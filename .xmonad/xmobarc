@@ -1,0 +1,14 @@
+Config { font = "xft:WenQuanYi Zen Hei Mono:pixelsize=20"
+       , bgColor = "black"
+       , fgColor = "grey"
+       , position = Top
+       , lowerOnStart = True
+       , commands = [ 
+                      Run Cpu ["-L","3","-H","50","--normal","green","--high","red","-t","<total>"] 50
+                    , Run Date "%a %b/%_d %H:%M" "date" 600
+                    , Run StdinReader
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%StdinReader%}{|%cpu% <fc=#ee9a00>%date%</fc>"
+       }

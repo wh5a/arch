@@ -1,0 +1,14 @@
+:set -fglasgow-exts -fwarn-incomplete-patterns -fwarn-name-shadowing -XTemplateHaskell -XUndecidableInstances -XPArr
+
+-- For the ghci debugger, see Monad.Reader Issue 10 http://www.haskell.org/sitewiki/images/0/0a/TMR-Issue10.pdf
+:set stop :list
+:def seq (\arg -> return ("seq (" ++ arg ++ ") ()"))
+:set -fprint-evld-with-show
+-- :set -fbreak-on-error
+-- :set -cpp
+
+-- DPH, for 6.8 only
+-- :set -fparr -XParallelListComp
+
+-- This extension introduces a few more keywords, which can be problematic to programs using them inadvertently
+-- :set -XArr

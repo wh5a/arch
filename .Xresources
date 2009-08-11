@@ -1,0 +1,21 @@
+Rxvt.background: black
+Rxvt.foreground: white
+URxvt.font: xft:Inconsolata-16
+URxvt.scrollBar_right: True
+Rxvt.jumpScroll: True
+Rxvt.skipScroll: True
+URxvt.preeditType: OnTheSpot
+
+! man urxvtperl
+URxvt.perl-ext-common: default,-option-popup,matcher,-selection-popup,xim-onthespot
+URxvt.urlLauncher: firefox
+URxvt.matcher.rend.0: fg8 Uline Italic
+!URxvt.colorUL: #86a2be
+! Right click to launch the URL
+URxvt.matcher.button: 3
+
+!Xcursor.theme: gentoo
+!Xcursor.size: 21
+
+!Emacs.useXIM: false
+Emacs.font: Inconsolata-12

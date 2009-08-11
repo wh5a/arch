@@ -1,0 +1,15 @@
+[alias]
+br = branch
+st = status
+co = checkout
+
+[color]
+ui = auto
+[user]
+	name = Wei Hu
+	email = weihu@cs.virginia.edu
+[push]
+	default = matching
+[branch "master"]
+  remote = origin
+  merge = refs/heads/master
