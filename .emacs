@@ -126,11 +126,15 @@ that was stored with ska-point-to-register."
               '(("\\.hs$"  . haskell-mode)
                 ("\\.hi$"  . haskell-mode)
                 ("\\.lhs$" . literate-haskell-mode))))
-
 (autoload 'haskell-mode "haskell-mode"
   "Major mode for editing Haskell scripts." t)
 (autoload 'literate-haskell-mode "haskell-mode"
   "Major mode for editing literate Haskell scripts." t)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+(setq haskell-literate-default 'tex)
 
 (require 'mic-paren)
 (paren-activate)
