@@ -1,0 +1,9 @@
+# Change the behavior of Up and Dn:
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+# List the possible completions when Tab is pressed:
+set show-all-if-ambiguous on
+# Make Meta+S cycle through the list:
+"\M-s": menu-complete
+

@@ -18,4 +18,4 @@ URxvt.matcher.button: 3
 !Xcursor.size: 21
 
 !Emacs.useXIM: false
-Emacs.font: Inconsolata-12
+Emacs.font: Inconsolata-10
