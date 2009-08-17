@@ -5,6 +5,8 @@ URxvt.scrollBar_right: True
 Rxvt.jumpScroll: True
 Rxvt.skipScroll: True
 URxvt.preeditType: OnTheSpot
+URxvt.scrollTtyOutput: False
+URxvt.scrollWithBuffer: True
 
 ! man urxvtperl
 URxvt.perl-ext-common: default,-option-popup,matcher,-selection-popup,xim-onthespot

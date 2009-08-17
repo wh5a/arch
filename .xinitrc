@@ -4,7 +4,7 @@ export GTK_IM_MODULE=ibus
 export XMODIFIERS="@im=ibus"
 export QT_IM_MODULE=ibus
 ibus-daemon -d -x
-xrdb -merge .Xresources
+xrdb -merge ~/.Xresources
 xsetroot -cursor_name left_ptr
 urxvtd -q -f -o
 urxvtc &
