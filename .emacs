@@ -171,3 +171,6 @@ that was stored with ska-point-to-register."
       (append '(scheme-mode haskell-mode literate-haskell-mode)
               ac-modes))
   )
+
+(autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
+(setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode)) auto-mode-alist))

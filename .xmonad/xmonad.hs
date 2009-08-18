@@ -22,9 +22,8 @@ import Data.List
 import XMonad.Prompt.Input
     
 myXPConfig = defaultXPConfig {
---               font = "xft:Droid Sans Mono:pixelsize=14"
-               font = "xft:WenQuanYi Zen Hei Mono:pixelsize=20"
-               --font = "xft:SimSun:pixelsize=16"
+               font = "xft:Droid Sans:pixelsize=20"
+--               font = "xft:WenQuanYi Zen Hei Mono:pixelsize=20"
              , position = Top
              --, height = 30
              }
@@ -62,6 +61,7 @@ main = do
        -- xmonad-eval; not sure what to make use of it
 --       , ("M-S-;", inputPrompt myXPConfig "Eval" >>= flip whenJust (evalExpression defaultEvalConfig))
        , ("M-e", launchApp myXPConfig "emacsclient -c -a emacs")
+       , ("M-n", launchApp myXPConfig "nautilus")
        , ("M-S-k", kill)
        , ("M-d", sinkAll)
        ]

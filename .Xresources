@@ -7,6 +7,7 @@ Rxvt.skipScroll: True
 URxvt.preeditType: OnTheSpot
 URxvt.scrollTtyOutput: False
 URxvt.scrollWithBuffer: True
+URxvt.scrollTtyKeypress: True
 
 ! man urxvtperl
 URxvt.perl-ext-common: default,-option-popup,matcher,-selection-popup,xim-onthespot
@@ -16,8 +17,8 @@ URxvt.matcher.rend.0: fg8 Uline Italic
 ! Right click to launch the URL
 URxvt.matcher.button: 3
 
-!Xcursor.theme: gentoo
-!Xcursor.size: 21
+Xcursor.theme: whiteglass
+Xcursor.size: 25
 
 !Emacs.useXIM: false
 Emacs.font: Inconsolata-10

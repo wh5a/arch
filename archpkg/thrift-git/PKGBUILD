@@ -1,0 +1,46 @@
+pkgname=thrift-git
+pkgver=20090818
+pkgrel=1
+pkgdesc="Scalable cross-language services framework for IPC/RPC between C++, Java, Ruby, PHP, Python, C, Haskell, Erlang, etc."
+arch=(i686 x86_64)
+url="http://developers.facebook.com/thrift/"
+license=('Thrift Software License')
+depends=(boost flex bison)
+makedepends=(git autoconf automake cabal-install)
+source=()
+md5sums=()
+install=hsmod.install
+
+_gitroot="git://github.com/dreiss/thrift.git"
+_gitname="thrift"
+
+build(){
+  cd ${startdir}/src
+  msg "Connecting to github.com"
+
+  if [ -d $startdir/src/$_gitname ] ; then
+    cd $_gitname && git pull origin
+    msg "The local files are updated."
+  else
+    git clone $_gitroot
+  fi
+
+  msg "GIT checkout done or server timeout"
+  msg "Starting make..."
+  
+  cd ${startdir}/src/${_gitname}
+  ./bootstrap.sh
+  ./configure --prefix=/usr --enable-gen-java=no --enable-gen-csharp=no --enable-gen-py=no --enable-gen-rb=no --enable-gen-perl=no --enable-gen-php=no --enable-gen-cocoa=no --enable-gen-erl=no --enable-gen-st=no --enable-gen-html=no --with-csharp=no --with-java=no --with-erlang=no --with-py=no --with-perl=no --with-ruby=no
+  make || return 1
+  make DESTDIR=${startdir}/pkg install || return 1
+  
+  msg "Building Haskell library..."
+  cd ${startdir}/src/${_gitname}/lib/hs
+  cabal configure --global || return 1
+  cabal build || return 1
+  cabal register --gen-script
+#  cabal unregister --gen-script
+  install -D -m744 register.sh $startdir/pkg/usr/share/haskell/$pkgname/register.sh
+#  install -m744 unregister.sh $startdir/pkg/usr/share/haskell/$pkgname/unregister.sh
+  cabal copy --destdir=$startdir/pkg
+}
