@@ -22,8 +22,8 @@ import Data.List
 import XMonad.Prompt.Input
     
 myXPConfig = defaultXPConfig {
-               font = "xft:Droid Sans:pixelsize=20"
---               font = "xft:WenQuanYi Zen Hei Mono:pixelsize=20"
+--               font = "xft:Droid Sans:pixelsize=20"
+               font = "xft:WenQuanYi Zen Hei:pixelsize=16"
              , position = Top
              --, height = 30
              }
