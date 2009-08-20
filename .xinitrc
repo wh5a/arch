@@ -19,4 +19,5 @@ xhost +local:root
 # Clipboard manager
 parcellite &
 trayer --edge top --align right --SetDockType true --expand true --width 7 &
+gvtray &
 exec xmonad

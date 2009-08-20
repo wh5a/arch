@@ -62,6 +62,7 @@ main = do
 --       , ("M-S-;", inputPrompt myXPConfig "Eval" >>= flip whenJust (evalExpression defaultEvalConfig))
        , ("M-e", launchApp myXPConfig "emacsclient -c -a emacs")
        , ("M-n", launchApp myXPConfig "nautilus")
-       , ("M-S-k", kill)
+--       , ("M-S-k", kill)   -- By default, M-S-k/ M-S-j move windows
+       , ("M-C-c", kill)
        , ("M-d", sinkAll)
        ]

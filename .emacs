@@ -56,9 +56,6 @@
 (add-hook 'eshell-mode-hook
           '(lambda () (define-key eshell-mode-map "\C-a" 'eshell-maybe-bol)))
 
-(require 'inf-haskell)
-(setq inferior-haskell-find-project-root nil)
-
 ;; WindMove enables buffer moving using Shift+Arrows
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
@@ -121,6 +118,8 @@ that was stored with ska-point-to-register."
 ; Already loaded by default
 ;(require 'face-remap)
 
+(require 'inf-haskell)
+(setq inferior-haskell-find-project-root nil)
 (setq auto-mode-alist
       (append auto-mode-alist
               '(("\\.hs$"  . haskell-mode)
@@ -132,8 +131,11 @@ that was stored with ska-point-to-register."
   "Major mode for editing literate Haskell scripts." t)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 ;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+;; Try out a said-to-be-better indentation-mode: http://groups.google.com/group/fa.haskell/browse_thread/thread/ce8910712d8cdfa6/
+(require 'haskell-indentation)
+(add-hook 'haskell-mode-hook 'haskell-indentation-mode)
 (setq haskell-literate-default 'tex)
 
 (require 'mic-paren)

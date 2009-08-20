@@ -64,3 +64,7 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;44;33m'                                 
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
+
+# CodeSurfer
+export PATH=~/codesurfer-2.1p1/csurf/bin/:$PATH
+export LM_LICENSE_FILE=~/codesurfer-2.1p1/csurf/bin/cs-license.dat
