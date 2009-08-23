@@ -68,3 +68,9 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 # CodeSurfer
 export PATH=~/codesurfer-2.1p1/csurf/bin/:$PATH
 export LM_LICENSE_FILE=~/codesurfer-2.1p1/csurf/bin/cs-license.dat
+
+# Emacs-daemon
+pgrep -u wh5a emacs > /dev/null
+if [ $? -ne 0 ]; then
+  emacs -daemon
+fi
