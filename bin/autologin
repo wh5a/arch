@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# http://www.linuxquestions.org/questions/linux-software-2/autologin-without-gui-374338/
+
+# Open /etc/inittab and change the line from
+#c1:2345:respawn:/sbin/agetty -8 38400 tty1 linux
+# to
+#c1:2345:respawn:/sbin/agetty -8 -n -l /home/wh5a/bin/autologin 38400 tty1 linux
+# , and so on.
+
+exec /bin/login -f wh5a
