@@ -24,8 +24,6 @@ export LESS="-iRsX"
 
 # Make Bash append rather than overwrite the history on disk:
 shopt -s histappend
-# Whenever displaying the prompt, write the previous line to disk:
-PROMPT_COMMAND='history -a'
 # Save multiple-line command together
 shopt -s cmdhist 
 # don't put duplicate lines in the history.
@@ -44,14 +42,17 @@ alias ....='../../..'
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+# Whenever displaying the prompt, write the previous line to disk;
 # If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
-    ;;
-*)
-    ;;
-esac
+PROMPT_COMMAND='history -a; echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
+
+# case "$TERM" in
+# xterm*|rxvt*)
+#     PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
+#     ;;
+# *)
+#     ;;
+# esac
 
 # set a fancy prompt
 PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
@@ -74,3 +75,5 @@ pgrep -u wh5a emacs > /dev/null
 if [ $? -ne 0 ]; then
   emacs -daemon
 fi
+
+export EDITOR="emacsclient -c -a emacs"

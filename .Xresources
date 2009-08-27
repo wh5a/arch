@@ -1,3 +1,4 @@
+! urxvt supports search with M-s
 Rxvt.background: black
 Rxvt.foreground: white
 URxvt.font: xft:Inconsolata-16
@@ -8,6 +9,7 @@ URxvt.preeditType: OnTheSpot
 URxvt.scrollTtyOutput: False
 URxvt.scrollWithBuffer: True
 URxvt.scrollTtyKeypress: True
+URxvt.fading: 20
 
 ! man urxvtperl
 URxvt.perl-ext-common: default,-option-popup,matcher,-selection-popup,xim-onthespot

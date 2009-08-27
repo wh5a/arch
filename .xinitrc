@@ -20,4 +20,7 @@ xhost +local:root
 parcellite &
 trayer --edge top --align right --SetDockType true --expand true --width 7 &
 gvtray &
+emacsclient -c &
+firefox &
+fqterm &
 exec xmonad

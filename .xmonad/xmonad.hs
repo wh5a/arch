@@ -10,6 +10,8 @@ import XMonad.Prompt.RunOrRaise
 import XMonad.Prompt.Window
 import XMonad.Prompt.XMonad
 import XMonad.Prompt.AppLauncher
+-- Man page, doesn't work well with urxvt?
+import XMonad.Prompt.Man
 -- Prompt }}
 import XMonad.Actions.SpawnOn
 import XMonad.Util.Run
@@ -20,6 +22,11 @@ import Data.List
 -- Emacs-style expression evaluation, requires the xmonad-eval package    
 --import XMonad.Actions.Eval
 import XMonad.Prompt.Input
+import XMonad.Actions.CycleWS
+import XMonad.Layout.PerWorkspace
+-- Respect size hint
+import XMonad.Layout.LayoutHints
+
     
 myXPConfig = defaultXPConfig {
 --               font = "xft:Droid Sans:pixelsize=20"
@@ -33,7 +40,10 @@ contain q x = fmap (isInfixOf x) q
 
 myManageHook = composeAll . concat $
     [ [ title `contain` c --> doFloat | c <- myFloats ]
---    , [ className =? "Firefox-bin" --> doShift "web" ]
+    , [ className =? "Firefox" --> doShift "9:web" ]
+    , [ appName =? "emacs" --> doShift "2:emacs" ]
+    , [ appName =? "fqterm.bin" --> doShift "9:web" ]
+    , [ className =? "Toplevel" --> doShift "3:csurf" ]
     ]
     where myFloats = ["Option", "option", "Preference", "preference"]
 
@@ -45,8 +55,10 @@ main = do
          defaultConfig {
          modMask = mod4Mask
        , terminal = "urxvtc"
+       , workspaces = ["1:term","2:emacs","3:csurf","4","5","6","7","8","9:web"]
        , manageHook = manageSpawn sp <+> manageDocks <+> manageHook defaultConfig <+> myManageHook
-       , layoutHook = avoidStruts $ smartBorders $ layoutHook defaultConfig
+       , layoutHook = layoutHints $ avoidStruts $ smartBorders $ onWorkspace "9:web" Full $ layoutHook defaultConfig
+--       , layoutHook = avoidStruts $ smartBorders $ layoutHook defaultConfig                      
        , logHook = dynamicLogWithPP $ xmobarPP {
                      ppOutput = hPutStrLn xmproc
                    , ppTitle = xmobarColor "yellow" "" -- . shorten 52
@@ -65,4 +77,10 @@ main = do
 --       , ("M-S-k", kill)   -- By default, M-S-k/ M-S-j move windows
        , ("M-C-c", kill)
        , ("M-d", sinkAll)
+         -- Cycle forward and backward through non-empty workspaces
+       , ("M-<R>", moveTo Next NonEmptyWS)
+       , ("M-<L>", moveTo Prev NonEmptyWS)
+       , ("M-S-<R>", shiftToNext >> nextWS)
+       , ("M-S-<L>", shiftToPrev >> prevWS)
+--       , ("M-<F1>", manPrompt myXPConfig)
        ]

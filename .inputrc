@@ -7,3 +7,4 @@ set show-all-if-ambiguous on
 # Make Meta+S cycle through the list:
 "\M-s": menu-complete
 
+set completion-ignore-case On
