@@ -43,16 +43,16 @@ alias ....='../../..'
 shopt -s checkwinsize
 
 # Whenever displaying the prompt, write the previous line to disk;
-# If this is an xterm set the title to user@host:dir
-PROMPT_COMMAND='history -a; echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
+PROMPT_COMMAND='history -a'
 
-# case "$TERM" in
-# xterm*|rxvt*)
-#     PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
-#     ;;
-# *)
-#     ;;
-# esac
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+    xterm*|rxvt*)
+        PROMPT_COMMAND=$PROMPT_COMMAND';echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
+        ;;
+    *)
+        ;;
+esac
 
 # set a fancy prompt
 PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '

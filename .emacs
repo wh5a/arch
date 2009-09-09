@@ -176,3 +176,5 @@ that was stored with ska-point-to-register."
 
 (autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
 (setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode)) auto-mode-alist))
+
+(require 'csurf)
