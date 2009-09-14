@@ -10,5 +10,5 @@ Config { font = "xft:WenQuanYi Zen Hei:pixelsize=20"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader%}{|%cpu% <fc=#ee9a00>%date%</fc>"
+       , template = "%StdinReader%}{%cpu% <fc=#ee9a00>%date%</fc>"
        }

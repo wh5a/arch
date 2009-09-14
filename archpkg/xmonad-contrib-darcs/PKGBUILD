@@ -1,6 +1,6 @@
 # Contributor: Adam Vogt <vogt.adam@gmail.com>
 pkgname=xmonad-contrib-darcs
-pkgver=20090817
+pkgver=20090909
 pkgrel=1
 pkgdesc="Community Contributed modules for xmonad"
 arch=('i686' 'x86_64')

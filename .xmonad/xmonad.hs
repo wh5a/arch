@@ -28,6 +28,8 @@ import XMonad.Layout.PerWorkspace
 --import XMonad.Layout.LayoutHints
 -- Automatically places floating windows at desired positions.
 import XMonad.Hooks.Place
+-- Full screen programs: http://code.google.com/p/xmonad/issues/detail?id=228
+import XMonad.Hooks.ManageHelpers
     
 myXPConfig = defaultXPConfig {
 --               font = "xft:Droid Sans:pixelsize=20"
@@ -39,13 +41,15 @@ myXPConfig = defaultXPConfig {
 -- If q contains x
 contain q x = fmap (isInfixOf x) q
 
-myManageHook = composeAll . concat $
-    [ [ title `contain` c --> doFloat | c <- myFloats ]
-    , [ className =? "Firefox" --> doShift "9:web" ]
-    , [ appName =? "emacs" --> doShift "2:emacs" ]
-    , [ appName =? "fqterm.bin" --> doShift "9:web" ]
-    , [ className =? "Toplevel" --> doShift "3:csurf" ]
-    , [ className =? "Dialog" --> doFloat ]
+myManageHook = composeOne $
+    [ title `contain` c -?> doFloat | c <- myFloats ] ++
+    [ transience
+    , isFullscreen -?> doFullFloat
+    , className =? "Dialog" -?> doFloat
+    , appName =? "emacs" -?> doShift "2:emacs"
+    , appName =? "fqterm.bin" -?> doShift "9:web"
+    , className =? "Toplevel" -?> doShift "3:csurf"
+    , className =? "Firefox" -?> doShift "9:web"
     ]
     where myFloats = ["Option", "option", "Preference", "preference", "about", "About", "Find"]
 
@@ -62,7 +66,10 @@ main = do
        , layoutHook = {- layoutHints $ -} avoidStruts $ smartBorders $ onWorkspace "9:web" Full $ layoutHook defaultConfig
        , logHook = dynamicLogWithPP $ xmobarPP {
                      ppOutput = hPutStrLn xmproc
+                     -- http://en.wikipedia.org/wiki/X11_color_names
                    , ppTitle = xmobarColor "yellow" "" -- . shorten 52
+                   , ppLayout = xmobarColor "burlywood" ""
+                   , ppSep = " "
                    }
        }
        `additionalKeysP`

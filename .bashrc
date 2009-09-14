@@ -45,17 +45,16 @@ shopt -s checkwinsize
 # Whenever displaying the prompt, write the previous line to disk;
 PROMPT_COMMAND='history -a'
 
-# If this is an xterm set the title to user@host:dir
 case "$TERM" in
     xterm*|rxvt*)
+        # If this is an xterm set the title to user@host:dir
         PROMPT_COMMAND=$PROMPT_COMMAND';echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
+        # set a fancy prompt
+        PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
         ;;
     *)
         ;;
 esac
-
-# set a fancy prompt
-PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 # colored manpages
 export LESS_TERMCAP_mb=$'\E[01;31m'
