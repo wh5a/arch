@@ -1,0 +1,4 @@
+#DontNeedToPressEnter
+EditPkgbuild no
+#NoConfirm yes
+PacmanBin /usr/bin/powerpill

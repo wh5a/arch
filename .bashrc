@@ -3,8 +3,9 @@
 
 alias ls='ls --color=auto'
 alias ll='ls -l'
-alias p='sudo pacman'
-alias y='yaourt --noconfirm'
+# Get reflector (AUR) for the latest mirrors
+alias p='sudo powerpill'
+alias y='yaourt' # --noconfirm'
 
 # set PATH so it includes user's private bin if it exists
 if [ -d ~/bin ] ; then
@@ -30,7 +31,7 @@ shopt -s cmdhist
 export HISTCONTROL=ignoredups
 
 # Syntax-highlighting pager
-alias cless='/usr/share/vim/macros/less.sh'
+alias cless='/usr/share/vim/vim72/macros/less.sh'
 
 # Bash 4 features
 shopt -s autocd globstar checkjobs
