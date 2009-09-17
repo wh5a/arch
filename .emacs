@@ -17,6 +17,9 @@
 (ido-mode t)
 (setq ido-create-new-buffer 'always)
 
+(require 'recentf)
+(recentf-mode 1)
+
 ;; disable tool-bar
 (tool-bar-mode 0)
 

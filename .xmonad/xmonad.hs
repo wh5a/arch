@@ -44,6 +44,7 @@ contain q x = fmap (isInfixOf x) q
 myManageHook = composeOne $
     [ title `contain` c -?> doFloat | c <- myFloats ] ++
     [ transience
+    , isDialog -?> doFloat
     , isFullscreen -?> doFullFloat
     , className =? "Dialog" -?> doFloat
     , appName =? "emacs" -?> doShift "2:emacs"

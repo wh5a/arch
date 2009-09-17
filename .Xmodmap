@@ -1,0 +1,15 @@
+keycode  79 = Home KP_7
+keycode  87 = End KP_1
+keycode  81 = Prior KP_9
+keycode  89 = Next KP_3
+
+keycode 106 = slash
+keycode  63 = asterisk
+keycode  82 = minus
+keycode  86 = plus
+keycode 104 = Return
+
+! keycode  83 = Left KP_4
+! keycode  85 = Right KP_6
+! keycode  80 = Up KP_8
+! keycode  88 = Down KP_2

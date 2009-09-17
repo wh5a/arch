@@ -13,6 +13,7 @@ scim -d
 
 xrdb -merge ~/.Xresources
 xsetroot -cursor_name left_ptr
+xmodmap ~/.Xmodmap
 urxvtd -q -f -o
 urxvtc &
 xhost +local:root
