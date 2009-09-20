@@ -77,3 +77,5 @@ if [ $? -ne 0 ]; then
 fi
 
 export EDITOR="emacsclient -c -a emacs"
+
+export GREP_OPTIONS='--color=auto --exclude-dir=_darcs'

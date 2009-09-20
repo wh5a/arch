@@ -1,4 +1,5 @@
 import XMonad
+import qualified XMonad.StackSet as W  
 import XMonad.Layout.NoBorders
 import XMonad.Util.EZConfig
 import XMonad.Hooks.ManageDocks
@@ -30,6 +31,12 @@ import XMonad.Layout.PerWorkspace
 import XMonad.Hooks.Place
 -- Full screen programs: http://code.google.com/p/xmonad/issues/detail?id=228
 import XMonad.Hooks.ManageHelpers
+import XMonad.Layout.Tabbed
+
+myTheme = defaultTheme {
+   fontName = "xft:WenQuanYi Zen Hei:pixelsize=17"
+ , decoHeight = 25
+  }
     
 myXPConfig = defaultXPConfig {
 --               font = "xft:Droid Sans:pixelsize=20"
@@ -37,6 +44,8 @@ myXPConfig = defaultXPConfig {
              , position = Top
              --, height = 30
              }
+             
+myTerm = "urxvtc"             
 
 -- If q contains x
 contain q x = fmap (isInfixOf x) q
@@ -61,10 +70,11 @@ main = do
   xmonad $
          defaultConfig {
          modMask = mod4Mask
-       , terminal = "urxvtc"
+       , terminal = myTerm
        , workspaces = ["1:term","2:emacs","3:csurf","4","5","6","7","8","9:web"]
        , manageHook = placeHook (inBounds $ underMouse (0.5,0.5)) <+> manageSpawn sp <+> manageDocks <+> manageHook defaultConfig <+> myManageHook
-       , layoutHook = {- layoutHints $ -} avoidStruts $ smartBorders $ onWorkspace "9:web" Full $ layoutHook defaultConfig
+       , layoutHook = {- layoutHints $ -} avoidStruts $ smartBorders $ onWorkspace "9:web" (tabbed shrinkText myTheme ||| Full) $ layoutHook defaultConfig
+--       , layoutHook = {- layoutHints $ -} avoidStruts $ smartBorders $ onWorkspace "9:web" Full $ layoutHook defaultConfig                      
        , logHook = dynamicLogWithPP $ xmobarPP {
                      ppOutput = hPutStrLn xmproc
                      -- http://en.wikipedia.org/wiki/X11_color_names
@@ -76,6 +86,7 @@ main = do
        `additionalKeysP`
        [ -- dmenu replacement
          ("M-p", shellPromptHere sp myXPConfig)
+       , ("M-S-<KP_Enter>", spawn myTerm)
        --, ("M-r", runOrRaisePrompt myXPConfig)
        , ("M-g", windowPromptGoto myXPConfig)
        , ("M-x", xmonadPrompt myXPConfig)
@@ -92,4 +103,6 @@ main = do
        , ("M-S-<R>", shiftToNext >> nextWS)
        , ("M-S-<L>", shiftToPrev >> prevWS)
        , ("M-<F1>", manPrompt myXPConfig)
+       , ("M-<U>", windows W.focusDown)
+       , ("M-<D>", windows W.focusUp)
        ]

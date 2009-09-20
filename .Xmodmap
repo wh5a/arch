@@ -7,7 +7,7 @@ keycode 106 = slash
 keycode  63 = asterisk
 keycode  82 = minus
 keycode  86 = plus
-keycode 104 = Return
+keycode 104 = Return KP_Enter
 
 ! keycode  83 = Left KP_4
 ! keycode  85 = Right KP_6
