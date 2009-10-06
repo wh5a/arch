@@ -22,7 +22,7 @@ import XMonad.Actions.SinkAll
 import Data.List
 -- Emacs-style expression evaluation, requires the xmonad-eval package    
 --import XMonad.Actions.Eval
-import XMonad.Prompt.Input
+--import XMonad.Prompt.Input
 import XMonad.Actions.CycleWS
 import XMonad.Layout.PerWorkspace
 -- Respect size hint, doesn't work?
@@ -32,6 +32,12 @@ import XMonad.Hooks.Place
 -- Full screen programs: http://code.google.com/p/xmonad/issues/detail?id=228
 import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.Tabbed
+import Data.Ratio
+import XMonad.Layout.Maximize
+-- import XMonad.Layout.Minimize
+import XMonad.Layout.MouseResizableTile
+import qualified XMonad.Actions.FlexibleResize as Flex
+import XMonad.Actions.WindowMenu
 
 myTheme = defaultTheme {
    fontName = "xft:WenQuanYi Zen Hei:pixelsize=17"
@@ -63,18 +69,20 @@ myManageHook = composeOne $
     ]
     where myFloats = ["Option", "option", "Preference", "preference", "about", "About", "Find"]
 
+myModMask = mod4Mask          
+
 main = do
   sp <- mkSpawner
   -- cabal install xmobar -fwith_xft
   xmproc <- spawnPipe "xmobar /home/wh5a/.xmonad/xmobarc"
   xmonad $
          defaultConfig {
-         modMask = mod4Mask
+         modMask = myModMask
        , terminal = myTerm
        , workspaces = ["1:term","2:emacs","3:csurf","4","5","6","7","8","9:web"]
        , manageHook = placeHook (inBounds $ underMouse (0.5,0.5)) <+> manageSpawn sp <+> manageDocks <+> manageHook defaultConfig <+> myManageHook
-       , layoutHook = {- layoutHints $ -} avoidStruts $ smartBorders $ onWorkspace "9:web" (tabbed shrinkText myTheme ||| Full) $ layoutHook defaultConfig
---       , layoutHook = {- layoutHints $ -} avoidStruts $ smartBorders $ onWorkspace "9:web" Full $ layoutHook defaultConfig                      
+--       , layoutHook = {- layoutHints $ -} maximize $ avoidStruts $ smartBorders $ onWorkspace "9:web" (tabbed shrinkText myTheme ||| Full ||| Tall 1 (3%100) (1%2)) $ (mouseResizableTile ||| layoutHook defaultConfig)
+       , layoutHook = {- layoutHints $ minimize -} maximize $ avoidStruts $ smartBorders $ onWorkspace "9:web" (tabbed shrinkText myTheme ||| Full ||| mouseResizableTile) $ (mouseResizableTile ||| mouseResizableTileMirrored ||| Full)
        , logHook = dynamicLogWithPP $ xmobarPP {
                      ppOutput = hPutStrLn xmproc
                      -- http://en.wikipedia.org/wiki/X11_color_names
@@ -83,6 +91,11 @@ main = do
                    , ppSep = " "
                    }
        }
+       `additionalMouseBindings`
+       [ -- Resize a floating window from whichever corner or edge the mouse is closest to
+--         ((myModMask, button3), \w -> focus w >> Flex.mouseResizeEdgeWindow (3%5) w)
+         ((0, button3), \w -> focus w >> Flex.mouseResizeEdgeWindow (3%5) w)         
+       ]
        `additionalKeysP`
        [ -- dmenu replacement
          ("M-p", shellPromptHere sp myXPConfig)
@@ -105,4 +118,8 @@ main = do
        , ("M-<F1>", manPrompt myXPConfig)
        , ("M-<U>", windows W.focusDown)
        , ("M-<D>", windows W.focusUp)
+         -- Maximize a window
+       , ("M-m", withFocused (sendMessage . maximizeRestore))
+         -- A cool menu
+       , ("M-o", windowMenu)
        ]

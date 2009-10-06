@@ -181,3 +181,6 @@ that was stored with ska-point-to-register."
 (setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode)) auto-mode-alist))
 
 (require 'csurf)
+
+(load "auctex.el" nil t t)
+(load "preview-latex.el" nil t t)
