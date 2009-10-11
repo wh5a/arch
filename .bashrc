@@ -71,10 +71,11 @@ export PATH=~/codesurfer-2.1p1/csurf/bin/:$PATH
 export LM_LICENSE_FILE=~/codesurfer-2.1p1/csurf/bin/cs-license.dat
 
 # Emacs-daemon
-pgrep -u wh5a emacs > /dev/null
-if [ $? -ne 0 ]; then
-  emacs -daemon
-fi
+# pgrep -u wh5a emacs > /dev/null
+# if [ $? -ne 0 ]; then
+#   emacs -daemon
+# fi
+pgrep -u wh5a emacs > /dev/null || emacs -daemon
 
 export EDITOR="emacsclient -c -a emacs"
 

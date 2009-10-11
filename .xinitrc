@@ -15,7 +15,7 @@ xrdb -merge ~/.Xresources
 xsetroot -cursor_name left_ptr
 xmodmap ~/.Xmodmap
 urxvtd -q -f -o
-urxvtc &
+LANG=en_US.utf8 urxvtc &
 xhost +local:root
 # Clipboard manager
 parcellite &

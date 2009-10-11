@@ -51,7 +51,8 @@ myXPConfig = defaultXPConfig {
              --, height = 30
              }
              
-myTerm = "urxvtc"             
+-- Arch packages (e.g. wget, pacman) often have trouble with Chinese locales.
+myTerm = "LANG=en_US.utf8 urxvtc"             
 
 -- If q contains x
 contain q x = fmap (isInfixOf x) q
@@ -93,8 +94,8 @@ main = do
        }
        `additionalMouseBindings`
        [ -- Resize a floating window from whichever corner or edge the mouse is closest to
---         ((myModMask, button3), \w -> focus w >> Flex.mouseResizeEdgeWindow (3%5) w)
-         ((0, button3), \w -> focus w >> Flex.mouseResizeEdgeWindow (3%5) w)         
+         ((myModMask, button3), \w -> focus w >> Flex.mouseResizeEdgeWindow (3%5) w)
+--         ((0, button3), \w -> focus w >> Flex.mouseResizeEdgeWindow (3%5) w)         
        ]
        `additionalKeysP`
        [ -- dmenu replacement
