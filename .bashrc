@@ -6,6 +6,7 @@ alias ll='ls -l'
 # Get reflector (AUR) for the latest mirrors
 alias p='sudo powerpill'
 alias y='yaourt' # --noconfirm'
+alias skype='LD_PRELOAD=/usr/lib/libv4l/v4l1compat.so /opt/skype/skype'
 
 # set PATH so it includes user's private bin if it exists
 if [ -d ~/bin ] ; then

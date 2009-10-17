@@ -1,0 +1,20 @@
+# Contributor: Eirik Haatveit <haatveit@gmail.com>
+pkgname=linux-wbfs-manager
+pkgver=0.1.11
+pkgrel=1
+pkgdesc="A WBFS manager for Linux using GTK+"
+arch=('i686' 'x86_64')
+url="http://code.google.com/p/linux-wbfs-manager/"
+license=('GPL2')
+depends=('gtk2' 'libglade')
+install=${pkgname}.install
+source=(http://$pkgname.googlecode.com/files/$pkgname-$pkgver.tar.gz)
+md5sums=('2c0730d55196fd8352a168437a6524a2')
+
+build() {
+  cd "$srcdir/$pkgname"
+
+  make || return 1
+  mkdir -p ${pkgdir}/usr/bin
+  cp wbfs_gtk ${pkgdir}/usr/bin/wbfs_gtk
+}
