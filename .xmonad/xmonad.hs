@@ -80,6 +80,7 @@ main = do
          defaultConfig {
          modMask = myModMask
        , terminal = myTerm
+--       , borderWidth = 1
        , workspaces = ["1:term","2:emacs","3:csurf","4","5","6","7","8","9:web"]
        , manageHook = placeHook (inBounds $ underMouse (0.5,0.5)) <+> manageSpawn sp <+> manageDocks <+> manageHook defaultConfig <+> myManageHook
 --       , layoutHook = {- layoutHints $ -} maximize $ avoidStruts $ smartBorders $ onWorkspace "9:web" (tabbed shrinkText myTheme ||| Full ||| Tall 1 (3%100) (1%2)) $ (mouseResizableTile ||| layoutHook defaultConfig)
@@ -95,6 +96,7 @@ main = do
        `additionalMouseBindings`
        [ -- Resize a floating window from whichever corner or edge the mouse is closest to
          ((myModMask, button3), \w -> focus w >> Flex.mouseResizeEdgeWindow (3%5) w)
+       , ((myModMask, button2), killWindow)
 --         ((0, button3), \w -> focus w >> Flex.mouseResizeEdgeWindow (3%5) w)         
        ]
        `additionalKeysP`

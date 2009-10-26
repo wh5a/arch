@@ -137,8 +137,8 @@ that was stored with ska-point-to-register."
 ;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 ;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 ;; Try out a said-to-be-better indentation-mode: http://groups.google.com/group/fa.haskell/browse_thread/thread/ce8910712d8cdfa6/
-(require 'haskell-indentation)
-(add-hook 'haskell-mode-hook 'haskell-indentation-mode)
+; which is included in haskell-mode since 2.5, so there's no need to download it separately.
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (setq haskell-literate-default 'tex)
 
 (require 'mic-paren)
