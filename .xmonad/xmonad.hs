@@ -38,6 +38,8 @@ import XMonad.Layout.Maximize
 import XMonad.Layout.MouseResizableTile
 import qualified XMonad.Actions.FlexibleResize as Flex
 import XMonad.Actions.WindowMenu
+-- http://doitian.com/2009/09/clickable-dzen2-panel-for-xmonad/
+import XMonad.Hooks.EwmhDesktops
 
 myTheme = defaultTheme {
    fontName = "xft:WenQuanYi Zen Hei:pixelsize=17"
@@ -76,7 +78,7 @@ main = do
   sp <- mkSpawner
   -- cabal install xmobar -fwith_xft
   xmproc <- spawnPipe "xmobar /home/wh5a/.xmonad/xmobarc"
-  xmonad $
+  xmonad $ ewmh $
          defaultConfig {
          modMask = myModMask
        , terminal = myTerm
