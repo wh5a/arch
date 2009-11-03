@@ -140,6 +140,7 @@ that was stored with ska-point-to-register."
 ; which is included in haskell-mode since 2.5, so there's no need to download it separately.
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (setq haskell-literate-default 'tex)
+(require 'haskell-cabal)
 
 (require 'mic-paren)
 (paren-activate)
