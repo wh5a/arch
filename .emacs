@@ -142,19 +142,40 @@ that was stored with ska-point-to-register."
 (setq haskell-literate-default 'tex)
 (require 'haskell-cabal)
 
+; I believe we can customize delimiters, check out the doc.
 (require 'mic-paren)
 (paren-activate)
 (setq paren-sexp-mode t)
 (setq paren-match-face 'highlight)
+; By default (i.e. in lisp), when the matching '(' is out of screen, we show the text after '('.
+; In C, it makes more sense to show the text before '{'.
+(add-hook 'c-mode-common-hook
+          (function (lambda ()
+                       (paren-toggle-open-paren-context 1))))
 
-(require 'yasnippet-bundle) 
+;;;; NOTE: yasnippet and auto-complete are different, but their ideas are related and can work together.
+;; yasnippet recognizes user-defined keywords and expands into templates.
+;; Such keywords have to be memorized usually.
+;; auto-complete recognize the word being typed, and expands into matching candidates.
+;; Such candidates can come from various sources, including yasnippet keywords!
+
+;; yasnippet is available in the AUR as emacs-yasnippet
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/yas")
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory "/usr/share/emacs/site-lisp/yas/snippets")
+;; Haskell support for yasnippet
+;; http://groups.google.com/group/fa.haskell/browse_thread/thread/739d9c8314fe7727
+(load-file "~/Emacs/haskell-snippets/haskell-snippets.el")
 
 ;; auto-complete: http://www.emacswiki.org/emacs/AutoComplete
 ;; For more configuration tips, see http://www.emacswiki.org/emacs/init-auto-complete.el
-(when (require 'auto-complete nil t)
+;; auto-complete-yasnippet is now bundled into auto-complete-config
+(add-to-list 'load-path "~/Emacs/auto-complete")
+(when (require 'auto-complete-config)
+  
   ;; I didn't include every possible extension.
-  (require 'auto-complete-yasnippet)
-
+  
   ;; Turn on the mode globally for modes included in 'ac-modes
   (global-auto-complete-mode t)
 

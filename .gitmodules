@@ -1,0 +1,3 @@
+[submodule "Emacs/auto-complete"]
+	path = Emacs/auto-complete
+	url = git://github.com/m2ym/auto-complete.git

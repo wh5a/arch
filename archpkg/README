@@ -1,3 +1,4 @@
 For official packages, follow http://wiki.archlinux.org/index.php/Getting_PKGBUILDS_From_SVN
+For unofficial repositories, go to http://wiki.archlinux.org/index.php/Unofficial_user_repositories
 For AUR packages, yaourt -G
 To get the complete list of installed packages, pacman -Qeq > complete_list
