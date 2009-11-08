@@ -86,8 +86,8 @@
   (let ((inhibit-read-only t))
     (erase-buffer)))
 
-;;;; goto-line                                                                                                  
-(global-set-key "\C-c\C-g" 'goto-line)
+;;;; goto-line is already bound to "M-g g" or "M-g M-g"
+;(global-set-key "\C-c\C-g" 'goto-line)
 
 ;;;; C-. to save a point   C-, to jump between them                                                             
 (global-set-key [(control ?\.)] 'ska-point-to-register)
@@ -206,3 +206,9 @@ that was stored with ska-point-to-register."
 
 (load "auctex.el" nil t t)
 (load "preview-latex.el" nil t t)
+
+; AUR provides emacs-tuareg-mode
+(setq auto-mode-alist (cons '("\\.ml[iylp]?\\'" . tuareg-mode) auto-mode-alist))
+;(setq auto-mode-alist (cons '("\\.ml[iylp]?$" . tuareg-mode) auto-mode-alist))
+(autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
+(autoload 'camldebug "camldebug" "Run the Caml debugger" t)

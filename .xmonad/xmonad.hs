@@ -75,8 +75,11 @@ myManageHook = composeOne $
 myModMask = mod4Mask          
 
 main = do
-  sp <- mkSpawner
+  -- http://haskell.org/haskellwiki/Xmonad/Notable_changes_since_0.9
+  -- sp <- mkSpawner
   -- cabal install xmobar -fwith_xft
+  -- xmobar-darcs now supports reading from XState instead of from stdin, thus getting rid of the pipe.
+  -- See X.C.Sjanssen for the usage
   xmproc <- spawnPipe "xmobar /home/wh5a/.xmonad/xmobarc"
   xmonad $ ewmh $
          defaultConfig {
@@ -84,7 +87,7 @@ main = do
        , terminal = myTerm
 --       , borderWidth = 1
        , workspaces = ["1:term","2:emacs","3:csurf","4","5","6","7","8","9:web"]
-       , manageHook = placeHook (inBounds $ underMouse (0.5,0.5)) <+> manageSpawn sp <+> manageDocks <+> manageHook defaultConfig <+> myManageHook
+       , manageHook = placeHook (inBounds $ underMouse (0.5,0.5)) <+> manageSpawn <+> manageDocks <+> manageHook defaultConfig <+> myManageHook
 --       , layoutHook = {- layoutHints $ -} maximize $ avoidStruts $ smartBorders $ onWorkspace "9:web" (tabbed shrinkText myTheme ||| Full ||| Tall 1 (3%100) (1%2)) $ (mouseResizableTile ||| layoutHook defaultConfig)
        , layoutHook = {- layoutHints $ minimize -} maximize $ avoidStruts $ smartBorders $ onWorkspace "9:web" (tabbed shrinkText myTheme ||| Full ||| mouseResizableTile) $ (mouseResizableTile ||| mouseResizableTileMirrored ||| Full)
        , logHook = dynamicLogWithPP $ xmobarPP {
@@ -103,7 +106,7 @@ main = do
        ]
        `additionalKeysP`
        [ -- dmenu replacement
-         ("M-p", shellPromptHere sp myXPConfig)
+         ("M-p", shellPromptHere myXPConfig)
        , ("M-S-<KP_Enter>", spawn myTerm)
        --, ("M-r", runOrRaisePrompt myXPConfig)
        , ("M-g", windowPromptGoto myXPConfig)
