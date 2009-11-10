@@ -212,3 +212,7 @@ that was stored with ska-point-to-register."
 ;(setq auto-mode-alist (cons '("\\.ml[iylp]?$" . tuareg-mode) auto-mode-alist))
 (autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
 (autoload 'camldebug "camldebug" "Run the Caml debugger" t)
+
+; CIL: M-x cil-debug
+(load-file "~/cil/tips/debugging.el")
+(push "~/cil/TAGS" tags-table-list)

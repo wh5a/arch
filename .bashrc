@@ -83,3 +83,5 @@ export EDITOR="emacsclient -c -a emacs"
 export GREP_OPTIONS='--color=auto --exclude-dir=_darcs'
 
 export OOO_FORCE_DESKTOP=kde
+
+export PATH=~/cil/bin/:$PATH
