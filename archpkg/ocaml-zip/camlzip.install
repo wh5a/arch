@@ -1,0 +1,11 @@
+post_install() {
+  echo Registering libs...
+  echo $(ocamlfind printconf destdir)/zip >> $(ocamlfind printconf ldconf)
+   
+}
+post_remove() {
+  echo Unregistering libs...
+  sed -i '/zip$/d' $(ocamlfind printconf ldconf)
+}
+
+# vim:set ts=2 sw=2 et:
