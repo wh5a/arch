@@ -212,6 +212,25 @@ that was stored with ska-point-to-register."
 ;(setq auto-mode-alist (cons '("\\.ml[iylp]?$" . tuareg-mode) auto-mode-alist))
 (autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
 (autoload 'camldebug "camldebug" "Run the Caml debugger" t)
+; The Whitespace Thing, only if the first line is:
+;(*pp ocaml+twt*)
+(autoload 'caml+twt-mode "caml+twt" "Major mode for editing Caml+twt code" t)
+(defun start-mlmode ()
+    (when
+        (save-excursion
+          (progn
+            (goto-char (point-min))
+            (looking-at "(\\*pp ocaml\\+twt\\*)[:blank:]*")
+            )
+          )
+      (caml+twt-mode)
+      ;;(tuareg-mode)
+      )
+      (remove-hook 'find-file-hook 'start-mlmode 1)
+    )
+(add-hook 'tuareg-load-hook (lambda ()
+                              (add-hook 'find-file-hook
+                                        'start-mlmode 1)))
 
 ; CIL: M-x cil-debug
 (load-file "~/cil/tips/debugging.el")
