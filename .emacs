@@ -207,11 +207,17 @@ that was stored with ska-point-to-register."
 (load "auctex.el" nil t t)
 (load "preview-latex.el" nil t t)
 
-; AUR provides emacs-tuareg-mode
+;; AUR provides emacs-tuareg-mode
+;; Many cool features like completion, help, type info, check out the mode help!
 (setq auto-mode-alist (cons '("\\.ml[iylp]?\\'" . tuareg-mode) auto-mode-alist))
 ;(setq auto-mode-alist (cons '("\\.ml[iylp]?$" . tuareg-mode) auto-mode-alist))
 (autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
 (autoload 'camldebug "camldebug" "Run the Caml debugger" t)
+; For tuareg-browse-manual. Requires an executable file "netscape".
+(setq tuareg-manual-url
+      "http://caml.inria.fr/pub/docs/manual-ocaml/index.html")
+; For tuareg-browse-library
+(setq tuareg-library-path "/usr/lib/ocaml/")
 ; The Whitespace Thing, only if the first line is:
 ;(*pp ocaml+twt*)
 (autoload 'caml+twt-mode "caml+twt" "Major mode for editing Caml+twt code" t)

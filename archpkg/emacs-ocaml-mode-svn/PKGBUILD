@@ -1,0 +1,39 @@
+# Contributor: dimino jeremie <jeremie@dimino.org>
+# Maintainer: Stefan Husmann <stefan-husmann@t-online.de>
+
+pkgname=emacs-ocaml-mode-svn
+pkgver=9411
+pkgrel=1
+pkgdesc="Emacs mode for ocaml. Some modules are useful for Tuareg too."
+arch=('i686' 'x86_64')
+url="http://caml.inria.fr/"
+depends=('emacs')
+source=()
+md5sums=()
+license=('custom:Q')
+install=emacs-ocaml-mode.install
+#conflicts=(emacs-tuareg-mode)
+
+_svntrunk="http://caml.inria.fr/svn/ocaml/trunk/"
+_svnmod="ocaml"
+
+build() {
+  cd $srcdir
+
+  msg "Connecting to the $_svnmod SVN server..."
+  if [ -d "$_svnmod/.svn" ]; then
+    cd $_svnmod && svn up
+    msg2 "Local files updated"
+  else
+    svn co $_svntrunk --config-dir ./ $_svnmod
+    msg2 "SVN checkout done"
+    cd $_svnmod
+  fi
+
+  ./configure
+  cd emacs
+
+  # string-to-int is obsolete in emacs 22.1
+  sed -i 's/string-to-int/string-to-number/g' * || return 1
+  make EMACSDIR=$pkgdir/usr/share/emacs/site-lisp/ocaml install || return 1
+}
