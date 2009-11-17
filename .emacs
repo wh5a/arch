@@ -224,7 +224,8 @@ that was stored with ska-point-to-register."
             )
           )
       (caml+twt-mode)
-      ;;(tuareg-mode)
+      ; A hack to force the execution of tuareg-fontify
+      (setq major-mode 'tuareg-mode)
       )
       (remove-hook 'find-file-hook 'start-mlmode 1)
     )

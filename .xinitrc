@@ -1,5 +1,7 @@
 export LANG=zh_CN.UTF-8
 export TERM=xterm-256color
+# For xdg-open. Other alternatives are kde, xfce.
+export DE=gnome
 
 # Somehow ibus cannot be activated with C-Spc, although it can be done through the tray.
 # export GTK_IM_MODULE=ibus
