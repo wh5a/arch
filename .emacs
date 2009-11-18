@@ -218,6 +218,51 @@ that was stored with ska-point-to-register."
       "http://caml.inria.fr/pub/docs/manual-ocaml/index.html")
 ; For tuareg-browse-library
 (setq tuareg-library-path "/usr/lib/ocaml/")
+;; http://www.cocan.org/tips/single_line_comment_syntax
+;; Comment from the point to the end of line or, if the point is at the end
+;; of a line and not following a comment, insert one.
+;; If the current line already ends with a comment, remove it.
+(defun caml-toggle-comment-endofline (u)
+  (interactive "P")
+  (if (eq u nil)
+      (let ((init (point)) beg end end_comment)
+        (progn
+          (end-of-line)
+          (setq end (point))
+          (if (looking-back (regexp-quote comment-end))
+              (progn ; remove the ending comment (naive)
+                (beginning-of-line)
+                (uncomment-region (point) end)
+                (setq end (- end (string-width comment-start)
+                             (string-width comment-end)))
+                (goto-char (min init end)))
+            (if (eq init end)
+                (indent-for-comment)
+              (progn
+                (beginning-of-line)
+                (search-forward-regexp "[^ \t]" end t)
+                (backward-char 1); now at the 1st non-space of the line
+                (setq beg (point))
+                (if (eq beg nil)
+                    ;; line is composed of spaces => new comment
+                    (indent-for-comment)
+                  (progn
+                    (comment-region (max init beg) end)
+                    (goto-char init))
+                  ))
+              ))
+          ))
+    (progn ; C-u prefix
+      (insert "(**  *)")
+      (forward-char 4)
+      )
+    ))
+(add-hook 'tuareg-mode-hook
+   (function (lambda ()
+      (define-key tuareg-mode-map "\C-c," 'caml-toggle-comment-endofline)
+      (define-key tuareg-interactive-mode-map "\C-c,"
+        'caml-toggle-comment-endofline)
+      )))
 ; The Whitespace Thing, only if the first line is:
 ;(*pp ocaml+twt*)
 (autoload 'caml+twt-mode "caml+twt" "Major mode for editing Caml+twt code" t)
