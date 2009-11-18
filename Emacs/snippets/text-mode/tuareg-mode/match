@@ -1,0 +1,6 @@
+#contributor : Alp Mestan <alpmestan@gmail.com>
+#name : match ... with
+# --
+match $1 with
+| $2 -> $3
+| $4 -> $5

@@ -1,0 +1,7 @@
+#contributor : Alp Mestan <alpmestan@gmail.com>
+#name : module ... = functor (...) -> struct ... end
+# --
+module $1 = functor ($2) ->
+  struct
+	$3
+  end

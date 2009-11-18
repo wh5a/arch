@@ -132,13 +132,18 @@ that was stored with ska-point-to-register."
   "Major mode for editing Haskell scripts." t)
 (autoload 'literate-haskell-mode "haskell-mode"
   "Major mode for editing literate Haskell scripts." t)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
-;; Try out a said-to-be-better indentation-mode: http://groups.google.com/group/fa.haskell/browse_thread/thread/ce8910712d8cdfa6/
-; which is included in haskell-mode since 2.5, so there's no need to download it separately.
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook
+   (lambda ()
+     (turn-on-haskell-decl-scan)
+     (turn-on-haskell-doc-mode)
+     ;(turn-on-haskell-indent)
+     ;(turn-on-haskell-simple-indent)
+     ;; Try out a said-to-be-better indentation-mode: http://groups.google.com/group/fa.haskell/browse_thread/thread/ce8910712d8cdfa6/
+     ; which is included in haskell-mode since 2.5, so there's no need to download it separately.
+     (turn-on-haskell-indentation)
+     ;(yas/minor-mode)
+     ))
+
 (setq haskell-literate-default 'tex)
 (require 'haskell-cabal)
 
@@ -164,9 +169,10 @@ that was stored with ska-point-to-register."
 (require 'yasnippet)
 (yas/initialize)
 (yas/load-directory "/usr/share/emacs/site-lisp/yas/snippets")
-;; Haskell support for yasnippet
-;; http://groups.google.com/group/fa.haskell/browse_thread/thread/739d9c8314fe7727
+;; Haskell support http://groups.google.com/group/fa.haskell/browse_thread/thread/739d9c8314fe7727
 (load-file "~/Emacs/haskell-snippets/haskell-snippets.el")
+;; OCaml support http://blog.mestan.fr/2009/02/22/ocaml-completion-reloaded/
+(yas/load-directory "~/Emacs/snippets")
 
 ;; auto-complete: http://www.emacswiki.org/emacs/AutoComplete
 ;; For more configuration tips, see http://www.emacswiki.org/emacs/init-auto-complete.el
@@ -195,7 +201,7 @@ that was stored with ska-point-to-register."
   (require 'auto-complete-haskell)
   ;; Somehow the hook doesn't enable auto-complete-mode for Haskell although it should
   (setq ac-modes
-      (append '(scheme-mode haskell-mode literate-haskell-mode)
+      (append '(scheme-mode haskell-mode literate-haskell-mode tuareg-mode)
               ac-modes))
   )
 
@@ -258,11 +264,12 @@ that was stored with ska-point-to-register."
       )
     ))
 (add-hook 'tuareg-mode-hook
-   (function (lambda ()
+   (lambda ()
       (define-key tuareg-mode-map "\C-c," 'caml-toggle-comment-endofline)
       (define-key tuareg-interactive-mode-map "\C-c,"
         'caml-toggle-comment-endofline)
-      )))
+      (yas/minor-mode)
+      ))
 ; The Whitespace Thing, only if the first line is:
 ;(*pp ocaml+twt*)
 (autoload 'caml+twt-mode "caml+twt" "Major mode for editing Caml+twt code" t)

@@ -1,0 +1,6 @@
+#contributor : Alp Mestan <alpmestan@gmail.com>
+#name : module type ... = sig ... end
+# --
+module type $1 = sig
+       $2
+end

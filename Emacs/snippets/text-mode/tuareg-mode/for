@@ -1,0 +1,6 @@
+#contributor : Laurent Le Brun <laurentlb@gmail.com>
+#name : for
+# --
+for $1 = $2 to $3 do
+  $0
+done

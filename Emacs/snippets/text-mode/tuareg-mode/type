@@ -1,0 +1,6 @@
+#contributor : Laurent Le Brun <laurentlb@gmail.com>
+#name : sum type
+# --
+type $1 =
+  | $2 of $3
+  | $4

@@ -1,0 +1,5 @@
+#contributor : Laurent Le Brun <laurentlb@gmail.com>
+#name : let
+# --
+let $1 =
+  

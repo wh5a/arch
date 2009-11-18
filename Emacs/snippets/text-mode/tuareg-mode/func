@@ -1,0 +1,5 @@
+#contributor : Laurent Le Brun <laurentlb@gmail.com>
+#name : for
+# --
+let $1 = function
+  | $2 -> $3

@@ -1,0 +1,6 @@
+#contributor : Alp Mestan <alpmestan@gmail.com>
+#name : try ... with
+# --
+try
+  $1
+with

@@ -1,0 +1,7 @@
+#contributor : Alp Mestan <alpmestan@gmail.com>
+#name : if ... then ... else ...
+# --
+if $1 then
+  $2
+else
+  $3
