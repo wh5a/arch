@@ -14,6 +14,8 @@
 
 (transient-mark-mode t)
 
+(setq js-indent-level 2)
+
 (ido-mode t)
 (setq ido-create-new-buffer 'always)
 
@@ -88,26 +90,6 @@
 
 ;;;; goto-line is already bound to "M-g g" or "M-g M-g"
 ;(global-set-key "\C-c\C-g" 'goto-line)
-
-;;;; C-. to save a point   C-, to jump between them                                                             
-(global-set-key [(control ?\.)] 'ska-point-to-register)
-(global-set-key [(control ?\,)] 'ska-jump-to-register)
-(defun ska-point-to-register()
-  "Store cursorposition _fast_ in a register.                                                                   
-Use ska-jump-to-register to jump back to the stored                                                             
-position."
-  (interactive)
-  (setq zmacs-region-stays t)
-  (point-to-register 8)
-  (message "Position saved"))
-(defun ska-jump-to-register()
-  "Switches between current cursorposition and position                                                         
-that was stored with ska-point-to-register."
-  (interactive)
-  (setq zmacs-region-stays t)
-  (let ((tmp (point-marker)))
-        (jump-to-register 8)
-        (set-register 8 tmp)))
 
 (setq require-final-newline t)          ; assures the newline at eof
 
@@ -201,7 +183,7 @@ that was stored with ska-point-to-register."
   (require 'auto-complete-haskell)
   ;; Somehow the hook doesn't enable auto-complete-mode for Haskell although it should
   (setq ac-modes
-      (append '(scheme-mode haskell-mode literate-haskell-mode tuareg-mode)
+      (append '(scheme-mode haskell-mode literate-haskell-mode tuareg-mode javascript-mode)
               ac-modes))
   )
 
@@ -294,3 +276,11 @@ that was stored with ska-point-to-register."
 ; CIL: M-x cil-debug
 (load-file "~/cil/tips/debugging.el")
 (push "~/cil/TAGS" tags-table-list)
+
+;;;; Automatically keeps track of your recent positions
+;; http://code.google.com/p/dea/source/browse/trunk/my-lisps/recent-jump.el
+;; (setq rj-ring-length 10000)
+(require 'recent-jump)
+(recent-jump-mode)
+(global-set-key (kbd "C-,") 'recent-jump-backward)
+(global-set-key (kbd "C-.") 'recent-jump-forward)
