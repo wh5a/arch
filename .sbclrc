@@ -1,0 +1,10 @@
+; Muffle compiler noises
+;(declaim (sb-ext:muffle-conditions sb-ext:compiler-note))
+
+(require :asdf)
+
+; Muffle asdf noises. Unfortunately this variable is not exported
+;(setf asdf:*verbose-out* (open "/dev/null" :direction :output :if-exists :supersede))
+
+; For AUR packages
+(push #p"/usr/share/common-lisp/systems/" asdf:*central-registry*)

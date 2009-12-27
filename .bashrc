@@ -4,7 +4,8 @@
 alias ls='ls --color=auto'
 alias ll='ls -l'
 # Get reflector (AUR) for the latest mirrors
-alias p='sudo powerpill'
+#alias p='sudo powerpill'
+alias p='sudo pacman'
 alias y='yaourt' # --noconfirm'
 alias skype='LD_PRELOAD=/usr/lib/libv4l/v4l1compat.so /opt/skype/skype'
 
@@ -91,3 +92,7 @@ alias bocaml='ocamlfind batteries/ocaml'
 alias bocamlc='ocamlfind batteries/ocamlc'
 alias bocamlbuild='ocamlfind batteries/ocamlbuild'
 alias bocamlopt='ocamlfind batteries/ocamlopt'
+
+export PATH=~/paktahn:$PATH
+
+alias ddc='~/ddc-head/bin/ddc -basedir ~/ddc-head'

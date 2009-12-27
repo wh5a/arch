@@ -109,6 +109,7 @@
       (append auto-mode-alist
               '(("\\.hs$"  . haskell-mode)
                 ("\\.hi$"  . haskell-mode)
+                ("\\.ds$"  . haskell-mode) ; DDC
                 ("\\.lhs$" . literate-haskell-mode))))
 (autoload 'haskell-mode "haskell-mode"
   "Major mode for editing Haskell scripts." t)
@@ -276,6 +277,8 @@
 ; CIL: M-x cil-debug
 (load-file "~/cil/tips/debugging.el")
 (push "~/cil/TAGS" tags-table-list)
+; case sensitive
+(setq tags-case-fold-search nil)
 
 ;;;; Automatically keeps track of your recent positions
 ;; http://code.google.com/p/dea/source/browse/trunk/my-lisps/recent-jump.el
@@ -284,3 +287,15 @@
 (recent-jump-mode)
 (global-set-key (kbd "C-,") 'recent-jump-backward)
 (global-set-key (kbd "C-.") 'recent-jump-forward)
+
+;; SLIME
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/slime/")
+(require 'slime)
+(slime-setup '(slime-fancy slime-asdf slime-autodoc))
+;(setq inferior-lisp-program "/path/to/lisp-executable")
+(setq slime-lisp-implementations
+      '((sbcl ("sbcl") :coding-system utf-8-unix)))
+(setf slime-default-lisp 'sbcl)
+(setq slime-startup-animation nil)
+
+(load "/usr/share/emacs/site-lisp/nxhtml/autostart.el")

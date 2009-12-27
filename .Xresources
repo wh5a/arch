@@ -13,7 +13,7 @@ URxvt.fading: 20
 
 ! man urxvtperl
 URxvt.perl-ext-common: default,-option-popup,matcher,-selection-popup,xim-onthespot
-URxvt.urlLauncher: chromium-browser
+URxvt.urlLauncher: chromium
 URxvt.matcher.rend.0: fg8 Uline Italic
 !URxvt.colorUL: #86a2be
 ! Right click to launch the URL
