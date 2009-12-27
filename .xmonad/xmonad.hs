@@ -40,6 +40,7 @@ import qualified XMonad.Actions.FlexibleResize as Flex
 import XMonad.Actions.WindowMenu
 -- http://doitian.com/2009/09/clickable-dzen2-panel-for-xmonad/
 import XMonad.Hooks.EwmhDesktops
+import Control.Monad
 
 myTheme = defaultTheme {
    fontName = "xft:WenQuanYi Zen Hei:pixelsize=17"
@@ -101,7 +102,12 @@ main = do
        `additionalMouseBindings`
        [ -- Resize a floating window from whichever corner or edge the mouse is closest to
          ((myModMask, button3), \w -> focus w >> Flex.mouseResizeEdgeWindow (3%5) w)
-       , ((myModMask, button2), killWindow)
+         -- Avoids killing xmonad accidentally when in tabbed layout.
+         -- Requires patching xmonad-contrib-darcs http://gist.github.com/264183
+       , ((myModMask, button2),
+          \w -> do
+            t <- runQuery title w
+            unless (t == "XMonad") $ killWindow w)
 --         ((0, button3), \w -> focus w >> Flex.mouseResizeEdgeWindow (3%5) w)         
        ]
        `additionalKeysP`
