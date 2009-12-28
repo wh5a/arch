@@ -298,4 +298,4 @@
 (setf slime-default-lisp 'sbcl)
 (setq slime-startup-animation nil)
 
-(load "/usr/share/emacs/site-lisp/nxhtml/autostart.el")
+;(load "/usr/share/emacs/site-lisp/nxhtml/autostart.el")
