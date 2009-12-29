@@ -77,7 +77,7 @@ export LM_LICENSE_FILE=~/codesurfer-2.1p1/csurf/bin/cs-license.dat
 # if [ $? -ne 0 ]; then
 #   emacs -daemon
 # fi
-pgrep -u wh5a emacs > /dev/null || emacs -daemon
+pgrep -u wh5a emacs > /dev/null || LANG=zh_CN.UTF-8 emacs -daemon
 
 export EDITOR="emacsclient -c -a emacs"
 
