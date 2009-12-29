@@ -1,0 +1,13 @@
+--- mozplugger-1.13.0/mozplugger.c.orig	2009-11-23 13:49:29.705331649 +0800
++++ mozplugger-1.13.0/mozplugger.c	2009-11-23 14:02:06.411407789 +0800
+@@ -1733,8 +1733,8 @@
+ 	  break;
+ 
+      case NPPVpluginNeedsXEmbed:
+-          D("GET Plugin 'needs XEmbed', returned false\n"); 
+-          *((int *)value) = 0;
++          D("GET Plugin 'needs XEmbed', returned true\n"); 
++          *((int *)value) = 1;
+           break; 
+ 
+      default:
