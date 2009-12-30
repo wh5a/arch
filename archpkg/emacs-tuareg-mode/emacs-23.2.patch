@@ -1,0 +1,12 @@
+--- tuareg.el.orig	2008-01-12 18:09:30.000000000 -0500
++++ tuareg.el	2009-12-29 23:17:50.322392375 -0500
+@@ -1245,8 +1245,7 @@
+ possible."
+  (if (eq major-mode 'tuareg-mode)
+      (let ((beg nil) (end nil))
+-       (save-excursion
+-	 (set-buffer compilation-last-buffer)
++       (with-current-buffer compilation-last-buffer
+ 	 (save-excursion
+ 	   (goto-char (window-point (get-buffer-window (current-buffer) t)))
+ 	   (if (looking-at tuareg-error-chars-regexp)

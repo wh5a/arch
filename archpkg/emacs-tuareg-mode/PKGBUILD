@@ -1,0 +1,30 @@
+# Contributor: dimino jeremie <jeremie@dimino.org>, Stefan Husmann <stefan-husmann@t-online.de>
+# Maintainer: Wei Hu <weihu@cs.virginia.edu>
+
+pkgname=emacs-tuareg-mode
+pkgver=1.45.6
+pkgrel=2
+pkgdesc="Emacs tuareg mode for ocaml"
+arch=('i686' 'x86_64')
+url="http://www-rocq.inria.fr/~acohen/tuareg/index.html.en"
+depends=('emacs')
+source=(http://www-rocq.inria.fr/~acohen/tuareg/mode/tuareg-mode-$pkgver.tar.gz emacs-23.2.patch)
+md5sums=('757406cf481d5eaa1a34099a12231f78' 'ef6b2190c6a08928589b372cea07db78')
+license=('GPL')
+install=emacs-tuareg-mode.install
+#conflicts=(emacs-ocaml-mode)
+
+build() {
+  cd $srcdir/tuareg-mode-$pkgver
+  
+  patch -Np0 -i $startdir/emacs-23.2.patch || return 1
+
+  emacs --batch --eval '(progn
+                          (push "." load-path)
+                          (byte-compile-file "tuareg.el")
+                          (byte-compile-file "camldebug.el"))'
+  install -d $pkgdir/usr/share/emacs/site-lisp/tuareg || return 1
+  cp tuareg.el{,c} camldebug.el{,c} \
+    $pkgdir/usr/share/emacs/site-lisp/tuareg || return 1
+  install -D README $pkgdir/usr/share/doc/tuareg/README || return 1
+}
