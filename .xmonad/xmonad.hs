@@ -72,7 +72,7 @@ myManageHook = composeOne $
     , className =? "Toplevel" -?> doShift "3:csurf"
     , className =? "Firefox" -?> doShift "9:web"
     ]
-    where myFloats = ["Option", "option", "Preference", "preference", "about", "About", "Find"]
+    where myFloats = ["Option", "option", "Preference", "preference", "about", "About", "Find", "选项"]
 
 myModMask = mod4Mask
 
@@ -82,10 +82,12 @@ myModMask = mod4Mask
 myKillWindow w =
   let gsc = defaultGSConfig {- gs_cellheight = 35
                              , gs_cellwidth = 70
-                            -} in do
+                            -}
+      notProtected = ["Developer Tools - ", "Chromium选项"]
+  in do
   t <- runQuery title w
   c <- runQuery className w
-  let prompt = c == "Chrome" && not (isPrefixOf "Developer Tools - " t)
+  let prompt = c == "Chrome" && all (not . ((flip isPrefixOf) t)) notProtected
   unless (t == "XMonad") $
     if prompt then runSelectedAction gsc
                    [ ("Cancel (k)", return ())
