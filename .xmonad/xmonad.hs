@@ -72,7 +72,7 @@ myManageHook = composeOne $
     , className =? "Toplevel" -?> doShift "3:csurf"
     , className =? "Firefox" -?> doShift "9:web"
     ]
-    where myFloats = ["Option", "option", "Preference", "preference", "about", "About", "Find", "选项"]
+    where myFloats = ["Option", "option", "Preference", "preference", "about", "About", "Find", "选项", "书签管理器"]
 
 myModMask = mod4Mask
 
@@ -83,7 +83,7 @@ myKillWindow w =
   let gsc = defaultGSConfig {- gs_cellheight = 35
                              , gs_cellwidth = 70
                             -}
-      notProtected = ["Developer Tools - ", "Chromium选项"]
+      notProtected = ["Developer Tools - ", "Chromium选项", "书签管理器", "About Chromium", "Task Manager - Chromium"]
   in do
   t <- runQuery title w
   c <- runQuery className w
