@@ -41,6 +41,7 @@ import XMonad.Actions.WindowMenu
 -- http://doitian.com/2009/09/clickable-dzen2-panel-for-xmonad/
 import XMonad.Hooks.EwmhDesktops
 import Control.Monad
+import XMonad.Actions.GridSelect
 
 myTheme = defaultTheme {
    fontName = "xft:WenQuanYi Zen Hei:pixelsize=17"
@@ -73,7 +74,24 @@ myManageHook = composeOne $
     ]
     where myFloats = ["Option", "option", "Preference", "preference", "about", "About", "Find"]
 
-myModMask = mod4Mask          
+myModMask = mod4Mask
+
+-- Avoids killing xmonad accidentally when in tabbed layout.
+-- Requires patching xmonad-contrib-darcs http://gist.github.com/264183
+-- Also avoids killing chrome, borrowed from XMonad.Actions.WindowMenu
+myKillWindow w =
+  let gsc = defaultGSConfig {- gs_cellheight = 35
+                             , gs_cellwidth = 70
+                            -} in do
+  t <- runQuery title w
+  c <- runQuery className w
+  let prompt = c == "Chrome" && not (isPrefixOf "Developer Tools - " t)
+  unless (t == "XMonad") $
+    if prompt then runSelectedAction gsc
+                   [ ("Cancel (k)", return ())
+                   , ("Kill (j)" , killWindow w)
+                   ]
+    else killWindow w
 
 main = do
   -- http://haskell.org/haskellwiki/Xmonad/Notable_changes_since_0.9
@@ -102,12 +120,7 @@ main = do
        `additionalMouseBindings`
        [ -- Resize a floating window from whichever corner or edge the mouse is closest to
          ((myModMask, button3), \w -> focus w >> Flex.mouseResizeEdgeWindow (3%5) w)
-         -- Avoids killing xmonad accidentally when in tabbed layout.
-         -- Requires patching xmonad-contrib-darcs http://gist.github.com/264183
-       , ((myModMask, button2),
-          \w -> do
-            t <- runQuery title w
-            unless (t == "XMonad") $ killWindow w)
+       , ((myModMask, button2), myKillWindow)
 --         ((0, button3), \w -> focus w >> Flex.mouseResizeEdgeWindow (3%5) w)         
        ]
        `additionalKeysP`
@@ -122,7 +135,7 @@ main = do
        , ("M-e", launchApp myXPConfig "emacsclient -c -a emacs")
        , ("M-n", launchApp myXPConfig "dolphin")
 --       , ("M-S-k", kill)   -- By default, M-S-k/ M-S-j move windows
-       , ("M-C-c", kill)
+       , ("M-C-c", withFocused myKillWindow)
        , ("M-d", sinkAll)
          -- Cycle forward and backward through non-empty workspaces
        , ("M-<R>", moveTo Next NonEmptyWS)
