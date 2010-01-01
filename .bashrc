@@ -96,3 +96,6 @@ alias bocamlopt='ocamlfind batteries/ocamlopt'
 export PATH=~/paktahn:$PATH
 
 alias ddc='~/ddc-head/bin/ddc -basedir ~/ddc-head'
+
+# http://blog.nelhage.com/archives/27
+stty -ixon
