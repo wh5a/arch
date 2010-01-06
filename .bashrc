@@ -99,3 +99,6 @@ alias ddc='~/ddc-head/bin/ddc -basedir ~/ddc-head'
 
 # http://blog.nelhage.com/archives/27
 stty -ixon
+
+# Completely wipe urxvt buffer
+alias cls="echo -ne '\033c'"
