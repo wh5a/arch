@@ -108,7 +108,13 @@ for pkgname in ${pkgnames[@]}; do
 	else
 		aurid=$(wget --quiet "${AUR_URL2}${pkgname}" -O - | \
 		grep -m 1 ">${pkgname}\ [0-9]" | sed -e "s/^.*packages.php?ID=//" -e "s/'.*//")
-                echo "Id is $aurid" # Demonstrates a bug in aurvote!!
+#                echo "Id is $aurid" # Demonstrates a bug in aurvote!!
+                if [[ $aurid =~ "<span class=" ]]
+                then
+                    aurid=$(wget --quiet "${AUR_URL2}${pkgname}" -O - | \
+                        grep -m 1 "<form method=\"post\"" | sed -e "s/^.*packages.php?ID=//" -e "s/\">//")
+                fi
+#                echo "Id is $aurid" # Demonstrates a bug in aurvote!!
 		if [ -z "$aurid" ]; then
 			echo "$pkgname was not found on AUR"
 			continue
