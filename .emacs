@@ -15,6 +15,7 @@
 (transient-mark-mode t)
 
 (setq js-indent-level 2)
+(setq lisp-indent-offset 2)
 
 (ido-mode t)
 (setq ido-create-new-buffer 'always)
