@@ -19,7 +19,7 @@ source=("${pkgname}.install")
 md5sums=('5d82ee59ed5583e6258ded143a0574f3')
 
 #_bzr_branch='lp:emacs'
-_bzr_branch='http://bzr.savannah.gnu.org/r/emacs'
+_bzr_branch='http://bzr.savannah.gnu.org/r/emacs/trunk'
 _bzr_mod='emacs'
 
 build() {
