@@ -1,0 +1,73 @@
+# Contributed by Neil Santos <nsantos16+aur@gmail.com>
+# ---
+# Mostly based on existing emacs-git AUR
+
+pkgname=emacs-bzr
+pkgver=20100104
+pkgrel=1
+pkgdesc='GNU Emacs from official Bzr repository'
+arch=('i686' 'x86_64')
+url='http://www.gnu.org/software/emacs/'
+license=('GPL3')
+depends=('dbus-core' 'libpng' 'libtiff' 'librsvg' 'giflib' 'gtk2' 'libxpm' 'libjpeg>=7' 'texinfo' 'hicolor-icon-theme')
+makedepends=('bzr' 'pkgconfig')
+provides=('emacs')
+conflicts=('emacs' 'emacs-otf' 'emacs-cvs' 'emacs-git')
+replaces=('emacs' 'emacs-cvs' 'emacs-git')
+install=$pkgname.install
+source=("${pkgname}.install")
+md5sums=('5d82ee59ed5583e6258ded143a0574f3')
+
+#_bzr_branch='lp:emacs'
+_bzr_branch='http://bzr.savannah.gnu.org/r/emacs'
+_bzr_mod='emacs'
+
+build() {
+  cd $startdir/src
+  msg "Connecting..."
+
+  if [[ -d $_bzr_mod ]]; then
+    cd $_bzr_mod
+    bzr update -v
+    msg "Local branch updated or server timeout"
+  else
+    bzr branch -v $_bzr_branch
+    msg "Branching done or server timeout"
+  fi
+
+  # msg "Branching for make..."
+  # rm -rf $_bzr_mod-build
+  # bzr branch -v $srcdir/$_bzr_mod $srcdir/$_bzr_mod-build
+
+  # cd $srcdir/$_bzr_mod-build
+  mandir=/usr/share/man
+
+  msg "Starting make..."
+  ./configure --prefix=/usr \
+    --sysconfdir=/etc \
+    --localstatedir=/var \
+    --libexecdir=/usr/lib \
+    --mandir=${mandir} \
+    --without-sound \
+    --with-x-toolkit=gtk || return 1
+  make || return 1
+  make DESTDIR=$startdir/pkg install || return 1
+
+  msg "Cleaning up..."
+  mv $pkgdir/usr/bin/{ctags,ctags.emacs} || return 1
+  mv $pkgdir/usr/bin/{etags,etags.emacs} || return 1
+  mv $pkgdir${mandir}/man1/{etags.1,etags.emacs.1} || return 1
+  mv $pkgdir${mandir}/man1/{ctags.1,ctags.emacs.1} || return 1
+
+  find $pkgdir/usr/share/emacs/23* -type d -exec chmod 755 {} \;
+  find $pkgdir/usr/share/emacs/23* -exec chown root.root {} \;
+  chmod 775 $pkgdir/var/games
+  chmod 775 $pkgdir/var/games/emacs
+  chmod 664 $pkgdir/var/games/emacs/*
+  chown -R root:50 $pkgdir/var/games
+
+  rm $pkgdir/usr/share/info/dir || return 1
+  gzip -9nf $pkgdir/usr/share/info/* || return 1
+
+  # rm -rf $srcdir/$_bzr_mod-build
+}
