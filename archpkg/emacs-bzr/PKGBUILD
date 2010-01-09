@@ -19,6 +19,7 @@ source=("${pkgname}.install")
 md5sums=('5d82ee59ed5583e6258ded143a0574f3')
 
 #_bzr_branch='lp:emacs'
+# Web interface: https://code.launchpad.net/~vcs-imports/emacs/trunk
 _bzr_branch='http://bzr.savannah.gnu.org/r/emacs/trunk'
 _bzr_mod='emacs'
 
@@ -28,10 +29,10 @@ build() {
 
   if [[ -d $_bzr_mod ]]; then
     cd $_bzr_mod
-    bzr update -v
+    bzr merge -v
     msg "Local branch updated or server timeout"
   else
-    bzr branch -v $_bzr_branch
+    bzr branch -v $_bzr_branch $_bzr_mod
     msg "Branching done or server timeout"
   fi
 
@@ -39,7 +40,7 @@ build() {
   # rm -rf $_bzr_mod-build
   # bzr branch -v $srcdir/$_bzr_mod $srcdir/$_bzr_mod-build
 
-  # cd $srcdir/$_bzr_mod-build
+  cd $srcdir/$_bzr_mod
   mandir=/usr/share/man
 
   msg "Starting make..."
