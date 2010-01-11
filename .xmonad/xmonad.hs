@@ -42,6 +42,7 @@ import XMonad.Actions.WindowMenu
 import XMonad.Hooks.EwmhDesktops
 import Control.Monad
 import XMonad.Actions.GridSelect
+import Fixfocus
 
 myTheme = defaultTheme {
    fontName = "xft:WenQuanYi Zen Hei:pixelsize=17"
@@ -110,7 +111,7 @@ main = do
        , workspaces = ["1:term","2:emacs","3:csurf","4","5","6","7","8","9:web"]
        , manageHook = placeHook (inBounds $ underMouse (0.5,0.5)) <+> manageSpawn <+> manageDocks <+> manageHook defaultConfig <+> myManageHook
 --       , layoutHook = {- layoutHints $ -} maximize $ avoidStruts $ smartBorders $ onWorkspace "9:web" (tabbed shrinkText myTheme ||| Full ||| Tall 1 (3%100) (1%2)) $ (mouseResizableTile ||| layoutHook defaultConfig)
-       , layoutHook = {- layoutHints $ minimize -} maximize $ avoidStruts $ smartBorders $ onWorkspace "9:web" (tabbed shrinkText myTheme ||| Full ||| mouseResizableTile) $ (mouseResizableTile ||| mouseResizableTileMirrored ||| Full)
+       , layoutHook = {- layoutHints $ minimize -} fixFocus $ maximize $ avoidStruts $ smartBorders $ onWorkspace "9:web" (tabbed shrinkText myTheme ||| Full ||| mouseResizableTile) $ (mouseResizableTile ||| mouseResizableTileMirrored ||| Full)
        , logHook = dynamicLogWithPP $ xmobarPP {
                      ppOutput = hPutStrLn xmproc
                      -- http://en.wikipedia.org/wiki/X11_color_names
