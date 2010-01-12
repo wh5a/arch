@@ -29,7 +29,8 @@ build() {
 
   if [[ -d $_bzr_mod ]]; then
     cd $_bzr_mod
-    bzr merge -v
+    # merge can cause conflicts? pull creates an exact clone.
+    bzr pull -v
     msg "Local branch updated or server timeout"
   else
     bzr branch -v $_bzr_branch $_bzr_mod
