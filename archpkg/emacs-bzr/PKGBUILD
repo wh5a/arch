@@ -29,7 +29,7 @@ build() {
 
   if [[ -d $_bzr_mod ]]; then
     cd $_bzr_mod
-    # pull works as a mirror: now local changes allowed.
+    # pull works as a mirror: no local changes allowed.
     # merge allows local changes, but you must commit following it.
     bzr pull -v
     msg "Local branch updated or server timeout"

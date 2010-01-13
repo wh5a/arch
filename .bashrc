@@ -102,3 +102,6 @@ stty -ixon
 
 # Completely wipe urxvt buffer
 alias cls="echo -ne '\033c'"
+
+# cope, a command line coloriser, kinda supersedes colorgcc
+export PATH=`cope_path`:$PATH
