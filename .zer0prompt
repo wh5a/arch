@@ -46,9 +46,12 @@ shopt -s checkwinsize
 # This function is run at every prompt update, keeping our variables updated.
 # Bash's PROMPT_COMMAND option handles this (see end of this function).
 function pre_prompt {
-  # show exit code of last failed command
+  # show exit code of last failed command, must be the first line in the function
   ZEXIT="${?}"
   [ "$ZEXIT" = "0" ] && ZEXIT=""
+
+  # Whenever displaying the prompt, write the previous line to disk;
+  history -a
 
   ZPWD=${PWD/#$HOME/\~}  # sorten home dir to ~
 
@@ -123,11 +126,12 @@ function zer0prompt {
 
 # prompt
 PS1="${TITLEBAR}\
-$zc1$zg2$zg1$zc3$zg1$zc4$zg1$zg4$zi1\u@\h:\l$zc4$zg5$zg1$zc2$zg1$zg1$zc4\
-\$ZFILL$zc3$zg1$zg1$zg1$zg1$zc1$zg1$zg1$zg1$zc3$zg1$zg1$zc4$zg1$zg4$zi2\
-\$ZPWD$zc4$zg5$zg1$zc2$zg1
-$zc3$zg3$zc4$zg1$zg4$zi3$ZTIME$zc4$zg7$zi5\\\$$zc4$zg5$zi4\
-\$ZEXIT$zc2$zg1$zc3$zg6$zc0 "
+$zc1$zg2$zg4$zi1\u@\h:\l$zc4$zg5$zg1\
+$zg4$zi1\$ZPWD$zc4$zg5$zg1$zc4\
+\$ZFILL$zc3$zg1$zg1$zg1$zg1$zc1$zg1$zg1$zg1$zc3$zg1$zg1$zc4$zg1\
+$zg1$zc2$zg1
+$zc3$zg3$zc4$zg7$zi5\\\$$zc4$zg5$zi4\
+\$ZEXIT$zc3$zg6$zc0 "
 
 # continuation prompt
 PS2="$zc3$zg3$zc4$zg1$zg4$zi5\\\$$zc4$zg5$zc2$zg1$zc3$zg6$zc0 "

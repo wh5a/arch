@@ -45,9 +45,6 @@ alias ....='../../..'
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# Whenever displaying the prompt, write the previous line to disk;
-PROMPT_COMMAND='history -a'
-
 ########### We now use a more advanced script:  http://bbs.archlinux.org/viewtopic.php?id=84386
 # case "$TERM" in
 #     xterm*|rxvt*)
