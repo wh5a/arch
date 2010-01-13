@@ -33,7 +33,6 @@ import XMonad.Hooks.Place
 import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.Tabbed
 import Data.Ratio
-import XMonad.Layout.Maximize
 -- import XMonad.Layout.Minimize
 import XMonad.Layout.MouseResizableTile
 import qualified XMonad.Actions.FlexibleResize as Flex
@@ -43,6 +42,7 @@ import XMonad.Hooks.EwmhDesktops
 import Control.Monad
 import XMonad.Actions.GridSelect
 import Fixfocus
+import Maximize
 
 myTheme = defaultTheme {
    fontName = "xft:WenQuanYi Zen Hei:pixelsize=17"
