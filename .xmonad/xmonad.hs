@@ -1,4 +1,6 @@
 import XMonad
+import Fixfocus
+import Maximize
 import qualified XMonad.StackSet as W  
 import XMonad.Layout.NoBorders
 import XMonad.Util.EZConfig
@@ -41,8 +43,8 @@ import XMonad.Actions.WindowMenu
 import XMonad.Hooks.EwmhDesktops
 import Control.Monad
 import XMonad.Actions.GridSelect
-import Fixfocus
-import Maximize
+-- import XMonad.Actions.Warp
+-- import XMonad.Actions.UpdatePointer
 
 myTheme = defaultTheme {
    fontName = "xft:WenQuanYi Zen Hei:pixelsize=17"
@@ -130,6 +132,7 @@ main = do
        [ -- dmenu replacement
          ("M-p", shellPromptHere myXPConfig)
        , ("M-S-<KP_Enter>", spawn myTerm)
+       , ("M-<Return>", launchApp myXPConfig "urxvtc -cd")
        --, ("M-r", runOrRaisePrompt myXPConfig)
        , ("M-g", windowPromptGoto myXPConfig)
        , ("M-x", xmonadPrompt myXPConfig)
@@ -152,4 +155,8 @@ main = do
        , ("M-m", withFocused (sendMessage . maximizeRestore))
          -- A cool menu
        , ("M-o", windowMenu)
+       --   -- unclutter the mouse
+       -- , ("M-u", banish LowerRight)
+       --   -- Doesn't work on Chrome?
+       -- , ("M-S-u", updatePointer $ Relative 0.5 0.5)
        ]
