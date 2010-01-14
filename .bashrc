@@ -57,6 +57,7 @@ shopt -s checkwinsize
 #         ;;
 # esac
 ###########
+## Although it suggests sourcing it also for root, doing so halts Emacs/Tramp.
 source ~/.zer0prompt
 zer0prompt
 unset zer0prompt
