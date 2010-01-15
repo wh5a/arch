@@ -126,12 +126,11 @@ function zer0prompt {
 
 # prompt
 PS1="${TITLEBAR}\
-$zc1$zg2$zg4$zi1\u@\h:\l$zc4$zg5$zg1\
+$zi1\u@\h:\l$zc4$zg5$zg1\
 $zg4$zi1\$ZPWD$zc4$zg5$zg1$zc4\
 \$ZFILL$zc3$zg1$zg1$zg1$zg1$zc1$zg1$zg1$zg1$zc3$zg1$zg1$zc4$zg1\
 $zg1$zc2$zg1
-$zc3$zg3$zc4$zg7$zi5\\\$$zc4$zg5$zi4\
-\$ZEXIT$zc3$zg6$zc0 "
+$zi4\$ZEXIT$zi5\\\$$zc0 "
 
 # continuation prompt
 PS2="$zc3$zg3$zc4$zg1$zg4$zi5\\\$$zc4$zg5$zc2$zg1$zc3$zg6$zc0 "
