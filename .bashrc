@@ -108,3 +108,6 @@ alias cls="echo -ne '\033c'"
 
 # cope, a command line coloriser, kinda supersedes colorgcc
 export PATH=`cope_path`:$PATH
+
+# compleat, a bash completion util, http://github.com/mbrubeck/compleat
+. ~/.cabal/share/compleat-1.0/compleat_setup
