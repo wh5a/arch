@@ -86,7 +86,7 @@ myKillWindow w =
   let gsc = defaultGSConfig {- gs_cellheight = 35
                              , gs_cellwidth = 70
                             -}
-      notProtected = ["Developer Tools - ", "Chromium选项", "书签管理器", "About Chromium", "Task Manager - Chromium"]
+      notProtected = ["Developer Tools - ", "Chromium选项", "书签管理器", "About Chromium", "Task Manager - Chromium", "chrome://devtools/devtools.html"]
   in do
   t <- runQuery title w
   c <- runQuery className w

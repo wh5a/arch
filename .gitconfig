@@ -2,6 +2,7 @@
 br = branch
 st = status
 co = checkout
+ci = commit
 
 [color]
 ui = auto
@@ -13,3 +14,5 @@ ui = auto
 [branch "master"]
   remote = origin
   merge = refs/heads/master
+[merge]
+	log = true

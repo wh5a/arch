@@ -23,6 +23,9 @@
 (require 'recentf)
 (recentf-mode 1)
 
+;; Ignore notices
+(setq erc-hide-list '("JOIN" "PART" "QUIT"))
+
 ;; disable tool-bar
 (tool-bar-mode 0)
 
