@@ -303,3 +303,13 @@
 (setq slime-startup-animation nil)
 
 ;(load "/usr/share/emacs/site-lisp/nxhtml/autostart.el")
+
+;; Associate external applications with files so that you can open them via C-x C-f, with RET in dired, etc.
+(require 'openwith)
+(openwith-mode t)
+; M-x customize-group RET openwith RET, or do it the old way like below
+(setq openwith-associations
+ '(("\\.pdf\\'" "acroread" (file))
+   ("\\.mp3\\'" "mplayer" (file))
+   ("\\.\\(?:mpe?g\\|avi\\|wmv\\)\\'" "mplayer" ("-idx" file))
+   ("\\.\\(?:jp?g\\|png\\)\\'" "gthumb" (file))))

@@ -91,10 +91,7 @@ export OOO_FORCE_DESKTOP=kde
 export PATH=~/cil/bin/:$PATH
 
 # ocaml-batteries
-alias bocaml='ocamlfind batteries/ocaml'
-alias bocamlc='ocamlfind batteries/ocamlc'
-alias bocamlbuild='ocamlfind batteries/ocamlbuild'
-alias bocamlopt='ocamlfind batteries/ocamlopt'
+alias bocaml='ocaml -init ~/.batteriesinit'
 
 export PATH=~/paktahn:$PATH
 
