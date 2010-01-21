@@ -45,6 +45,8 @@ import Control.Monad
 import XMonad.Actions.GridSelect
 -- import XMonad.Actions.Warp
 -- import XMonad.Actions.UpdatePointer
+-- To-test:  java -jar /opt/java/demo/jfc/Stylepad/Stylepad.jar
+import XMonad.Hooks.SetWMName
 
 myTheme = defaultTheme {
    fontName = "xft:WenQuanYi Zen Hei:pixelsize=17"
@@ -105,9 +107,10 @@ main = do
   -- xmobar-darcs now supports reading from XState instead of from stdin, thus getting rid of the pipe.
   -- See X.C.Sjanssen for the usage
   xmproc <- spawnPipe "xmobar /home/wh5a/.xmonad/xmobarc"
-  xmonad $ ewmh $
+  xmonad $
          defaultConfig {
          modMask = myModMask
+       , startupHook = ewmhDesktopsStartup >> setWMName "LG3D"
        , terminal = myTerm
 --       , borderWidth = 1
        , workspaces = ["1:term","2:emacs","3:csurf","4","5","6","7","8","9:web"]
