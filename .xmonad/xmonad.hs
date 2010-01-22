@@ -1,6 +1,9 @@
 import XMonad
 import Fixfocus
+-- Patched to show no border for maximized windows
 import Maximize
+-- Patched to handle spawned processes' children for shell scripts/wrappers
+import SpawnOn
 import qualified XMonad.StackSet as W  
 import XMonad.Layout.NoBorders
 import XMonad.Util.EZConfig
@@ -16,7 +19,6 @@ import XMonad.Prompt.AppLauncher
 -- Show man page. Somehow you need to press the Up arrow to get it to show.
 import XMonad.Prompt.Man
 -- Prompt }}
-import XMonad.Actions.SpawnOn
 import XMonad.Util.Run
 -- http://haskell.org/haskellwiki/Xmonad/Config_archive/John_Goerzen%27s_Configuration#Configuring_xmonad_to_use_xmobar
 import XMonad.Hooks.DynamicLog
@@ -82,7 +84,7 @@ myManageHook = composeOne $
 myModMask = mod4Mask
 
 -- Avoids killing xmonad accidentally when in tabbed layout.
--- Requires patching xmonad-contrib-darcs http://gist.github.com/264183
+-- Requires patching xmonad-contrib-darcs XMonad/Layout/Decoration.hs
 -- Also avoids killing chrome, borrowed from XMonad.Actions.WindowMenu
 myKillWindow w =
   let gsc = defaultGSConfig {- gs_cellheight = 35
