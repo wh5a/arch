@@ -24,7 +24,7 @@ xhost +local:root
 parcellite &
 trayer --edge top --align right --SetDockType true --expand true --width 7 &
 gvtray &
-emacsclient -c &
+# emacsclient -c &
 #firefox &
 fqterm &
 # http://haskell.org/haskellwiki/Xmonad/Frequently_asked_questions#XMonad_stops_responding_to_keys_.28usually_due_to_unclutter.29

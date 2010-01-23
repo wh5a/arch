@@ -74,7 +74,7 @@ myManageHook = composeOne $
     , isDialog -?> doFloat
     , isFullscreen -?> doFullFloat
     , className =? "Dialog" -?> doFloat
-    , appName =? "emacs" -?> doShift "2:emacs"
+--    , appName =? "emacs" -?> doShift "2:emacs"
     , appName =? "fqterm.bin" -?> doShift "9:web"
     , className =? "Toplevel" -?> doShift "3:csurf"
     , className =? "Firefox" -?> doShift "9:web"
