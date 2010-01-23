@@ -317,4 +317,4 @@
 ;; Edit texts areas in Google Chrome https://chrome.google.com/extensions/detail/ljobjlafonikaiipfkggjbhkghgicgoh
 ;; http://github.com/stsquad/emacs_chrome/raw/master/servers/edit_server.el
 (require 'edit-server)
-(edit-server-start)
+(if (daemonp) (edit-server-start))
