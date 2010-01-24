@@ -1,0 +1,24 @@
+# Maintainer : Wei Hu <weihu@cs.virginia.edu>
+# Contributor: Nicolas Pouillard <nicolas(dot)pouillard(at)gmail(dot)com>, Sylvester Johansson <scj(at)archlinux(dot)us>
+pkgname=ocaml-sexplib
+pkgver=4.2.15
+pkgrel=1
+pkgdesc="Automated code generation for converting OCaml-values to S-expressions"
+arch=('i686' 'x86_64')
+url="http://www.ocaml.info/home/ocaml_sources.html"
+license=('LGPL')
+depends=('ocaml>=3.10' 'ocaml-findlib' 'ocaml-type-conv')
+options=(!strip)
+install=ocaml-sexplib.install
+source=(http://hg.ocaml.info/release/${pkgname/ocaml-/}310/archive/release-$pkgver.tar.gz)
+noextract=()
+md5sums=('e361c13b737035de7182ae62dd19ee5c')
+
+build() {
+  cd "$srcdir/${pkgname/ocaml-/}310-release-$pkgver"
+
+  mkdir -p $pkgdir$(ocamlfind printconf destdir)/sexplib
+  make -j1 || return 1
+  make -j1 OCAMLFIND_INSTFLAGS="-destdir $pkgdir$(ocamlfind printconf destdir) -ldconf ignore" install
+  install -Dm 644 LICENSE $pkgdir/usr/share/licenses/$pkgname/LICENSE
+}

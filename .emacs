@@ -318,3 +318,8 @@
 ;; http://github.com/stsquad/emacs_chrome/raw/master/servers/edit_server.el
 (require 'edit-server)
 (if (daemonp) (edit-server-start))
+(defun edit-server-restart ()
+   (interactive)
+   (edit-server-stop)
+   (edit-server-start)
+   )
