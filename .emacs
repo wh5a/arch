@@ -315,7 +315,8 @@
    ))
 
 ;; Edit texts areas in Google Chrome https://chrome.google.com/extensions/detail/ljobjlafonikaiipfkggjbhkghgicgoh
-;; http://github.com/stsquad/emacs_chrome/raw/master/servers/edit_server.el
+;; My own fork http://github.com/wh5a/emacs_chrome
+(push "~/Chrome/emacs_chrome/servers" load-path)
 (require 'edit-server)
 (if (daemonp) (edit-server-start))
 (defun edit-server-restart ()
