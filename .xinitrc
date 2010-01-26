@@ -29,4 +29,6 @@ gvtray &
 fqterm &
 # http://haskell.org/haskellwiki/Xmonad/Frequently_asked_questions#XMonad_stops_responding_to_keys_.28usually_due_to_unclutter.29
 unclutter -root &
+# Awesome mouse gesture
+easystroke &
 exec xmonad
