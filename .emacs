@@ -324,3 +324,67 @@
    (edit-server-stop)
    (edit-server-start)
    )
+
+;; http://www.emacswiki.org/emacs/ImenuMode
+;; Awesome function that makes use of imenu and ido to navigate in the current buffer
+(defun ido-imenu ()
+    "Will update the imenu index and then use ido to select a symbol to navigate to"
+    (interactive)
+    (imenu--make-index-alist)
+    (let ((name-and-pos '())
+          (symbol-names '()))
+      (flet ((addsymbols (symbol-list)
+                         (when (listp symbol-list)
+                           (dolist (symbol symbol-list)
+                             (let ((name nil) (position nil))
+                               (cond
+                                ((and (listp symbol) (imenu--subalist-p symbol))
+                                 (addsymbols symbol))
+   
+                                ((listp symbol)
+                                 (setq name (car symbol))
+                                 (setq position (cdr symbol)))
+   
+                                ((stringp symbol)
+                                 (setq name symbol)
+                                 (setq position (get-text-property 1 'org-imenu-marker symbol))))
+   
+                               (unless (or (null position) (null name))
+                                 (add-to-list 'symbol-names name)
+                                 (add-to-list 'name-and-pos (cons name position))))))))
+        (addsymbols imenu--index-alist))
+      (let* ((selected-symbol (ido-completing-read "Symbol? " symbol-names))
+             (position (cdr (assoc selected-symbol name-and-pos))))
+        (cond
+         ((overlayp position)
+          (goto-char (overlay-start position)))
+         (t
+          (goto-char position))))))
+
+;; Icicles not compatible with ido. To use it, uncomment these lines.
+; (push "~/Emacs/icicles" load-path)
+;(require 'icicles)
+;(icy-mode)
+
+;; M-x anything, to open anything (controlled by anything-sources) by category.
+(push "~/Emacs/anything" load-path)
+(require 'anything-config)
+;; Better find-tag
+(require 'anything-yaetags)
+(global-set-key (kbd "M-.") 'anything-yaetags-find-tag)
+;(require 'anything-etags)
+
+;; http://emacser.com/process-sentinel.htm
+(defun kill-buffer-when-shell-command-exit ()
+  "Close current buffer when `shell-command' exit."
+  (let ((process (ignore-errors (get-buffer-process (current-buffer)))))
+    (when process
+      (set-process-sentinel process
+                            (lambda (proc change)
+                              (when (string-match "\\(finished\\|exited\\)" change)
+                                (kill-buffer (process-buffer proc))))))))
+;; 退出gdb的时候关闭gdb对应的buffer
+(add-hook 'gdb-mode-hook 'kill-buffer-when-shell-command-exit)
+;; 退出term的时候关闭term对应的buffer
+(add-hook 'term-mode-hook 'kill-buffer-when-shell-command-exit)
+(add-hook 'shell-mode-hook 'kill-buffer-when-shell-command-exit)
