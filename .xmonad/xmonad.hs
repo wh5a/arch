@@ -90,11 +90,12 @@ myKillWindow w =
   let gsc = defaultGSConfig {- gs_cellheight = 35
                              , gs_cellwidth = 70
                             -}
-      notProtected = ["Developer Tools - ", "Chromium选项", "书签管理器", "About Chromium", "Task Manager - Chromium", "chrome://devtools/devtools.html"]
+      protectedProgs = ["Chromium", "Chrome"]
+      notProtected = ["Developer Tools - ", "Chromium选项", "谷歌浏览器选项", "书签管理器", "About Chromium", "关于谷歌浏览器", "Task Manager - Chromium", "任务管理器 - 谷歌浏览器", "chrome://devtools/devtools.html"]
   in do
   t <- runQuery title w
   c <- runQuery className w
-  let prompt = c == "Chrome" && all (not . ((flip isPrefixOf) t)) notProtected
+  let prompt = any (== c) protectedProgs && all (not . ((flip isPrefixOf) t)) notProtected
   unless (t == "XMonad") $
     if prompt then runSelectedAction gsc
                    [ ("Cancel (k)", return ())
