@@ -397,7 +397,7 @@
 (autoload 'magit-status "magit" nil t)
 ; http://github.com/jimhourihan/egit/raw/master/egit.el
 ; Sort-of like gitk, depends on emacs-git-mode (AUR)
-; M-x egit. Look at egit.el and search for egit-mode-map (line 914) for keybindings.
+; M-x egit. Look at egit.el and search for egit-mode-map (line 914) for keybindings. Or look at the EGit menu.
 (require 'egit)
 
 ;; AUR: emacs-markdown-mode-git
