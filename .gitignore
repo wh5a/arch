@@ -2,3 +2,12 @@
 *.o
 *.hi
 *.elc
+.*
+Downloads
+archpkg
+ghc
+codesurfer-2.1p1
+_darcs
+ddc-head
+fun
+Emacs

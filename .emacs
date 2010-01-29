@@ -388,3 +388,20 @@
 ;; 退出term的时候关闭term对应的buffer
 (add-hook 'term-mode-hook 'kill-buffer-when-shell-command-exit)
 (add-hook 'shell-mode-hook 'kill-buffer-when-shell-command-exit)
+
+;; AUR: emacs-egg-git, much nicer UI than magit
+; M-x egg-status, or C-x v s
+(require 'egg)
+;; magit is less friendly, but has some unique functionalities
+; M-x magit-status
+(autoload 'magit-status "magit" nil t)
+; http://github.com/jimhourihan/egit/raw/master/egit.el
+; Sort-of like gitk, depends on emacs-git-mode (AUR)
+; M-x egit. Look at egit.el and search for egit-mode-map (line 914) for keybindings.
+(require 'egit)
+
+;; AUR: emacs-markdown-mode-git
+(autoload 'markdown-mode "markdown-mode/markdown-mode.el"
+   "Major mode for editing Markdown files" t)
+(setq auto-mode-alist
+   (cons '("\.md" . markdown-mode) auto-mode-alist))
