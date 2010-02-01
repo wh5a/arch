@@ -84,7 +84,7 @@ pgrep -u wh5a emacs > /dev/null || LANG=zh_CN.UTF-8 emacs -daemon
 
 export EDITOR="emacsclient -c -a emacs"
 
-export GREP_OPTIONS='--color=auto --exclude-dir=_darcs'
+export GREP_OPTIONS='--color=auto --exclude-dir=_darcs --exclude-dir=\.svn'
 
 export OOO_FORCE_DESKTOP=kde
 

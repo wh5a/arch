@@ -1,0 +1,16 @@
+diff --git a/chromium-browser/net/proxy/proxy_config_service_linux.cc b/chromium-browser/net/proxy/proxy_config_service_linux.cc
+index 3ca35c5..be8ff2d 100644
+--- a/chromium-browser/net/proxy/proxy_config_service_linux.cc
++++ b/chromium-browser/net/proxy/proxy_config_service_linux.cc
+@@ -415,7 +415,10 @@ class GConfSettingGetterImplKDE
+       if (!env_var_getter->Getenv("HOME", &kde_home))
+         // User has no $HOME? Give up. Later we'll report the failure.
+         return;
+-      kde_home = FilePath(kde_home).Append(FILE_PATH_LITERAL(".kde")).value();
++      if (base::GetDesktopEnvironment(env_var_getter) == base::DESKTOP_ENVIRONMENT_KDE4)
++        kde_home = FilePath(kde_home).Append(FILE_PATH_LITERAL(".kde4")).value();
++      else
++        kde_home = FilePath(kde_home).Append(FILE_PATH_LITERAL(".kde")).value();
+     }
+     kde_config_dir_ = FilePath(kde_home).Append(
+         FILE_PATH_LITERAL("share")).Append(FILE_PATH_LITERAL("config"));

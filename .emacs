@@ -405,3 +405,10 @@
    "Major mode for editing Markdown files" t)
 (setq auto-mode-alist
    (cons '("\.md" . markdown-mode) auto-mode-alist))
+
+;; http://stackoverflow.com/questions/2171890/emacs-how-to-evaluate-the-smallest-s-expression-the-cursor-is-in-or-the-followi/2172519#2172519
+(defun eval-surrounding-sexp (levels)
+  (interactive "p")
+  (save-excursion
+    (up-list (abs levels))
+    (eval-last-sexp nil)))

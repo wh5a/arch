@@ -2,8 +2,8 @@
 # Contributor: Arch Haskell Team <arch-haskell@haskell.org>, Sergej Pupykin <pupykin.s+arch@gmail.com>, Vesa Kaihlavirta <vegai@iki.fi>
 
 pkgname=gtk2hs-darcs
-pkgver=20100130
-pkgrel=2
+pkgver=20100131
+pkgrel=1
 pkgdesc="A GTK+2 binding for Haskell"
 license=('LGPL')
 url="http://gtk2hs.sourceforge.net"
