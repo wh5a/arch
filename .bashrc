@@ -31,6 +31,8 @@ shopt -s histappend
 shopt -s cmdhist 
 # don't put duplicate lines in the history.
 export HISTCONTROL=ignoredups
+# Huge history
+export HISTSIZE=1000000
 
 # Syntax-highlighting pager
 alias cless='/usr/share/vim/vim72/macros/less.sh'
