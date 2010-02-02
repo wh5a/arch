@@ -412,3 +412,8 @@
   (save-excursion
     (up-list (abs levels))
     (eval-last-sexp nil)))
+
+;; Similar to the kill-ring keybindings, but deal with clipboard
+(global-set-key (kbd "C-c C-w") 'clipboard-kill-region)
+(global-set-key (kbd "C-c C-y") 'clipboard-yank)
+(global-set-key (kbd "C-c M-w") 'clipboard-kill-ring-save)

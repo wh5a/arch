@@ -91,7 +91,7 @@ myKillWindow w =
                              , gs_cellwidth = 70
                             -}
       protectedProgs = ["Chromium", "Chrome"]
-      notProtected = ["Developer Tools - ", "Chromium选项", "谷歌浏览器选项", "书签管理器", "About Chromium", "关于谷歌浏览器", "Task Manager - Chromium", "任务管理器 - 谷歌浏览器", "chrome://devtools/devtools.html"]
+      notProtected = ["Developer Tools - ", "Chromium选项", "谷歌浏览器选项", "书签管理器", "About Chromium", "关于谷歌浏览器", "Task Manager - Chromium", "任务管理器 - 谷歌浏览器", "chrome://devtools/devtools.html", "保存文件"]
   in do
   t <- runQuery title w
   c <- runQuery className w
