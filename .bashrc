@@ -110,3 +110,28 @@ export PATH=`cope_path`:$PATH
 
 # compleat, a bash completion util, http://github.com/mbrubeck/compleat
 . ~/.cabal/share/compleat-1.0/compleat_setup
+
+# http://stackoverflow.com/questions/994563/integrate-readlines-kill-ring-and-the-x11-clipboard
+# M-u, M-k, M-y are similar to C-u, C-k, C-y, but deal with X primary selection.
+# C-u kills back to the beginning, and C-w kills back a word.
+_xdiscard() {
+    echo -n "${READLINE_LINE:0:$READLINE_POINT}" | xclip
+    READLINE_LINE="${READLINE_LINE:$READLINE_POINT}"
+    READLINE_POINT=0
+}
+_xkill() {
+    echo -n "${READLINE_LINE:$READLINE_POINT}" | xclip
+    READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}"
+}
+_xyank() {
+    READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}$(xclip -o)${READLINE_LINE:$READLINE_POINT}"
+}
+_xpaste() {
+    READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}$(xclip -o -selection clipboard)${READLINE_LINE:$READLINE_POINT}"
+}
+bind -m emacs -x '"\eu": _xdiscard'
+bind -m emacs -x '"\ek": _xkill'
+bind -m emacs -x '"\ey": _xyank'
+# Couldn't bind to \C-v. Seems it's builtin and couldn't be overriden
+# Use M-v to paste from the clipboard
+bind -m emacs -x '"\ev": _xpaste'
