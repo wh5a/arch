@@ -125,13 +125,13 @@ _xkill() {
 }
 _xyank() {
     CLIP=$(xclip -o)
-    COUNT=$(echo -n "$CLIP" | wc -c)
+    COUNT=`expr length "$CLIP"`
     READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}${CLIP}${READLINE_LINE:$READLINE_POINT}"
     READLINE_POINT=$(($READLINE_POINT + $COUNT))
 }
 _xpaste() {
     CLIP=$(xclip -o -selection clipboard)
-    COUNT=$(echo -n "$CLIP" | wc -c)
+    COUNT=`expr length "$CLIP"`
     READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}${CLIP}${READLINE_LINE:$READLINE_POINT}"
     READLINE_POINT=$(($READLINE_POINT + $COUNT))
 }
