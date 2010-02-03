@@ -166,8 +166,6 @@ main = do
          -- Paste from clipboard, mainly used for urxvt
          -- http://bbs.archlinux.org/viewtopic.php?id=80226
        , ("C-<Insert>", spawn "xsel -x; xsel -o -b | xsel -i; xdotool click 2; xsel -x")
-         -- Paste from X11 selection, mainly used for chrome
-       , ("S-<Insert>", spawn "xdotool click 2")
        --   -- unclutter the mouse
        -- , ("M-u", banish LowerRight)
        --   -- Doesn't work on Chrome?
