@@ -49,6 +49,8 @@ import XMonad.Actions.GridSelect
 -- import XMonad.Actions.UpdatePointer
 -- To-test:  java -jar /opt/java/demo/jfc/Stylepad/Stylepad.jar
 import XMonad.Hooks.SetWMName
+-- Send keys to windows
+import XMonad.Util.Paste
 
 myTheme = defaultTheme {
    fontName = "xft:WenQuanYi Zen Hei:pixelsize=17"
@@ -103,6 +105,16 @@ myKillWindow w =
                    ]
     else killWindow w
 
+shiftInsert w =
+  let translatedProgs = ["Chromium", "Chrome"] in do
+    c <- runQuery className w
+    let toTranslate = any (== c) translatedProgs
+    -- Unfortunately pasteSelection only supports ASCII
+    -- If we simply use xdotool to send a middle click, it doens't always work depending on the position of the mouse pointer
+    if toTranslate then spawn ("CLIP=$(xsel -o -b); xsel -o | xsel -i -b; " ++
+                               "xdotool key --clearmodifiers --window " ++ show w ++  " ctrl+v; echo -n $CLIP | xsel -i -b")
+     else sendKey shiftMask xK_Insert
+  
 main = do
   -- http://haskell.org/haskellwiki/Xmonad/Notable_changes_since_0.9
   -- sp <- mkSpawner
@@ -161,11 +173,12 @@ main = do
        , ("M-m", withFocused (sendMessage . maximizeRestore))
          -- A cool menu
        , ("M-o", windowMenu)
-         -- Bind keys natively in XMonad http://www.haskell.org/haskellwiki/Xmonad/Frequently_asked_questions#How_can_I_send_a_key_sequence_to_a_window.3F
-         -- Or with xbindkeys
-         -- Paste from clipboard, mainly used for urxvt
-         -- http://bbs.archlinux.org/viewtopic.php?id=80226
+         -- We choose to bind keys natively in XMonad, instead of using xbindkeys
+         -- Paste from clipboard, mainly used for urxvt, http://bbs.archlinux.org/viewtopic.php?id=80226
+         -- We can send a middle click because the mouse pointer's position doesn't matter for CLI programs
        , ("C-<Insert>", spawn "xsel -x; xsel -o -b | xsel -i; xdotool click 2; xsel -x")
+         -- Paste from X primary, mainly used for chrome
+       , ("S-<Insert>", withFocused shiftInsert)
        --   -- unclutter the mouse
        -- , ("M-u", banish LowerRight)
        --   -- Doesn't work on Chrome?
