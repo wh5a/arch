@@ -161,6 +161,13 @@ main = do
        , ("M-m", withFocused (sendMessage . maximizeRestore))
          -- A cool menu
        , ("M-o", windowMenu)
+         -- Bind keys natively in XMonad http://www.haskell.org/haskellwiki/Xmonad/Frequently_asked_questions#How_can_I_send_a_key_sequence_to_a_window.3F
+         -- Or with xbindkeys
+         -- Paste from clipboard, mainly used for urxvt
+         -- http://bbs.archlinux.org/viewtopic.php?id=80226
+       , ("C-<Insert>", spawn "xsel -x; xsel -o -b | xsel -i; xdotool click 2; xsel -x")
+         -- Paste from X11 selection, mainly used for chrome
+       , ("S-<Insert>", spawn "xdotool click 2")
        --   -- unclutter the mouse
        -- , ("M-u", banish LowerRight)
        --   -- Doesn't work on Chrome?
