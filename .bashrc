@@ -124,10 +124,16 @@ _xkill() {
     READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}"
 }
 _xyank() {
-    READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}$(xclip -o)${READLINE_LINE:$READLINE_POINT}"
+    CLIP=$(xclip -o)
+    COUNT=$(echo -n "$CLIP" | wc -c)
+    READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}${CLIP}${READLINE_LINE:$READLINE_POINT}"
+    READLINE_POINT=$(($READLINE_POINT + $COUNT))
 }
 _xpaste() {
-    READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}$(xclip -o -selection clipboard)${READLINE_LINE:$READLINE_POINT}"
+    CLIP=$(xclip -o -selection clipboard)
+    COUNT=$(echo -n "$CLIP" | wc -c)
+    READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}${CLIP}${READLINE_LINE:$READLINE_POINT}"
+    READLINE_POINT=$(($READLINE_POINT + $COUNT))
 }
 bind -m emacs -x '"\eu": _xdiscard'
 bind -m emacs -x '"\ek": _xkill'
