@@ -1,0 +1,30 @@
+#! perl
+
+# Set if ctrl was pressed down when you started a selection by a left-click
+my $ctrl;
+
+sub on_sel_grab {
+    # The quote trick stolen from http://wiki.archlinux.org/index.php/Rxvt-unicode#No_clipboard_management_solution
+    my $query=quotemeta $_[0]->selection;
+    $query=~ s/\n/\\n/g;
+    $query=~ s/\r/\\r/g;
+
+    # If ctrl pressed, copy the current selection to the clipboard
+    if ($ctrl) {
+        system( "echo -en " . $query . " | xclip -selection clipboard" );
+    }
+    ()
+}
+
+sub on_button_press {
+    my ($self, $event) = @_;
+    # Only effective for left clicks
+    $event->{button} == 1
+        or return;
+    if ($event->{state} & urxvt::ControlMask) {
+        $ctrl = 1;
+    } else {
+        $ctrl = 0;
+    }
+    ()
+}

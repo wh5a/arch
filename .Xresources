@@ -9,8 +9,6 @@ URxvt.scrollWithBuffer: True
 URxvt.scrollTtyKeypress: True
 URxvt.fading: 40
 URxvt.saveLines: 10000
-! Avoide strange redraw issues. Is this resource really supported, or just a compile-time configure?
-URxvt.smartResize: True
 
 ! Colors taken from http://ezyang.scripts.mit.edu/blog/2010/01/rxvt-unicode-for-gnome-terminal-refugees/
 URxvt*background: black
@@ -40,8 +38,12 @@ URxvt*color14 : #34E2E2
 URxvt*color7  : #D3D7CF
 URxvt*color15 : #EEEEEC
 
+! My urxvt perl extensions
+! Ctrl-select to copy text into clipboard
+! Another trick: Shift-click to move around
+URxvt.perl-lib: /home/wh5a/.urxvt
 ! man urxvtperl
-URxvt.perl-ext-common: default,-option-popup,matcher,-selection-popup,xim-onthespot
+URxvt.perl-ext-common: default,-option-popup,matcher,-selection-popup,xim-onthespot,ctrl-clipboard
 URxvt.urlLauncher: chromium
 URxvt.matcher.rend.0: fg8 Uline Italic
 !URxvt.colorUL: #86a2be
