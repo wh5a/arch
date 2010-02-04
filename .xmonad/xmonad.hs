@@ -105,8 +105,9 @@ myKillWindow w =
                    ]
     else killWindow w
 
+-- Why doesn't this work reliably on Firefox?
 shiftInsert w =
-  let translatedProgs = ["Chromium", "Chrome"] in do
+  let translatedProgs = ["Chromium", "Chrome", "Firefox", "Namoroka"] in do
     c <- runQuery className w
     let toTranslate = any (== c) translatedProgs
     -- Unfortunately pasteSelection only supports ASCII

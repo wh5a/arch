@@ -6,6 +6,12 @@ my $ctrl;
 sub on_sel_grab {
     # The quote trick stolen from http://wiki.archlinux.org/index.php/Rxvt-unicode#No_clipboard_management_solution
     my $query=quotemeta $_[0]->selection;
+
+    # Convert literal "\n" to "\\\\n" for echo
+    $query=~ s/\\n/\\\\\\\\n/g;
+    $query=~ s/\\r/\\\\\\\\r/g;
+
+    # Convert [RET] to "\\n" so that it doesn't break the pipeline
     $query=~ s/\n/\\n/g;
     $query=~ s/\r/\\r/g;
 
