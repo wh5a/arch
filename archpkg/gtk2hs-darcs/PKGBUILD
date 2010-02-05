@@ -2,16 +2,15 @@
 # Contributor: Arch Haskell Team <arch-haskell@haskell.org>, Sergej Pupykin <pupykin.s+arch@gmail.com>, Vesa Kaihlavirta <vegai@iki.fi>
 
 pkgname=gtk2hs-darcs
-pkgver=20100201
+pkgver=20100205
 pkgrel=1
 pkgdesc="A GTK+2 binding for Haskell"
 license=('LGPL')
 url="http://gtk2hs.sourceforge.net"
 arch=('i686' 'x86_64')
 conflicts=('gtk2hs')
-makedepends=('ghc>=6.10.4')
-depends=('libglade' 'gtksourceview2' 'gconf' 'librsvg>=2.16' 'gtkglext')
-makedepends=('alex' 'happy')
+makedepends=('ghc' 'alex' 'happy' 'darcs')
+depends=('libglade' 'gtksourceview2' 'gconf' 'librsvg>=2.16' 'gtkglext' 'haskell-mtl')
 provides=('gtk2hs')
 options=('strip' 'docs' 'zipman')
 install=gtk2hs.install
