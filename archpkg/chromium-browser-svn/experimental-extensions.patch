@@ -1,0 +1,16 @@
+Index: src/chrome/common/extensions/extension.cc
+===================================================================
+--- src/chrome/common/extensions/extension.cc	(revision 38441)
++++ src/chrome/common/extensions/extension.cc	(working copy)
+@@ -62,11 +62,6 @@
+ static bool IsAPIPermission(const std::string& str) {
+   for (size_t i = 0; i < Extension::kNumPermissions; ++i) {
+     if (str == Extension::kPermissionNames[i]) {
+-      if (str == Extension::kExperimentalPermission &&
+-          !CommandLine::ForCurrentProcess()->HasSwitch(
+-              switches::kEnableExperimentalExtensionApis)) {
+-        return false;
+-      }
+       return true;
+     }
+   }

@@ -1,0 +1,54 @@
+Index: src/third_party/WebKit/WebCore/page/DOMWindow.cpp
+===================================================================
+--- src/third_party/WebKit/WebCore/page/DOMWindow.cpp	(revision 54493)
++++ src/third_party/WebKit/WebCore/page/DOMWindow.cpp	(working copy)
+@@ -1156,6 +1156,25 @@
+     view->scrollBy(IntSize(x, y));
+ }
+ 
++void DOMWindow::scrollByPages(int pages) const
++{
++    if (!m_frame)
++        return;
++
++    m_frame->document()->updateLayoutIgnorePendingStylesheets();
++
++    FrameView* view = m_frame->view();
++    if (!view)
++        return;
++
++    if (pages > 0)
++      for (; pages > 0; pages--)
++        view->scroll(ScrollDown, ScrollByPage);
++    else
++      for (; pages < 0; pages++)
++        view->scroll(ScrollUp, ScrollByPage);
++}
++
+ void DOMWindow::scrollTo(int x, int y) const
+ {
+     if (!m_frame)
+Index: src/third_party/WebKit/WebCore/page/DOMWindow.h
+===================================================================
+--- src/third_party/WebKit/WebCore/page/DOMWindow.h	(revision 54493)
++++ src/third_party/WebKit/WebCore/page/DOMWindow.h	(working copy)
+@@ -227,6 +227,7 @@
+         void postMessageTimerFired(PostMessageTimer*);
+ 
+         void scrollBy(int x, int y) const;
++        void scrollByPages(int pages) const;
+         void scrollTo(int x, int y) const;
+         void scroll(int x, int y) const { scrollTo(x, y); }
+ 
+Index: src/third_party/WebKit/WebCore/page/DOMWindow.idl
+===================================================================
+--- src/third_party/WebKit/WebCore/page/DOMWindow.idl	(revision 54493)
++++ src/third_party/WebKit/WebCore/page/DOMWindow.idl	(working copy)
+@@ -108,6 +108,7 @@
+         readonly attribute long pageYOffset;
+ 
+         [RequiresAllArguments] void scrollBy(in long x, in long y);
++        [RequiresAllArguments] void scrollByPages(in long pages);
+         [RequiresAllArguments] void scrollTo(in long x, in long y);
+         [RequiresAllArguments] void scroll(in long x, in long y);
+         [RequiresAllArguments] void moveBy(in float x, in float y); // FIXME: this should take longs not floats.
