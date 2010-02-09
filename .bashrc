@@ -141,3 +141,7 @@ bind -m emacs -x '"\ey": _xyank'
 # Couldn't bind to \C-v. Seems it's builtin and couldn't be overriden
 # Use M-v to paste from the clipboard
 bind -m emacs -x '"\ev": _xpaste'
+
+# Read by chromium-browser.sh, which is usually installed to /usr/bin/chromium
+export CHROMIUM_USER_FLAGS="--enable-geolocation --enable-indexed-database --enable-new-autofill --enable-privacy-blacklists --enable-session-storage --omnibox-popup-count=15"
+# --enable-vertical-tabs --enable-seccomp-sandbox --bookmark-menu --enable-udd-profiles --purge-memory-button --user-data-dir=/foo/bar

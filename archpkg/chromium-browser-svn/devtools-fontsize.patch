@@ -1,0 +1,119 @@
+--- src/third_party/WebKit/WebCore/inspector/front-end/inspector.css	2010-02-07 11:08:37.365001301 +0100
++++ src/third_party/WebKit/WebCore/inspector/front-end/inspector.css	2010-02-07 11:52:06.000000000 +0100
+@@ -33,7 +33,7 @@
+     width: 100%;
+     overflow: hidden;
+     font-family: Lucida Grande, sans-serif;
+-    font-size: 10px;
++    font-size: 13px;
+     margin: 0;
+     -webkit-text-size-adjust: none;
+     -webkit-user-select: none;
+@@ -431,7 +431,7 @@
+     top: 0;
+     cursor: pointer;
+     padding: 6px 2px;
+-    font-size: 10px;
++    font-size: 13px;
+     height: 19px;
+ }
+ 
+@@ -497,7 +497,7 @@
+ }
+ 
+ .monospace {
+-    font-size: 10px;
++    font-size: 13px;
+     font-family: monospace;
+ }
+ 
+@@ -1119,7 +1119,7 @@
+ 
+ .source-code {
+     font-family: monospace;
+-    font-size: 10px;
++    font-size: 13px;
+     white-space: pre-wrap;
+ }
+ 
+@@ -1233,7 +1233,7 @@
+ 
+ .placard .subtitle {
+     float: right;
+-    font-size: 10px;
++    font-size: 13px;
+     margin-left: 5px;
+     max-width: 55%;
+     color: rgba(0, 0, 0, 0.7);
+@@ -1331,7 +1331,7 @@
+ 
+ .section .header .subtitle, .event-bar .header .subtitle {
+     float: right;
+-    font-size: 10px;
++    font-size: 13px;
+     margin-left: 5px;
+     max-width: 55%;
+     color: rgba(255, 255, 255, 0.7);
+@@ -1547,7 +1547,7 @@
+ .section .properties .enabled-button {
+     display: none;
+     float: right;
+-    font-size: 10px;
++    font-size: 13px;
+     margin: 0 0 0 4px;
+     vertical-align: top;
+     position: relative;
+@@ -1689,7 +1689,7 @@
+ .pane > .body .info {
+     text-align: center;
+     font-style: italic;
+-    font-size: 10px;
++    font-size: 13px;
+     padding: 6px;
+     color: gray;
+ }
+@@ -1712,7 +1712,7 @@
+ 
+ .metrics {
+     padding: 8px;
+-    font-size: 10px;
++    font-size: 13px;
+     text-align: center;
+     white-space: nowrap;
+ }
+@@ -1910,7 +1910,7 @@
+     border-spacing: 0;
+     border-collapse: collapse;
+     width: 100%;
+-    font-size: 10px;
++    font-size: 13px;
+     font-family: Lucida Grande, sans-serif;
+ }
+ 
+@@ -2202,7 +2202,7 @@
+ }
+ 
+ .panel-enabler-disclaimer {
+-    font-size: 10px;
++    font-size: 13px;
+     color: rgb(110, 116, 128);
+     margin-bottom: 12px;
+     margin-left: 20px;
+@@ -2617,7 +2617,7 @@
+ }
+ 
+ .summary-graph-legend-value {
+-    font-size: 10px;
++    font-size: 13px;
+ }
+ 
+ .summary-graph-legend-swatch {
+@@ -3754,7 +3754,7 @@
+ }
+ 
+ .breakpoint-list .checkbox-elem {
+-    font-size: 10px;
++    font-size: 13px;
+     margin: 0 4px;
+     vertical-align: top;
+     position: relative;

@@ -1,0 +1,15 @@
+solutions = [
+  { "name"        : "src",
+    "url"         : "http://src.chromium.org/svn/trunk/src",
+    "custom_deps" : {
+      # "src/v8" : "http://v8.googlecode.com/svn/trunk@3540",
+      "src/third_party/WebKit/LayoutTests": None,
+      "src/chrome/tools/test/reference_build": None,
+      "src/third_party/ffmpeg/binaries/chromium/linux/ia32": None,
+      "src/third_party/ffmpeg/binaries/chromium/linux/ia32_dbg": None,
+      "src/third_party/ffmpeg/binaries/chromium/linux/x64": None,
+      "src/third_party/ffmpeg/binaries/chromium/linux/x64_dbg": None,
+    },
+    "safesync_url": "http://chromium-status.appspot.com/lkgr"
+  },
+]
