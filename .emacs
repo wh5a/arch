@@ -262,21 +262,19 @@
 (autoload 'caml+twt-mode "caml+twt" "Major mode for editing Caml+twt code" t)
 (defun start-mlmode ()
     (when
-        (save-excursion
-          (progn
-            (goto-char (point-min))
-            (looking-at "(\\*pp ocaml\\+twt\\*)[:blank:]*")
-            )
-          )
-      (caml+twt-mode)
-      ; A hack to force the execution of tuareg-fontify
-      (setq major-mode 'tuareg-mode)
-      )
-      (remove-hook 'find-file-hook 'start-mlmode 1)
-    )
+      (save-excursion
+        (progn
+          (goto-char (point-min))
+          (looking-at "(\\*pp ocaml\\+twt\\*)[:blank:]*")))
+      (caml+twt-mode))
+      (remove-hook 'find-file-hook 'start-mlmode 1))
 (add-hook 'tuareg-load-hook (lambda ()
                               (add-hook 'find-file-hook
                                         'start-mlmode 1)))
+(add-hook 'caml+twt-mode-hook
+  (lambda ()
+    ; A hack to force the execution of tuareg-fontify
+    (setq major-mode 'tuareg-mode)))
 
 ; CIL: M-x cil-debug
 (load-file "~/cil/tips/debugging.el")
