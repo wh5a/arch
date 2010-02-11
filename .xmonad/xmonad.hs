@@ -4,6 +4,7 @@ import Fixfocus
 import Maximize
 -- Patched to handle spawned processes' children for shell scripts/wrappers
 import SpawnOn
+import Data.Monoid
 import qualified XMonad.StackSet as W  
 import XMonad.Layout.NoBorders
 import XMonad.Util.EZConfig
@@ -79,7 +80,7 @@ myManageHook = composeOne $
     , appName =? "emacs" -?> doShift "2:emacs"
     , appName =? "fqterm.bin" -?> doShift "9:web"
     , className =? "Toplevel" -?> doShift "3:csurf"
-    , className =? "Firefox" -?> doShift "9:web"
+--    , className =? "Firefox" -?> doShift "9:web"
     ]
     where myFloats = ["Option", "option", "Preference", "preference", "about", "About", "Find", "选项", "书签管理器", "Emacs TEXTAREA"]
 
@@ -123,13 +124,11 @@ main = do
   -- xmobar-darcs now supports reading from XState instead of from stdin, thus getting rid of the pipe.
   -- See X.C.Sjanssen for the usage
   xmproc <- spawnPipe "xmobar /home/wh5a/.xmonad/xmobarc"
-  xmonad $
-         defaultConfig {
+  let conf = ewmh defaultConfig {
          modMask = myModMask
-       , startupHook = ewmhDesktopsStartup >> setWMName "LG3D"
        , terminal = myTerm
 --       , borderWidth = 1
-       , workspaces = ["1:term","2:emacs","3:csurf","4","5","6","7","8","9:web"]
+       , workspaces = ["1:term","2:emacs","3","4","5","6","7","8","9:web"]
        , manageHook = placeHook (inBounds $ underMouse (0.5,0.5)) <+> manageSpawn <+> manageDocks <+> manageHook defaultConfig <+> myManageHook
 --       , layoutHook = {- layoutHints $ -} maximize $ avoidStruts $ smartBorders $ onWorkspace "9:web" (tabbed shrinkText myTheme ||| Full ||| Tall 1 (3%100) (1%2)) $ (mouseResizableTile ||| layoutHook defaultConfig)
        , layoutHook = {- layoutHints $ minimize -} fixFocus $ maximize $ avoidStruts $ smartBorders $ onWorkspace "9:web" (tabbed shrinkText myTheme ||| Full ||| mouseResizableTile) $ (mouseResizableTile ||| mouseResizableTileMirrored ||| Full)
@@ -185,3 +184,8 @@ main = do
        --   -- Doesn't work on Chrome?
        -- , ("M-S-u", updatePointer $ Relative 0.5 0.5)
        ]
+  xmonad conf {
+    startupHook = startupHook conf >> setWMName "LG3D"
+    -- Fix some fullscreen events, e.g. Firefox <video> play
+  , handleEventHook = handleEventHook conf `mappend` fullscreenEventHook
+    }
