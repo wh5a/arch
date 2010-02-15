@@ -1,0 +1,179 @@
+Index: src/chrome/browser/sessions/tab_restore_service.cc
+===================================================================
+--- src/chrome/browser/sessions/tab_restore_service.cc	(revision 39074)
++++ src/chrome/browser/sessions/tab_restore_service.cc	(working copy)
+@@ -41,7 +41,7 @@
+ // TabRestoreService ----------------------------------------------------------
+ 
+ // static
+-const size_t TabRestoreService::kMaxEntries = 10;
++const size_t TabRestoreService::kMaxEntries = 30;
+ 
+ // Identifier for commands written to file.
+ // The ordering in the file is as follows:
+Index: src/chrome/browser/resources/new_new_tab.css
+===================================================================
+--- src/chrome/browser/resources/new_new_tab.css	(revision 39074)
++++ src/chrome/browser/resources/new_new_tab.css	(working copy)
+@@ -22,7 +22,6 @@
+   background: url(chrome://theme/product_logo) no-repeat 0 6px;
+   position: relative;
+   margin: 0 auto;
+-  width: 920px;
+   min-height: 50px;
+   -webkit-transition: width .15s;
+   padding-bottom: 110px;
+@@ -45,7 +44,7 @@
+   position: relative;
+   padding: 0;
+   margin-bottom: 34px;
+-  height: 366px;
++  height: 520px;
+   -webkit-user-select: none;
+   -webkit-transition: height .15s, opacity .15s;
+ }
+@@ -495,7 +494,7 @@
+   -webkit-border-radius: 5px;
+   padding: 5px 0px;
+   white-space: nowrap;
+-  overflow-x: hidden;
++  overflow-x: scroll;
+ }
+ 
+ #recently-closed > * {
+@@ -691,7 +690,7 @@
+ }
+ 
+ #most-visited.list {
+-  height: 294px;
++  height: 410px;
+ }
+ 
+ .list > .thumbnail-container {
+@@ -815,7 +814,7 @@
+   }
+ 
+   #most-visited {
+-    height: 294px;
++    height: 410px;
+   }
+ 
+   .thumbnail,
+Index: src/chrome/browser/resources/new_new_tab.html
+===================================================================
+--- src/chrome/browser/resources/new_new_tab.html	(revision 39074)
++++ src/chrome/browser/resources/new_new_tab.html	(working copy)
+@@ -92,8 +92,8 @@
+ function getMostVisitedLayoutRects() {
+   var small = useSmallGrid();
+ 
+-  var cols = 4;
+-  var rows = 2;
++  var cols = 7;
++  var rows = 3;
+   var marginWidth = 10;
+   var marginHeight = 7;
+   var borderWidth = 4;
+@@ -150,7 +150,7 @@
+     var rects = getMostVisitedLayoutRects();
+     var rtlList = isRtl() && isList;
+     var children = $('most-visited').children;
+-    for (var i = 0; i < 8; i++) {
++    for (var i = 0; i < 21; i++) {
+       var t = children[i];
+       t.style.left = rtlList ? '' : rects[i].left + 'px';
+       t.style.top = rects[i].top + 'px';
+@@ -227,7 +227,7 @@
+         el.className += ' collapsed';
+       }
+ 
+-      for (var i = 1; i < 8; i++) {
++      for (var i = 1; i < 21; i++) {
+         el.appendChild(el.firstElementChild.cloneNode(true)).id = 't' + i;
+       }
+ 
+Index: src/chrome/browser/resources/new_new_tab.js
+===================================================================
+--- src/chrome/browser/resources/new_new_tab.js	(revision 39074)
++++ src/chrome/browser/resources/new_new_tab.js	(working copy)
+@@ -75,7 +75,7 @@
+ 
+   // We append the class name with the "filler" so that we can style fillers
+   // differently.
+-  var maxItems = 8;
++  var maxItems = 21;
+   data.length = Math.min(maxItems, data.length);
+   var len = data.length;
+   for (var i = len; i < maxItems; i++) {
+@@ -581,31 +581,6 @@
+ function layoutRecentlyClosed() {
+   var recentShown = shownSections & Section.RECENT;
+   updateSimpleSection('recently-closed', Section.RECENT);
+-
+-  if (recentShown) {
+-    var recentElement = $('recently-closed');
+-    var style = recentElement.style;
+-    // We cannot use clientWidth here since the width has a transition.
+-    var spacing = 20;
+-    var headerEl = recentElement.firstElementChild;
+-    var navEl = recentElement.lastElementChild;
+-    var navWidth = navEl.offsetWidth;
+-    // Subtract 10 for the padding
+-    var availWidth = (useSmallGrid() ? 690 : 918) - navWidth - 10;
+-
+-    // Now go backwards and hide as many elements as needed.
+-    var elementsToHide = [];
+-    for (var el = navEl.previousElementSibling; el != headerEl;
+-         el = el.previousElementSibling) {
+-      if (el.offsetLeft + el.offsetWidth + spacing > availWidth) {
+-        elementsToHide.push(el);
+-      }
+-    }
+-
+-    elementsToHide.forEach(function(el) {
+-      el.parentNode.removeChild(el);
+-    });
+-  }
+ }
+ 
+ /**
+Index: src/chrome/browser/dom_ui/new_tab_ui.cc
+===================================================================
+--- src/chrome/browser/dom_ui/new_tab_ui.cc	(revision 39074)
++++ src/chrome/browser/dom_ui/new_tab_ui.cc	(working copy)
+@@ -36,13 +36,6 @@
+ #include "grit/generated_resources.h"
+ 
+ namespace {
+-
+-// The number of recent bookmarks we show.
+-const int kRecentBookmarks = 9;
+-
+-// The number of search URLs to show.
+-const int kSearchURLs = 3;
+-
+ // Strings sent to the page via jstemplates used to set the direction of the
+ // HTML document based on locale.
+ const wchar_t kRTLHtmlTextDirection[] = L"rtl";
+@@ -261,7 +254,7 @@
+   ListValue list_value;
+   std::set<std::wstring> unique_items;
+   int added_count = 0;
+-  const int max_count = 10;
++  const int max_count = 30;
+ 
+   // We filter the list of recently closed to only show 'interesting' entries,
+   // where an interesting entry is either a closed window or a closed tab
+Index: src/chrome/browser/dom_ui/most_visited_handler.cc
+===================================================================
+--- src/chrome/browser/dom_ui/most_visited_handler.cc	(revision 39074)
++++ src/chrome/browser/dom_ui/most_visited_handler.cc	(working copy)
+@@ -29,7 +29,7 @@
+ namespace {
+ 
+ // The number of most visited pages we show.
+-const size_t kMostVisitedPages = 8;
++const size_t kMostVisitedPages = 21;
+ 
+ // The number of days of history we consider for most visited entries.
+ const int kMostVisitedScope = 90;
