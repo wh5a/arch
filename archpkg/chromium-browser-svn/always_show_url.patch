@@ -1,0 +1,21 @@
+Index: src/chrome/browser/tab_contents/tab_contents.cc
+===================================================================
+--- src/chrome/browser/tab_contents/tab_contents.cc	(revision 39074)
++++ src/chrome/browser/tab_contents/tab_contents.cc	(working copy)
+@@ -532,16 +532,6 @@
+ }
+ 
+ bool TabContents::ShouldDisplayURL() {
+-  // Don't hide the url in view source mode and with interstitials.
+-  NavigationEntry* entry = controller_.GetActiveEntry();
+-  if (entry && (entry->IsViewSourceMode() ||
+-                entry->page_type() == NavigationEntry::INTERSTITIAL_PAGE)) {
+-    return true;
+-  }
+-
+-  DOMUI* dom_ui = GetDOMUIForCurrentState();
+-  if (dom_ui)
+-    return !dom_ui->should_hide_url();
+   return true;
+ }
+ 
