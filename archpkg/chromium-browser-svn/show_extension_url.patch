@@ -1,0 +1,27 @@
+Index: src/chrome/browser/extensions/extension_dom_ui.cc
+===================================================================
+--- src/chrome/browser/extensions/extension_dom_ui.cc	(revision 39074)
++++ src/chrome/browser/extensions/extension_dom_ui.cc	(working copy)
+@@ -31,9 +31,6 @@
+   if (url.SchemeIs(chrome::kChromeUIScheme)) {
+     if (url.host() == chrome::kChromeUINewTabHost) {
+       focus_location_bar_by_default_ = true;
+-    } else {
+-      // Current behavior of other chrome:// pages is to display the URL.
+-      should_hide_url_ = false;
+     }
+   }
+ }
+Index: src/chrome/browser/extensions/extension_host.cc
+===================================================================
+--- src/chrome/browser/extensions/extension_host.cc	(revision 39074)
++++ src/chrome/browser/extensions/extension_host.cc	(working copy)
+@@ -129,6 +129,8 @@
+       dom_storage_context()->AllocateSessionStorageNamespaceId();
+   render_view_host_ = new RenderViewHost(site_instance, this, MSG_ROUTING_NONE,
+                                          session_storage_namespace_id);
++  // Wei: granting extension bindings and dom_ui bindings simultaneously confuses chrome: we lose the extension bindings
++  // render_view_host_->AllowBindings(BindingsPolicy::EXTENSION | BindingsPolicy::DOM_UI);
+   render_view_host_->AllowBindings(BindingsPolicy::EXTENSION);
+   if (enable_dom_automation_)
+     render_view_host_->AllowBindings(BindingsPolicy::DOM_AUTOMATION);
