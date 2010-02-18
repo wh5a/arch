@@ -6,6 +6,9 @@ ci = commit
 # http://upsilon.cc/~zack/blog/posts/2010/01/git_flag_of_the_day_--color-words/
 wdiff = diff --color-words
 wshow = show --color-words
+# http://www.jukie.net/~bart/blog/pimping-out-git-log
+top = !eval cd "$(pwd)/$(git rev-parse --show-cdup)" && pwd
+lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative
 
 [color]
 ui = auto
