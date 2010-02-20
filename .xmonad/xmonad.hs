@@ -23,7 +23,6 @@ import XMonad.Prompt.Man
 import XMonad.Util.Run
 -- http://haskell.org/haskellwiki/Xmonad/Config_archive/John_Goerzen%27s_Configuration#Configuring_xmonad_to_use_xmobar
 import XMonad.Hooks.DynamicLog
-import XMonad.Actions.SinkAll
 import Data.List
 -- Emacs-style expression evaluation, requires the xmonad-eval package    
 --import XMonad.Actions.Eval
@@ -52,6 +51,8 @@ import XMonad.Actions.GridSelect
 import XMonad.Hooks.SetWMName
 -- Send keys to windows
 import XMonad.Util.Paste
+import XMonad.Actions.FloatKeys
+import XMonad.Actions.WithAll
 
 myTheme = defaultTheme {
    fontName = "xft:WenQuanYi Zen Hei:pixelsize=17"
@@ -116,7 +117,7 @@ shiftInsert w =
     if toTranslate then spawn ("CLIP=$(xsel -o -b); xsel -o | xsel -i -b; " ++
                                "xdotool key --clearmodifiers --window " ++ show w ++  " ctrl+v; echo -n $CLIP | xsel -i -b")
      else sendKey shiftMask xK_Insert
-  
+
 main = do
   -- http://haskell.org/haskellwiki/Xmonad/Notable_changes_since_0.9
   -- sp <- mkSpawner
@@ -161,14 +162,14 @@ main = do
 --       , ("M-S-k", kill)   -- By default, M-S-k/ M-S-j move windows
        , ("M-C-c", withFocused myKillWindow)
        , ("M-d", sinkAll)
+         -- M-t tiles window
+       , ("M-S-t", withFocused float)
          -- Cycle forward and backward through non-empty workspaces
-       , ("M-<R>", moveTo Next NonEmptyWS)
-       , ("M-<L>", moveTo Prev NonEmptyWS)
+       , ("M-<Tab>", moveTo Next NonEmptyWS)
+       , ("M-S-<Tab>", moveTo Prev NonEmptyWS)
        , ("M-S-<R>", shiftToNext >> nextWS)
        , ("M-S-<L>", shiftToPrev >> prevWS)
        , ("M-<F1>", manPrompt myXPConfig)
-       , ("M-<U>", windows W.focusDown)
-       , ("M-<D>", windows W.focusUp)
          -- Maximize a window
        , ("M-m", withFocused (sendMessage . maximizeRestore))
          -- A cool menu
@@ -183,6 +184,16 @@ main = do
        -- , ("M-u", banish LowerRight)
        --   -- Doesn't work on Chrome?
        -- , ("M-S-u", updatePointer $ Relative 0.5 0.5)
+       , ("M-<L>", withFocused (keysMoveWindow (-10, 0)))
+       , ("M-<R>", withFocused (keysMoveWindow (10, 0)))
+       , ("M-<U>", withFocused (keysMoveWindow (0, -10)))
+       , ("M-<D>", withFocused (keysMoveWindow (0, 10)))
+       , ("M-<KP_Left>", withFocused (keysResizeWindow (-10, 0) (1%2, 1%2)))
+       , ("M-<KP_Right>", withFocused (keysResizeWindow (10, 0) (1%2, 1%2)))
+       , ("M-<KP_Up>", withFocused (keysResizeWindow (0, 10) (1%2, 1%2)))
+       , ("M-<KP_Down>", withFocused (keysResizeWindow (0, -10) (1%2, 1%2)))
+       , ("M1-<Tab>", windows W.focusDown)
+       , ("M1-S-<Tab>", windows W.focusUp)
        ]
   xmonad conf {
     startupHook = startupHook conf >> setWMName "LG3D"
