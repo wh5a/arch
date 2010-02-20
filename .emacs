@@ -18,7 +18,13 @@
 (setq lisp-indent-offset 2)
 
 (ido-mode t)
-(setq ido-create-new-buffer 'always)
+(setq
+  ido-ignore-buffers ;; ignore these guys
+  '("\\` " "^\*Mess" "^\*Help" "^\*Back" "^\*Completion" "^\*Ido")
+  ido-create-new-buffer 'always
+  ido-max-work-file-list      50   ; remember many
+;  ido-use-filename-at-point t
+  )
 
 (require 'recentf)
 (recentf-mode 1)
@@ -438,3 +444,33 @@
 ;; save is done automatically, you can also do `M-x save-visited-files-save` and `M-x save-visited-files-restore`
 (require 'save-visited-files)
 (turn-on-save-visited-files-mode)
+
+;; `C-c <-` and `C-c ->` to cycle through window configurations
+(winner-mode 1)
+
+;; http://emacs-fu.blogspot.com/2010/02/dealing-with-many-buffers-ibuffer.html
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(setq ibuffer-saved-filter-groups
+  (quote (("default"
+            ("Emacs"
+              (or
+                (mode . emacs-lisp-mode)
+                (mode . lisp-interaction-mode)))
+            ("Haskell"
+              (or
+                (mode . haskell-mode)
+                (mode . literate-haskell-mode)
+                (mode . inferior-haskell-mode)))
+            ("OCaml"
+              (or
+                (mode . tuareg-mode)
+                (mode . caml+twt-mode)
+                (mode . tuareg-interactive-mode)))
+            ;; ("MyProject1"
+            ;;   (filename . "src/myproject1/"))
+            ;; ("MyProject2"
+            ;;   (filename . "src/myproject2/"))
+            ))))
+(add-hook 'ibuffer-mode-hook
+  (lambda ()
+    (ibuffer-switch-to-saved-filter-groups "default")))
