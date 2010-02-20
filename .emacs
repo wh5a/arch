@@ -85,6 +85,10 @@
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+;; http://nflath.com/2010/01/c-eldoc-speedups/
+;; http://github.com/nflath/c-eldoc/raw/master/c-eldoc.el
+(require 'c-eldoc)
+(add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
 
 ;; Enable clear command in eshell buffer                                                                           
 (defun eshell/clear ()
@@ -415,3 +419,22 @@
 (global-set-key (kbd "C-c C-w") 'clipboard-kill-region)
 (global-set-key (kbd "C-c C-y") 'clipboard-yank)
 (global-set-key (kbd "C-c M-w") 'clipboard-kill-ring-save)
+
+;; doing a pg-up followed by a pg-down should return to the original place.
+(require 'pager)
+(global-set-key "\C-v" 'pager-page-down)
+(global-set-key "\ev" 'pager-page-up)
+
+;; add the function point is inside to the mode-line.
+(setq which-func-modes t)
+(which-func-mode 1)
+
+;; Remember buffer positions per-window, not per buffer
+(require 'winpoint)
+(winpoint-mode t)
+
+;; lightweight version of Desktop.el that only save the files you have open
+;; http://github.com/nflath/save-visited-files/raw/master/save-visited-files.el
+;; save is done automatically, you can also do `M-x save-visited-files-save` and `M-x save-visited-files-restore`
+(require 'save-visited-files)
+(turn-on-save-visited-files-mode)
