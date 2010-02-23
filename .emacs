@@ -444,6 +444,7 @@
 ;; save is done automatically, you can also do `M-x save-visited-files-save` and `M-x save-visited-files-restore`
 (require 'save-visited-files)
 (turn-on-save-visited-files-mode)
+(save-visited-files-restore)
 
 ;; `C-c <-` and `C-c ->` to cycle through window configurations
 (winner-mode 1)
@@ -471,6 +472,7 @@
             ;; ("MyProject2"
             ;;   (filename . "src/myproject2/"))
             ))))
+(setq ibuffer-expert t)
 (add-hook 'ibuffer-mode-hook
   (lambda ()
     (ibuffer-switch-to-saved-filter-groups "default")))

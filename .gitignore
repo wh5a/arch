@@ -3,9 +3,9 @@
 *.hi
 *.elc
 .*
+!.xmonad
 Downloads
 archpkg
-ghc
 codesurfer-2.1p1
 _darcs
 ddc-head

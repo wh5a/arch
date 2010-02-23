@@ -4,6 +4,9 @@ import Fixfocus
 import Maximize
 -- Patched to handle spawned processes' children for shell scripts/wrappers
 import SpawnOn
+-- Patched to ignore resize increment hints, see http://code.google.com/p/xmonad/issues/detail?id=375
+-- Some text-based programs have such hints which can be found in the WM_NORMAL_HINTS property via xprop.
+import FloatKeys
 import Data.Monoid
 import qualified XMonad.StackSet as W  
 import XMonad.Layout.NoBorders
@@ -51,7 +54,6 @@ import XMonad.Actions.GridSelect
 import XMonad.Hooks.SetWMName
 -- Send keys to windows
 import XMonad.Util.Paste
-import XMonad.Actions.FloatKeys
 import XMonad.Actions.WithAll
 
 myTheme = defaultTheme {
