@@ -467,12 +467,39 @@
                 (mode . tuareg-mode)
                 (mode . caml+twt-mode)
                 (mode . tuareg-interactive-mode)))
+            ("Scheme"
+              (or
+                (mode . scheme-mode)
+                (mode . inferior-scheme-mode)))
+            ("Web"
+              (or
+                (mode . css-mode)
+                (mode . javascript-mode)
+                (mode . js-mode)
+                (mode . html-mode)))
+            ("Dired"
+              (mode . dired-mode))
             ;; ("MyProject1"
             ;;   (filename . "src/myproject1/"))
             ;; ("MyProject2"
             ;;   (filename . "src/myproject2/"))
             ))))
-(setq ibuffer-expert t)
+(setq
+  ibuffer-expert t
+  ; Don't show empty groups
+  buffer-show-empty-filter-groups nil
+  ibuffer-display-summary nil)
 (add-hook 'ibuffer-mode-hook
   (lambda ()
-    (ibuffer-switch-to-saved-filter-groups "default")))
+    (ibuffer-switch-to-saved-filter-groups "default")
+    ; Override the ibuffer-find-file function to use ido
+    (define-key ibuffer-mode-map (kbd "C-x C-f")
+      (lambda ()
+        (interactive)
+        (let ((default-directory (let ((buf (ibuffer-current-buffer)))
+                                   (if (buffer-live-p buf)
+                                     (with-current-buffer buf
+                                       default-directory)
+                                     default-directory))))
+          (ido-find-file-in-dir default-directory))))
+    ))
