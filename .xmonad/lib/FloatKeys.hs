@@ -20,6 +20,7 @@ module FloatKeys (
                 keysAbsResizeWindow) where
 
 import XMonad
+import Control.Arrow ((***))
 
 -- $usage
 -- You can use this module with the following in your @~\/.xmonad\/xmonad.hs@:
@@ -94,7 +95,9 @@ keysAbsResizeWindow = keysMoveResize keysAbsResizeWindow'
 keysAbsResizeWindow' :: SizeHints -> P -> D -> D -> D -> (P,D)
 keysAbsResizeWindow' sh (x,y) (w,h) (dx,dy) (ax, ay) = ((round nx, round ny), (nw, nh))
     where
-        (nw, nh) = applySizeHintsContents sh (w + dx, h + dy)
+        (minw, minh) = maybe (10,10) ((***) (max 10) (max 10)) $ sh_min_size sh
+        (nw, nh) = if w + dx > minw && h + dy > minh then applySizeHintsContents sh (w + dx, h + dy)
+                   else (w, h)
         nx :: Rational
         nx = fromIntegral (ax * w + nw * (fromIntegral x - ax)) / fromIntegral w
         ny :: Rational
@@ -103,7 +106,10 @@ keysAbsResizeWindow' sh (x,y) (w,h) (dx,dy) (ax, ay) = ((round nx, round ny), (n
 keysResizeWindow' :: SizeHints -> P -> D -> D -> G -> (P,D)
 keysResizeWindow' sh (x,y) (w,h) (dx,dy) (gx, gy) = ((nx, ny), (nw, nh))
     where
-        (nw, nh) = applySizeHintsContents sh (w + dx, h + dy)
+        -- Prevent shrinking a window too small and getting one's foot shot
+        (minw, minh) = maybe (10,10) ((***) (max 10) (max 10)) $ sh_min_size sh
+        (nw, nh) = if w + dx > minw && h + dy > minh then applySizeHintsContents sh (w + dx, h + dy)
+                   else (w, h)
         nx = round $ fromIntegral x + gx * fromIntegral w - gx * fromIntegral nw
         ny = round $ fromIntegral y + gy * fromIntegral h - gy * fromIntegral nh
 
@@ -112,11 +118,10 @@ keysMoveResize f move resize w = whenX (isClient w) $ withDisplay $ \d -> do
     io $ raiseWindow d w
     wa <- io $ getWindowAttributes d w
     sh' <- io $ getWMNormalHints d w
-    let sh = sh' {sh_resize_inc = Nothing}
-    let wa_dim = (fromIntegral $ wa_width wa, fromIntegral $ wa_height wa)
+    let sh = sh' {sh_resize_inc = Nothing, sh_aspect = Nothing}
+        wa_dim = (fromIntegral $ wa_width wa, fromIntegral $ wa_height wa)
         wa_pos = (fromIntegral $ wa_x wa, fromIntegral $ wa_y wa)
         (wn_pos, wn_dim) = f sh wa_pos wa_dim move resize
     io $ resizeWindow d w `uncurry` wn_dim
     io $ moveWindow d w `uncurry` wn_pos
     float w
-
