@@ -487,7 +487,7 @@
 (setq
   ibuffer-expert t
   ; Don't show empty groups
-  buffer-show-empty-filter-groups nil
+  ibuffer-show-empty-filter-groups nil
   ibuffer-display-summary nil)
 (add-hook 'ibuffer-mode-hook
   (lambda ()
