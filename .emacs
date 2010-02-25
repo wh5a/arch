@@ -534,3 +534,9 @@
 (global-set-key (kbd "S-C-<right>") 'resize-right)
 (global-set-key (kbd "S-C-<down>") 'resize-down)
 (global-set-key (kbd "S-C-<up>") 'resize-up)
+
+;; Add the ability to move between frames as well as windows
+;; http://www.emacswiki.org/emacs/framemove.el
+(require 'framemove)
+(windmove-default-keybindings)
+(setq framemove-hook-into-windmove t)
