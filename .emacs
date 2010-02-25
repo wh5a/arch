@@ -503,3 +503,34 @@
                                      default-directory))))
           (ido-find-file-in-dir default-directory))))
     ))
+
+;; My helper functions for resizing windows, buggy for windows more than 2 on a row/col.
+(defun resize-left ()
+  (interactive)
+  (let ((other-window (windmove-find-other-window 'left)))
+    (if other-window
+      (enlarge-window-horizontally 1)
+      (shrink-window-horizontally 1))))
+(defun resize-right ()
+  (interactive)
+  (let ((other-window (windmove-find-other-window 'right)))
+    (if other-window
+      (enlarge-window-horizontally 1)
+      (shrink-window-horizontally 1))))
+(defun resize-up ()
+  (interactive)
+  (let ((other-window (windmove-find-other-window 'up)))
+    (if other-window
+      (enlarge-window 1)
+      (shrink-window 1))))
+(defun resize-down ()
+  (interactive)
+  (let* ((down-window (windmove-find-other-window 'down))
+         (other-window (not (window-minibuffer-p down-window))))
+    (if other-window
+      (enlarge-window 1)
+      (shrink-window 1))))
+(global-set-key (kbd "S-C-<left>") 'resize-left)
+(global-set-key (kbd "S-C-<right>") 'resize-right)
+(global-set-key (kbd "S-C-<down>") 'resize-down)
+(global-set-key (kbd "S-C-<up>") 'resize-up)
