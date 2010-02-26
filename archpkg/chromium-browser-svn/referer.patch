@@ -1,8 +1,8 @@
-Index: third_party/WebKit/WebCore/page/SecurityOrigin.cpp
+Index: src/third_party/WebKit/WebCore/page/SecurityOrigin.cpp
 ===================================================================
---- src/third_party/WebKit/WebCore/page/SecurityOrigin.cpp	(revision 54103)
+--- src/third_party/WebKit/WebCore/page/SecurityOrigin.cpp	(revision 55161)
 +++ src/third_party/WebKit/WebCore/page/SecurityOrigin.cpp	(working copy)
-@@ -483,6 +483,13 @@
+@@ -479,6 +479,15 @@
  
  bool SecurityOrigin::shouldHideReferrer(const KURL& url, const String& referrer)
  {
@@ -10,8 +10,11 @@ Index: third_party/WebKit/WebCore/page/SecurityOrigin.cpp
 +    String h = url.host();
 +    if (h.contains("photo.sina.com.cn", false)
 +        || h.contains("blog.sina.com.cn", false)
++        || h.contains("photo.store.qq.com", false)
++        || h.contains("imgsrc.baidu.com", false)
 +        )
 +        return true;
 +
      bool referrerIsSecureURL = protocolIs(referrer, "https");
      bool referrerIsWebURL = referrerIsSecureURL || protocolIs(referrer, "http");
+ 
