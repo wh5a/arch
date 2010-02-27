@@ -19,7 +19,6 @@ makedepends=('subversion' 'python>=2.4' 'perl>=5' 'bison>=2.3' 'flex>=2.5.34' 'g
 provides=('chromium-browser' 'chromium' 'chrome')
 conflicts=('chromium-browser' 'chromium' 'chrome')
 source=('chromium.desktop'
-	'chromium.install'
 	'html5_video_mimetypes.patch'
 	'gclient'
 	'chromium-browser.sh'
@@ -27,11 +26,6 @@ source=('chromium.desktop'
         'extension_on_gallery.patch'
         'referer.patch'
 	'devtools-fontsize.patch')
-md5sums=('897de25e9c25a01f8b1b67abe554a6b7' '347d94494ab0e27c7dd16c3f7f965a9d'\
-         'a3fd9ae9188df496294feeb9159690ff' '070a3342899adab9f65b02bacbc2903e'\
-         '2178331349c6ee8f8300bf71d585dc6d' '0ab6bf6d08e3a028196dd980a88c4313'\
-         'ac8793edbb49de45bac6c6b240542e6f' '1bb06d5e092332d48c0710cce9d3d459'\
-         '1a80831e5942ba9301b63845331bfa35')
 install=('chromium.install')
 
 _builddir=${srcdir}/src
@@ -140,3 +134,11 @@ _source() {
 		gclient.py sync --force --nohooks --revision src@${_revision}|| return 1
 	fi
 }
+md5sums=('897de25e9c25a01f8b1b67abe554a6b7'
+         'a3fd9ae9188df496294feeb9159690ff'
+         '070a3342899adab9f65b02bacbc2903e'
+         '2178331349c6ee8f8300bf71d585dc6d'
+         '0ab6bf6d08e3a028196dd980a88c4313'
+         'ac8793edbb49de45bac6c6b240542e6f'
+         '7c343b2c2a34753096bd5ad58f530d86'
+         '1a80831e5942ba9301b63845331bfa35')

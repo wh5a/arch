@@ -540,3 +540,8 @@
 (require 'framemove)
 (windmove-default-keybindings)
 (setq framemove-hook-into-windmove t)
+
+;; http://emacser.com/highlight-tail.htm  Draw a colourful "tail" while you write
+; A little too distracting.
+;(require 'highlight-tail)
+;(highlight-tail-mode)
