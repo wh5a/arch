@@ -176,29 +176,27 @@
 ;; auto-complete-yasnippet is now bundled into auto-complete-config
 (add-to-list 'load-path "~/Emacs/auto-complete")
 (when (require 'auto-complete-config)
-  
-  ;; I didn't include every possible extension.
-  
-  ;; Turn on the mode globally for modes included in 'ac-modes
-  (global-auto-complete-mode t)
-
+  ; Load the default configs and do some further tweaking
+  (ac-config-default)
   (define-key ac-complete-mode-map "\C-n" 'ac-next)
   (define-key ac-complete-mode-map "\C-p" 'ac-previous)
 
   ;; default sources of candidates
-  (set-default 'ac-sources '(ac-source-yasnippet ac-source-abbrev ac-source-words-in-buffer))
-  
-  (add-hook 'emacs-lisp-mode-hook
-            (lambda ()
-              (setq ac-sources
-                    '(ac-source-yasnippet ac-source-abbrev ac-source-words-in-buffer ac-source-symbols))))
+  (push 'ac-source-yasnippet ac-sources)
+
+  ;; A new way of adding keywords is through dictionary:
+  ; Any user defined keywords go here
+  ;(add-to-list 'ac-user-dictionary "foobar@example.com")
+  ; mode-specific keywords
+  (add-to-list 'ac-dictionary-directories "~/Emacs/auto-complete/dict")
 
   ;; I'm using the extension from http://madscientist.jp/~ikegami/diary/20090215.html
   ;; There's also http://www.emacswiki.org/emacs/auto-complete-extension.el, that can do hoogle search
   (require 'auto-complete-haskell)
   ;; Somehow the hook doesn't enable auto-complete-mode for Haskell although it should
+  ; ac-modes lists all modes with auto-complete enabled
   (setq ac-modes
-      (append '(scheme-mode haskell-mode literate-haskell-mode tuareg-mode javascript-mode)
+      (append '(scheme-mode haskell-mode literate-haskell-mode tuareg-mode js-mode)
               ac-modes))
   )
 
@@ -439,13 +437,6 @@
 (require 'winpoint)
 (winpoint-mode t)
 
-;; lightweight version of Desktop.el that only save the files you have open
-;; http://github.com/nflath/save-visited-files/raw/master/save-visited-files.el
-;; save is done automatically, you can also do `M-x save-visited-files-save` and `M-x save-visited-files-restore`
-(require 'save-visited-files)
-(turn-on-save-visited-files-mode)
-(save-visited-files-restore)
-
 ;; `C-c <-` and `C-c ->` to cycle through window configurations
 (winner-mode 1)
 
@@ -545,3 +536,25 @@
 ; A little too distracting.
 ;(require 'highlight-tail)
 ;(highlight-tail-mode)
+
+;; Highlight "TODO:"s  http://emacs-fu.blogspot.com/2008/12/highlighting-todo-fixme-and-friends.html
+;; http://stackoverflow.com/questions/2242572/emacs-todo-indicator-at-left-side
+;
+; (add-hook 'find-file-hooks
+;   (lambda ()
+;     (font-lock-add-keywords nil
+;       '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))))
+;
+;; A more complete solution: http://www.emacswiki.org/emacs/FixmeMode
+; Supports auto highlighting, and navigating between TODOs
+(require 'fixme-mode)
+;; Enabled for modes listed in 'fixme-modes
+(fixme-mode 1)
+
+;; lightweight version of Desktop.el that only save the files you have open
+;; http://github.com/nflath/save-visited-files/raw/master/save-visited-files.el
+;; save is done automatically, you can also do `M-x save-visited-files-save` and `M-x save-visited-files-restore`
+;; Load the files after all the previos extensions have taken effects
+(require 'save-visited-files)
+(turn-on-save-visited-files-mode)
+(save-visited-files-restore)
