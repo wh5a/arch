@@ -1,0 +1,17 @@
+# Maintainer: Wei Hu <weihu@cs.virginia.edu>
+pkgname=otags
+pkgver=3.09.3.3
+pkgrel=1
+pkgdesc="tool for building TAGS files from OCaml sources, obtained from Debian and extracted with deb2targz"
+arch=('i686')
+url="http://packages.debian.org/sid/otags"
+depends=()
+options=()
+source=('otags_3.09.3-3+b2_i386.tar.gz')
+md5sums=('2f03b0b63c93bbf3651775c566a70f22')
+
+build() {
+  cd $pkgdir
+
+  tar zxf $srcdir/otags_3.09.3-3+b2_i386.tar.gz
+}
