@@ -19,7 +19,7 @@ import sys
 # helper function to get tuple of (file dtm, file name, file sz)	
 def fn_stats(fn):
   s = os.stat(fn)
-  return (s[8], fn, s[6])
+  return (s.st_mtime, fn, s.st_size)
 
 # cleanup does the actual pkg file deletion
 def cleanup(run_list):
@@ -36,7 +36,7 @@ def cleanup(run_list):
   # Build list of the filenames to delete (all but last n_to_keep).
   # <showing_off>
   #kill_list = [tfn[1] for tfn in dtm_list[:-n_to_keep]]
-  #bytes_deleted = reduce(lambda x, y: x+y, [x[2] for x in dtm_list[:-n_to_keep]])
+  #bytes_deleted = sum(x[2] for x in dtm_list[:-n_to_keep])
   # </showing_off>
   kill_list = []
   for x in dtm_list[:-n_to_keep]:
@@ -56,8 +56,8 @@ def cleanup(run_list):
 try:
   opts, pargs = getopt.getopt(sys.argv[1:], 'vp')
   opt_dict = dict(opts)
-  opt_preview = opt_dict.has_key('-p')
-  opt_verbose = opt_dict.has_key('-v')
+  opt_preview = '-p' in opt_dict
+  opt_verbose = '-v' in opt_dict
   if opt_preview: opt_verbose = True
   if len(pargs) == 1:
     n_to_keep = pargs[0]
@@ -79,7 +79,7 @@ pkg_fns.sort()
 
 # Pattern to use to extract the package name from the tar file name:
 # for pkg e.g. 'gnome-common-2.8.0-1-i686.pkg.tar.gz' group(1) is 'gnome-common'.
-bpat = re.compile(r'^(.+)-\d[^-]+-.+?(-i686|-x86_64)?\.pkg\.tar\.gz$')
+bpat = re.compile(r'^(.+)-\d[^-]+-.+?(-i686|-x86_64|-any)?\.pkg\.tar\.[gx]z$')
 
 n_deleted = 0
 bytes_deleted = 0
@@ -87,21 +87,26 @@ pkg_base_nm = ''
 # now look for "runs" of the same package name differing only in version info.
 for run_end in range(len(pkg_fns)):
   fn = pkg_fns[run_end]
-  mo = bpat.match(fn) # test for a match of the package name pattern
-  if mo:
-    tbase = mo.group(1) # gets the 'base' package name
-    # include the architecture in the name if it's present
-    if mo.lastindex > 1:
-      tbase += mo.group(2)
-    #print 'tbase: ',tbase,'  ',mo.lastindex
-    # is it a new base name, i.e. the start of a new run?
-    if tbase != pkg_base_nm: # if so then process the prior run
-      if pkg_base_nm != '':
-        cleanup(pkg_fns[run_start:run_end])
-      pkg_base_nm = tbase # & setup for the new run
-      run_start = run_end
+
+  # make sure we skip directories
+  if not os.path.isdir(fn):
+    mo = bpat.match(fn) # test for a match of the package name pattern
+    if mo:
+      tbase = mo.group(1) # gets the 'base' package name
+      # include the architecture in the name if it's present
+      if mo.lastindex > 1:
+        tbase += mo.group(2)
+      #print 'tbase: ',tbase,'  ',mo.lastindex
+      # is it a new base name, i.e. the start of a new run?
+      if tbase != pkg_base_nm: # if so then process the prior run
+        if pkg_base_nm != '':
+          cleanup(pkg_fns[run_start:run_end])
+        pkg_base_nm = tbase # & setup for the new run
+        run_start = run_end
+    else:
+      print >>sys.stderr, "File '"+fn+"' doesn't match package pattern!"
   else:
-    print >>sys.stderr, "File '"+fn+"' doesn't match package pattern!"
+    print >>sys.stdout, "skipping directory '"+fn+"'!"
 
 # catch the final run of the list
 run_end += 1

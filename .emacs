@@ -558,3 +558,9 @@
 (require 'save-visited-files)
 (turn-on-save-visited-files-mode)
 (save-visited-files-restore)
+
+;; Popup a terminal in the working directory
+(defun popup-term ()
+  (interactive)
+  (start-process "terminal" nil "urxvtc")
+  )
