@@ -564,3 +564,20 @@
   (interactive)
   (start-process "terminal" nil "urxvtc")
   )
+
+;; A more intuitive way of replace-string operation
+; Mark a region, or use the current word, or use the incrementally searched string, and then activate iedit-mode by pressing C-;
+; Use TAB and S-TAB to move around
+; Edit one occurrence and have all others edited the same way.
+(require 'iedit)
+(define-key global-map (kbd "C-;") 'iedit-mode)
+(define-key isearch-mode-map (kbd "C-;") 'iedit-mode)
+
+
+
+
+
+
+
+
+
