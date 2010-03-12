@@ -195,7 +195,8 @@
 				  my/haskell-defined-classes
 				  my/haskell-reserved-keywords
 				  my/haskell-prelude-functions
-				  my/haskell-ghc-modules
+                            ; the modules are handled separately by ghc-mod
+;				  my/haskell-ghc-modules
 				  my/haskell-ghc-pragmas
 				  my/haskell-ghc-language-options
 				  '("-fglasgow-exts")
@@ -204,11 +205,7 @@
 
 (add-hook 'haskell-mode-hook
 	  '(lambda () (auto-complete-mode 1)
-	     (make-local-variable 'ac-sources)
-	     (setq ac-sources '(ac-source-yasnippet
-				ac-source-abbrev
-				ac-source-words-in-buffer
-				my/ac-source-haskell))
+             (setq ac-sources (cons my/ac-source-haskell ac-sources))
 	     nil))
 
 (provide 'auto-complete-haskell)

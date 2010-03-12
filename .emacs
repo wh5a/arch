@@ -182,7 +182,7 @@
   (define-key ac-complete-mode-map "\C-p" 'ac-previous)
 
   ;; default sources of candidates
-  (push 'ac-source-yasnippet ac-sources)
+  (setq-default ac-sources (cons 'ac-source-yasnippet ac-sources))
 
   ;; A new way of adding keywords is through dictionary:
   ; Any user defined keywords go here
@@ -191,6 +191,7 @@
   (add-to-list 'ac-dictionary-directories "~/Emacs/auto-complete/dict")
 
   ;; I'm using the extension from http://madscientist.jp/~ikegami/diary/20090215.html
+  ;; Except that the module names are produced by ghc-mod http://www.mew.org/~kazu/proj/ghc-mod/en/
   ;; There's also http://www.emacswiki.org/emacs/auto-complete-extension.el, that can do hoogle search
   (require 'auto-complete-haskell)
   ;; Somehow the hook doesn't enable auto-complete-mode for Haskell although it should
@@ -452,7 +453,8 @@
               (or
                 (mode . haskell-mode)
                 (mode . literate-haskell-mode)
-                (mode . inferior-haskell-mode)))
+                (mode . inferior-haskell-mode)
+                (mode . haskell-cabal-mode)))
             ("OCaml"
               (or
                 (mode . tuareg-mode)
@@ -572,12 +574,3 @@
 (require 'iedit)
 (define-key global-map (kbd "C-;") 'iedit-mode)
 (define-key isearch-mode-map (kbd "C-;") 'iedit-mode)
-
-
-
-
-
-
-
-
-
