@@ -132,6 +132,10 @@
 (add-hook 'haskell-mode-hook
    (lambda ()
      (turn-on-haskell-decl-scan)
+     ; Navigate between function definitions
+     (define-key haskell-mode-map "\M-n" 'haskell-ds-forward-decl)
+     (define-key haskell-mode-map "\M-p" 'haskell-ds-backward-decl)
+     ; This mode has been modified by me to make use of scion
      (turn-on-haskell-doc-mode)
      ;(turn-on-haskell-indent)
      ;(turn-on-haskell-simple-indent)
@@ -553,14 +557,6 @@
 ;; Enabled for modes listed in 'fixme-modes
 (fixme-mode 1)
 
-;; lightweight version of Desktop.el that only save the files you have open
-;; http://github.com/nflath/save-visited-files/raw/master/save-visited-files.el
-;; save is done automatically, you can also do `M-x save-visited-files-save` and `M-x save-visited-files-restore`
-;; Load the files after all the previos extensions have taken effects
-(require 'save-visited-files)
-(turn-on-save-visited-files-mode)
-(save-visited-files-restore)
-
 ;; Popup a terminal in the working directory
 (defun popup-term ()
   (interactive)
@@ -574,3 +570,25 @@
 (require 'iedit)
 (define-key global-map (kbd "C-;") 'iedit-mode)
 (define-key isearch-mode-map (kbd "C-;") 'iedit-mode)
+
+;; The 'devel' branch of scion: http://github.com/nominolo/scion/tree/devel
+; Read README.markdown for usage, or look at the keybindings of scion-mode
+(require 'scion)
+(add-hook 'haskell-mode-hook
+   (lambda ()
+     (scion-mode 1)
+     ;; Whenever a file is saved, immediately type check it and
+     ;; highlight errors/warnings in the source.
+     (scion-flycheck-on-save 1)))
+; use ido-mode completion
+(setq scion-completing-read-function 'ido-completing-read)
+
+;; lightweight version of Desktop.el that only save the files you have open
+;; http://github.com/nflath/save-visited-files/raw/master/save-visited-files.el
+;; save is done automatically, you can also do `M-x save-visited-files-save` and `M-x save-visited-files-restore`
+(require 'save-visited-files)
+(turn-on-save-visited-files-mode)
+
+
+;;;; This should be placed at the end!! So that all files will be properly opened.
+(save-visited-files-restore)
