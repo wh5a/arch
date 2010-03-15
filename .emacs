@@ -580,6 +580,8 @@
      ;; Whenever a file is saved, immediately type check it and
      ;; highlight errors/warnings in the source.
      (scion-flycheck-on-save 1)))
+; quiet mode
+(setq scion-log-events nil)
 ; use ido-mode completion
 (setq scion-completing-read-function 'ido-completing-read)
 

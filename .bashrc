@@ -23,7 +23,7 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 # Make less more friendly
-export LESS="-iRsX"
+export LESS="-iFRsX"
 
 # Make Bash append rather than overwrite the history on disk:
 shopt -s histappend
