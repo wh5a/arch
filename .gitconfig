@@ -22,3 +22,5 @@ ui = auto
   merge = refs/heads/master
 [merge]
 	log = true
+[achievement]
+	upload = true
