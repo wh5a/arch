@@ -44,7 +44,10 @@
 
 (setq font-lock-maximum-decoration t)
 
-(set-scroll-bar-mode 'right)
+;; This is the default since 24 on UNIX/GTK
+;(set-scroll-bar-mode 'right)
+;; Cursor blinking by default since 24?
+(blink-cursor-mode 0)
 
 (mouse-avoidance-mode 'animate)
 

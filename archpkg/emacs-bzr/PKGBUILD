@@ -3,7 +3,7 @@
 # Mostly based on existing emacs-git AUR
 
 pkgname=emacs-bzr
-pkgver=99640
+pkgver=99667
 pkgrel=1
 pkgdesc='GNU Emacs from official Bzr repository'
 arch=('i686' 'x86_64')
@@ -16,7 +16,7 @@ conflicts=('emacs' 'emacs-otf' 'emacs-cvs' 'emacs-git')
 replaces=('emacs' 'emacs-cvs' 'emacs-git')
 install=$pkgname.install
 source=("${pkgname}.install")
-md5sums=('5d82ee59ed5583e6258ded143a0574f3')
+md5sums=('053284a9c6d063f8babb6f2de7a10a7f')
 
 # Web Interface: https://code.launchpad.net/~vcs-imports/emacs/trunk
 _bzrtrunk='http://bzr.savannah.gnu.org/r/emacs/trunk'
@@ -59,8 +59,8 @@ build() {
   mv $pkgdir${mandir}/man1/{etags.1,etags.emacs.1} || return 1
   mv $pkgdir${mandir}/man1/{ctags.1,ctags.emacs.1} || return 1
 
-  find $pkgdir/usr/share/emacs/23* -type d -exec chmod 755 {} \;
-  find $pkgdir/usr/share/emacs/23* -exec chown root.root {} \;
+  find $pkgdir/usr/share/emacs -type d -exec chmod 755 {} \;
+  find $pkgdir/usr/share/emacs -exec chown root.root {} \;
   chmod 775 $pkgdir/var/games
   chmod 775 $pkgdir/var/games/emacs
   chmod 664 $pkgdir/var/games/emacs/*
