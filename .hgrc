@@ -1,0 +1,4 @@
+[extensions]
+hgext.fetch=
+hgext.record=
+pager =

@@ -24,6 +24,7 @@ fi
 
 # Make less more friendly
 export LESS="-iFRsX"
+export PAGER=less
 
 # Make Bash append rather than overwrite the history on disk:
 shopt -s histappend

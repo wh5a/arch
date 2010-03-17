@@ -1,31 +1,21 @@
 Index: src/chrome/browser/extensions/extension_dom_ui.cc
 ===================================================================
---- src/chrome/browser/extensions/extension_dom_ui.cc	(revision 39077)
+--- src/chrome/browser/extensions/extension_dom_ui.cc	(revision 41808)
 +++ src/chrome/browser/extensions/extension_dom_ui.cc	(working copy)
-@@ -23,7 +23,7 @@
+@@ -48,7 +48,7 @@
+ 
+ ExtensionDOMUI::ExtensionDOMUI(TabContents* tab_contents)
      : DOMUI(tab_contents) {
-   // TODO(aa): It would be cool to show the extension's icon in here.
-   hide_favicon_ = true;
 -  should_hide_url_ = true;
 +  should_hide_url_ = false;
    bindings_ = BindingsPolicy::EXTENSION;
  
    // For chrome:// overrides, some of the defaults are a little different.
-@@ -31,9 +31,6 @@
-   if (url.SchemeIs(chrome::kChromeUIScheme)) {
-     if (url.host() == chrome::kChromeUINewTabHost) {
-       focus_location_bar_by_default_ = true;
--    } else {
--      // Current behavior of other chrome:// pages is to display the URL.
--      should_hide_url_ = false;
-     }
-   }
- }
 Index: src/chrome/browser/extensions/extension_host.cc
 ===================================================================
---- src/chrome/browser/extensions/extension_host.cc	(revision 39077)
+--- src/chrome/browser/extensions/extension_host.cc	(revision 41775)
 +++ src/chrome/browser/extensions/extension_host.cc	(working copy)
-@@ -129,6 +129,8 @@
+@@ -130,6 +130,8 @@
        dom_storage_context()->AllocateSessionStorageNamespaceId();
    render_view_host_ = new RenderViewHost(site_instance, this, MSG_ROUTING_NONE,
                                           session_storage_namespace_id);
