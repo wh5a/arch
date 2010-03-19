@@ -1,3 +1,60 @@
+---- See http://www.haskell.org/pipermail/haskell-cafe/2007-September/032260.html for a nice tutorial
+-- :defs list
+
+-- if your editor doesn't understand :e +line file 
+-- (jump to line in file), you'll need to change 
+-- functions find and loadEditErr below
+:set editor gvim
+
+-- make commands helpful
+let { cmdHelp cmd msg "--help" = return $ "putStrLn "++show msg; cmdHelp cmd msg other    = cmd other }
+
+:def . cmdHelp readFile ":. <file>\t\t-- source commands from <file>"
+
+let pwd _ = return "System.Directory.getCurrentDirectory >>= putStrLn"
+
+:def pwd cmdHelp pwd ":pwd\t\t\t-- print working directory"
+
+let ls p  = return $ "mapM_ putStrLn =<< System.Directory.getDirectoryContents "++show path where {path = if (null p) then "." else p}
+
+:def ls cmdHelp ls ":ls [<path>]\t\t-- list directory (\".\" by default)"
+
+-- todo: merge redir/redirErr, but keep vars/afterCmd distinct, for nesting
+let redir varcmd = case break Data.Char.isSpace varcmd of { (var,_:cmd) -> return $ unlines [":set -fno-print-bind-result" ,"tmp <- System.Directory.getTemporaryDirectory" ,"(f,h) <- System.IO.openTempFile tmp \"ghci\"" ,"sto <- GHC.Handle.hDuplicate System.IO.stdout" ,"GHC.Handle.hDuplicateTo h System.IO.stdout" ,"System.IO.hClose h" ,cmd ,"GHC.Handle.hDuplicateTo sto System.IO.stdout" ,"let readFileNow f = readFile f >>= \\t->length t `seq` return t" ,var++" <- readFileNow f" ,"System.Directory.removeFile f"] ; _ -> return "putStrLn \"usage: :redir <var> <cmd>\"" }
+
+:def redir cmdHelp redir ":redir <var> <cmd>\t-- execute <cmd>, redirecting stdout to <var>"
+
+let redirErr varcmd = case break Data.Char.isSpace varcmd of { (var,_:cmd) -> return $ unlines [":set -fno-print-bind-result" ,"tmp2 <- System.Directory.getTemporaryDirectory" ,"(f,h) <- System.IO.openTempFile tmp2 \"ghci\"" ,"ste <- GHC.Handle.hDuplicate System.IO.stderr" ,"GHC.Handle.hDuplicateTo h System.IO.stderr" ,"System.IO.hClose h" ,"let readFileNow f = readFile f >>= \\t->length t `seq` return t" ,"let afterCmd _ = do { GHC.Handle.hDuplicateTo ste System.IO.stderr ; r <- readFileNow f ; System.Directory.removeFile f ; return $ \""++var++" <- return \"++show r }" ,":def afterCmd afterCmd", cmd, ":afterCmd", ":undef afterCmd" ] ; _ -> return "putStrLn \"usage: :redirErr <var> <cmd>\"" }
+
+:def redirErr cmdHelp redirErr ":redirErr <var> <cmd>\t-- execute <cmd>, redirecting stderr to <var>"
+
+let { merge []                    = [] ; merge (l:c:ls) | i c > i l  = merge ((l++c):ls) where {i l = length (takeWhile Data.Char.isSpace l)} ; merge (l:ls)                = l:merge ls ; grep patcmd = case break Data.Char.isSpace patcmd of { (pat,_:cmd) -> return $ unlines [":redir out "++cmd ,"let ls = "++if ":browse" `Data.List.isPrefixOf` cmd then "merge (lines out)" else "lines out" ,"let match pat = Data.Maybe.isJust . Text.Regex.matchRegex (Text.Regex.mkRegex pat)" ,"putStrLn $ unlines $ (\"\":) $ filter (match "++show pat++") $ ls"] ; _ -> return "putStrLn \"usage: :grep <pat> <cmd>\"" } }
+
+:def grep cmdHelp grep ":grep <pat> <cmd>\t-- filter lines matching <pat> from the output of <cmd>"
+-- (also merges pretty-printed lines if <cmd> is :browse)
+
+let find id = return $ unlines [":redir out :info "++id ,"let ls = filter (Data.List.isInfixOf \"-- Defined\") $ lines out" ,"let match pat = Text.Regex.matchRegex (Text.Regex.mkRegex pat)" ,"let m = match \"-- Defined at ([^<:]*):([^:]*):\" $ head ls" ,":cmd return $ case (ls,m) of { (_:_,Just [mod,line]) -> (\":e +\"++line++\" \"++mod) ; _ -> \"\" }"]
+
+:def find cmdHelp find ":find <id>\t\t-- call editor (:set editor) on definition of <id>"
+
+let { b browse "" = return $ unlines [":redir out :show modules" ,":cmd case lines out of { (l:_) -> return ("++show browse++"++head (words l)); _ -> return \"\" }"] ; b browse m  = return (browse++m) }
+
+:def b  cmdHelp (b ":browse ") ":b [<mod>]\t\t-- :browse <mod> (default: first loaded module)"
+
+let loadEditErr m = return $ unlines [if null m then ":redirErr err :r" else ":redirErr err :l "++m ,"let match pat = Text.Regex.matchRegex (Text.Regex.mkRegex pat)" ,"let ms = Data.Maybe.catMaybes $ map (match \"^([^:]*):([^:]*):([^:]*):\") $ lines err" ,":cmd return $ case ms of { ([mod,line,col]:_) -> (\":e +\"++line++\" \"++mod) ; _ -> \"\" }"]
+
+:def le cmdHelp loadEditErr ":le [<mod>]\t\t-- try to :load <mod> (default to :reload); edit first error, if any"
+
+let { cmds = [".","pwd","ls","redir","redirErr","grep","find","b","le","defs"] ; defs "list"  = return $ unlines $ "putStrLn \"\"": [":"++cmd++" --help"| cmd <- cmds]++ ["putStrLn \"\""] ; defs "undef" = return $ unlines [":undef "++cmd| cmd <- cmds] ; defs _       = return "putStrLn \"usage: :defs {list,undef}\"" }
+
+:def defs cmdHelp defs ":defs {list,undef}\t-- list or undefine user-defined commands"
+
+
+---- More tricks can be done via lambdabot: http://www.haskell.org/haskellwiki/GHC/GHCi#GHCi_on_Acid
+-- Lambdabot depends on many packages which I don't like.
+
+
+---- My very own settings goes at the end to avoid warnings
 :set -fglasgow-exts -fwarn-incomplete-patterns -fwarn-name-shadowing -XTemplateHaskell -XUndecidableInstances -XPArr
 
 -- For the ghci debugger, see Monad.Reader Issue 10 http://www.haskell.org/sitewiki/images/0/0a/TMR-Issue10.pdf
@@ -6,9 +63,6 @@
 :set -fprint-evld-with-show
 -- :set -fbreak-on-error
 -- :set -cpp
-
--- DPH, for 6.8 only
--- :set -fparr -XParallelListComp
 
 -- This extension introduces a few more keywords, which can be problematic to programs using them inadvertently
 -- :set -XArr
