@@ -18,6 +18,7 @@
 (setq lisp-indent-offset 2)
 
 (ido-mode t)
+(ido-everywhere 1)
 (setq
   ido-ignore-buffers ;; ignore these guys
   '("\\` " "^\*Mess" "^\*Help" "^\*Back" "^\*Completion" "^\*Ido")
@@ -151,8 +152,7 @@
      (turn-on-haskell-indentation)
      ;(yas/minor-mode)
      ))
-
-(setq haskell-literate-default 'tex)
+;(setq haskell-literate-default 'tex)
 (require 'haskell-cabal)
 
 ; I believe we can customize delimiters, check out the doc.
@@ -597,6 +597,16 @@
 ;; save is done automatically, you can also do `M-x save-visited-files-save` and `M-x save-visited-files-restore`
 (require 'save-visited-files)
 (turn-on-save-visited-files-mode)
+
+(defun dos2unix ()
+  "Automate M-% C-q C-m RET C-q C-j RET"
+  (interactive "*")
+  (set-buffer-file-coding-system 'unix 't)
+  (save-excursion
+    (goto-char (point-min))
+    (while (search-forward (string ?\C-m) nil t)
+      (replace-match "" nil t)))
+  (save-buffer))
 
 
 ;;;; This should be placed at the end!! So that all files will be properly opened.
