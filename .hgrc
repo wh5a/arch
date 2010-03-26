@@ -1,4 +1,24 @@
+[ui]
+username = Wei Hu <weihu@cs.virginia.edu>
+verbose = True
+
+# http://mercurial.selenic.com/wiki/UsingExtensions
 [extensions]
+# Conveniently pull, merge and update in one step
 hgext.fetch=
+# Darcs-style hunk commiting
 hgext.record=
 pager =
+color =
+# http://hgtip.com/tips/beginner/2009-10-03-stay-sane-with-graphlog/
+graphlog =
+
+[pager]
+attend = annotate, cat, diff, export, glog, log, qdiff, help, slog
+
+[alias]
+# http://hgtip.com/tips/advanced/2010-01-15-styling-mercurials-cli/
+slog = log --style=/home/wh5a/mercurial-cli-templates/map-cmdline.slog
+
+[defaults]
+log = --style=/home/wh5a/mercurial-cli-templates/map-cmdline.nlog

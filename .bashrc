@@ -1,7 +1,7 @@
 # Check for an interactive session
 #[ -z "$PS1" ] && return
 
-alias ls='ls --color=auto'
+alias ls='ls --color=auto -F'
 alias ll='ls -l'
 # Get reflector (AUR) for the latest mirrors
 alias b='sudo bauerbill'

@@ -208,7 +208,7 @@
   ;; Somehow the hook doesn't enable auto-complete-mode for Haskell although it should
   ; ac-modes lists all modes with auto-complete enabled
   (setq ac-modes
-      (append '(scheme-mode haskell-mode literate-haskell-mode tuareg-mode js-mode)
+      (append '(scheme-mode haskell-mode literate-haskell-mode tuareg-mode js-mode inferior-haskell-mode)
               ac-modes))
   )
 
