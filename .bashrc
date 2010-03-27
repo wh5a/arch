@@ -87,7 +87,7 @@ pgrep -u wh5a emacs > /dev/null || LANG=zh_CN.UTF-8 emacs -daemon
 
 export EDITOR="emacsclient -c -a emacs"
 
-export GREP_OPTIONS='--color=auto --exclude-dir=_darcs --exclude-dir=\.svn'
+export GREP_OPTIONS='--color=auto --exclude-dir=_darcs --exclude-dir=\.svn --exclude-dir=\.git --exclude-dir=\.hg'
 
 export OOO_FORCE_DESKTOP=kde
 
@@ -154,3 +154,6 @@ alias git='git-achievements'
 
 # http://github.com/ddollar/git-utils
 export PATH=$PATH:~/git-utils
+
+export DARCS_ALWAYS_COLOR=1
+export DARCS_DO_COLOR_LINES=1

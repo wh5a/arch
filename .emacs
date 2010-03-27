@@ -145,11 +145,10 @@
      (define-key haskell-mode-map "\M-p" 'haskell-ds-backward-decl)
      ; This mode has been modified by me to make use of scion
      (turn-on-haskell-doc-mode)
-     ;(turn-on-haskell-indent)
+     (turn-on-haskell-indent)
      ;(turn-on-haskell-simple-indent)
-     ;; Try out a said-to-be-better indentation-mode: http://groups.google.com/group/fa.haskell/browse_thread/thread/ce8910712d8cdfa6/
-     ; which is included in haskell-mode since 2.5, so there's no need to download it separately.
-     (turn-on-haskell-indentation)
+     ; Said to be better, but unfriendly to literate haskell
+     ;(turn-on-haskell-indentation)
      ;(yas/minor-mode)
      ))
 ;(setq haskell-literate-default 'tex)
