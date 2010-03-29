@@ -126,6 +126,7 @@ _source() {
 	fi
 	msg "Configuring gclient..."
 	export PATH=./depot_tools/:$PATH
+        chmod +x ./depot_tools/gclient.py
 	# always force a new configuration...
 	if [ -f ${srcdir}/.gclient ]; then
 		rm -rf ${srcdir}/.gclient

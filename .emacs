@@ -211,6 +211,11 @@
               ac-modes))
   )
 
+(add-hook 'inferior-haskell-mode-hook
+   (lambda ()
+     (setq ac-sources '(my/ac-source-haskell ac-source-dictionary ac-source-words-in-same-mode-buffers)
+     )))
+
 (autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
 (setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode)) auto-mode-alist))
 
@@ -482,6 +487,8 @@
                 (mode . html-mode)))
             ("Dired"
               (mode . dired-mode))
+            ("PKGBUILD"
+              (name . "^\*?PKGBUILD"))
             ;; ("MyProject1"
             ;;   (filename . "src/myproject1/"))
             ;; ("MyProject2"
