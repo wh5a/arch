@@ -24,12 +24,11 @@ source=('chromium.desktop'
 	'chromium-browser.sh'
 	'libpng-1.4.patch'
         'extension_on_gallery.patch'
-        'referer.patch'
 	'devtools-fontsize.patch')
 md5sums=('897de25e9c25a01f8b1b67abe554a6b7' 'a3fd9ae9188df496294feeb9159690ff'\
          '070a3342899adab9f65b02bacbc2903e' '2178331349c6ee8f8300bf71d585dc6d'\
          '0ab6bf6d08e3a028196dd980a88c4313' 'ac8793edbb49de45bac6c6b240542e6f'\
-         '7c343b2c2a34753096bd5ad58f530d86' '1a80831e5942ba9301b63845331bfa35')
+         '1a80831e5942ba9301b63845331bfa35')
 install=('chromium.install')
 
 _builddir=${srcdir}/src
@@ -45,7 +44,7 @@ build() {
 	patch -Np0 -i ${srcdir}/libpng-1.4.patch
 	patch -Np0 -i ${srcdir}/devtools-fontsize.patch
 	patch -Np0 -i ${srcdir}/extension_on_gallery.patch
-	patch -Np0 -i ${srcdir}/referer.patch
+#	patch -Np0 -i ${srcdir}/referer.patch
         cd ${_builddir}
 	# strip -Werror - the build process treats warnings as error and aborts; we dont want that...
 	sed -i "s/'-Werror'/''/" -i build/common.gypi || return 1

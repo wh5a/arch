@@ -125,7 +125,8 @@ main = do
   -- sp <- mkSpawner
   -- cabal install xmobar -fwith_xft
   -- xmobar-darcs now supports reading from XState instead of from stdin, thus getting rid of the pipe.
-  -- See X.C.Sjanssen for the usage
+  -- See X.C.Sjanssen for the usage. You need to change xmobarc to read from XMonadLog instead of Stdin too.
+  -- Unfortunately, this support is experimental and crashes on some long titles.
   xmproc <- spawnPipe "xmobar /home/wh5a/.xmonad/xmobarc"
   let conf = ewmh defaultConfig {
          modMask = myModMask
