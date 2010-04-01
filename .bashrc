@@ -1,3 +1,5 @@
+. /etc/profile
+
 # Check for an interactive session
 #[ -z "$PS1" ] && return
 
@@ -157,3 +159,13 @@ export PATH=$PATH:~/git-utils
 
 export DARCS_ALWAYS_COLOR=1
 export DARCS_DO_COLOR_LINES=1
+
+# http://www.reddit.com/r/programming/comments/bkmtm/spend_a_lot_of_time_cding_around_a_complex/
+alias bd='popd > /dev/null'
+function cd {
+    if [ $# -eq 0 ]; then
+        builtin cd
+    else
+        pushd > /dev/null $*
+    fi
+}

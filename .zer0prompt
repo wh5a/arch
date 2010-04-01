@@ -74,6 +74,10 @@ function pre_prompt {
     local cut=3-${fillsize}  # some tricky math, 3-(-number)=+number
     ZPWD="...${ZPWD:${cut}}"
   fi
+
+  # Required by /etc/profile.d/autojump.bash
+  # It conflicts with our function so we have to copy over.
+  (autojump -a "$(pwd -P)"&)>/dev/null 2>>${HOME}/.autojump_errors
 }
 PROMPT_COMMAND=pre_prompt
 
