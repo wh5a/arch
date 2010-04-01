@@ -55,6 +55,8 @@ import XMonad.Hooks.SetWMName
 -- Send keys to windows
 import XMonad.Util.Paste
 import XMonad.Actions.WithAll
+-- Modify the layouts' names. I use it to shorten them.
+import XMonad.Layout.Renamed
 
 myTheme = defaultTheme {
    fontName = "xft:WenQuanYi Zen Hei:pixelsize=17"
@@ -128,14 +130,17 @@ main = do
   -- See X.C.Sjanssen for the usage. You need to change xmobarc to read from XMonadLog instead of Stdin too.
   -- Unfortunately, this support is experimental and crashes on some long titles.
   xmproc <- spawnPipe "xmobar /home/wh5a/.xmonad/xmobarc"
-  let conf = ewmh defaultConfig {
+  let mTile = renamed [Replace "Tile"] mouseResizableTile
+      mMirror = renamed [Replace "Mirror"] mouseResizableTileMirrored
+      tab = renamed [CutWordsRight 1] $ tabbed shrinkText myTheme
+      maxi x = (renamed [CutWordsLeft 1]) $ maximize x
+      conf = ewmh defaultConfig {
          modMask = myModMask
        , terminal = myTerm
 --       , borderWidth = 1
        , workspaces = ["1:term","2:emacs","3:csurf","4","5","6","7","8","9:web"]
        , manageHook = placeHook (inBounds $ underMouse (0.5,0.5)) <+> manageSpawn <+> manageDocks <+> manageHook defaultConfig <+> myManageHook
---       , layoutHook = {- layoutHints $ -} maximize $ avoidStruts $ smartBorders $ onWorkspace "9:web" (tabbed shrinkText myTheme ||| Full ||| Tall 1 (3%100) (1%2)) $ (mouseResizableTile ||| layoutHook defaultConfig)
-       , layoutHook = {- layoutHints $ minimize -} fixFocus $ maximize $ avoidStruts $ smartBorders $ onWorkspace "9:web" (tabbed shrinkText myTheme ||| Full ||| mouseResizableTile) $ (mouseResizableTile ||| mouseResizableTileMirrored ||| Full)
+       , layoutHook = {- layoutHints $ minimize -} fixFocus $ maxi $ avoidStruts $ smartBorders $ onWorkspace "9:web" (tab ||| mTile ||| Full) $ (mTile ||| mMirror ||| Full)
        , logHook = dynamicLogWithPP $ xmobarPP {
                      ppOutput = hPutStrLn xmproc
                      -- http://en.wikipedia.org/wiki/X11_color_names
