@@ -166,6 +166,6 @@ function cd {
     if [ $# -eq 0 ]; then
         builtin cd
     else
-        pushd > /dev/null $*
+        pushd > /dev/null "$*"
     fi
 }
