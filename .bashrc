@@ -146,7 +146,7 @@ bind -m emacs -x '"\ey": _xyank'
 bind -m emacs -x '"\ev": _xpaste'
 
 # Read by chromium-browser.sh, which is usually installed to /usr/bin/chromium
-export CHROMIUM_USER_FLAGS="--enable-geolocation --enable-indexed-database --enable-new-autofill --enable-privacy-blacklists --enable-session-storage --omnibox-popup-count=15 --enable-experimental-extension-apis"
+export CHROMIUM_USER_FLAGS="--enable-geolocation --enable-indexed-database --enable-new-autofill --enable-privacy-blacklists --enable-session-storage --omnibox-popup-count=15 --enable-experimental-extension-apis --enable-webgl"
 # --enable-vertical-tabs --enable-seccomp-sandbox --bookmark-menu --enable-udd-profiles --purge-memory-button --user-data-dir=/foo/bar
 
 # http://github.com/wh5a/git-achievements

@@ -26,6 +26,8 @@
   ido-max-work-file-list      50   ; remember many
 ;  ido-use-filename-at-point t
   )
+; A new feature since Apr 2010: visit recently closed files easily
+(setq ido-use-virtual-buffers t)
 
 (require 'recentf)
 (recentf-mode 1)
@@ -613,6 +615,20 @@
     (while (search-forward (string ?\C-m) nil t)
       (replace-match "" nil t)))
   (save-buffer))
+
+;; Prolog
+(autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)
+(autoload 'prolog-mode "prolog" "Major mode for editing Prolog programs." t)
+;(autoload 'mercury-mode "prolog" "Major mode for editing Mercury programs." t)
+(setq prolog-system 'swi)
+(setq auto-mode-alist (append '(("\.pl$" . prolog-mode)
+;                                ("\.m$" . mercury-mode)
+                                 )
+                               auto-mode-alist))
+
+;; A dark color theme: http://emacs-fu.blogspot.com/2010/04/zenburn-color-theme.html
+; (require 'zenburn)
+; (color-theme-zenburn)
 
 
 ;;;; This should be placed at the end!! So that all files will be properly opened.
