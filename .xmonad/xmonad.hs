@@ -69,9 +69,28 @@ myXPConfig = defaultXPConfig {
              , position = Top
              --, height = 30
              }
-             
--- Arch packages (e.g. wget, pacman) often have trouble with Chinese locales.
-myTerm = "LANG=en_US.utf8 urxvtc"             
+
+-- Spawn urxvt with PWD if the current window is urxvt
+myTerm = withWindowSet $ \w -> maybe defaultAction f (W.peek w)
+         where f :: Window -> X()
+               f w = do
+                 c <- runQuery appName w
+                 t <- runQuery title w
+                 let ts = words t
+                     titleWords = length ts
+                     -- We assume a specific title format:  username (pwd) [dimension]
+                     -- , which is controlled by $PS1 in ~/.zer0prompt
+                     pwdLength = length $ ts!!1
+                     (x:pwd') = ts!!1
+                     pwd = init pwd'
+                     y = last pwd'
+                 -- The conditions after the first one are just for robustness
+                 if c /= "urxvt" || titleWords /= 3 || pwdLength < 3 || x /= '(' || y /= ')' then defaultAction
+                  else spawn $ term ++ " -cd " ++ pwd
+
+               -- Arch packages (e.g. wget, pacman) often have trouble with Chinese locales.
+               term = "LANG=en_US.utf8 urxvtc"
+               defaultAction = spawn term
 
 -- If q contains x
 contain q x = fmap (isInfixOf x) q
@@ -136,7 +155,6 @@ main = do
       maxi x = (renamed [CutWordsLeft 1]) $ maximize x
       conf = ewmh defaultConfig {
          modMask = myModMask
-       , terminal = myTerm
 --       , borderWidth = 1
        , workspaces = ["1:term","2:emacs","3:csurf","4","5","6","7","8","9:web"]
        , manageHook = placeHook (inBounds $ underMouse (0.5,0.5)) <+> manageSpawn <+> manageDocks <+> manageHook defaultConfig <+> myManageHook
@@ -158,7 +176,8 @@ main = do
        `additionalKeysP`
        [ -- dmenu replacement
          ("M-p", shellPromptHere myXPConfig)
-       , ("M-S-<KP_Enter>", spawn myTerm)
+       , ("M-S-<KP_Enter>", myTerm)
+       , ("M-S-<Return>", myTerm)
        , ("M-<Return>", launchApp myXPConfig "urxvtc -cd")
        --, ("M-r", runOrRaisePrompt myXPConfig)
        , ("M-g", windowPromptGoto myXPConfig)
