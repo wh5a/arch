@@ -84,7 +84,7 @@ myTerm = withWindowSet $ \w -> maybe defaultAction f (W.peek w)
                      (x:pwd') = ts!!1
                      pwd = init pwd'
                      y = last pwd'
-                 -- The conditions after the first one are just for robustness
+                 -- It's possible that urxvt's title has been changed by the process running inside
                  if c /= "urxvt" || titleWords /= 3 || pwdLength < 3 || x /= '(' || y /= ')' then defaultAction
                   else spawn $ term ++ " -cd " ++ pwd
 

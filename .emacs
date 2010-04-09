@@ -31,6 +31,7 @@
 
 (require 'recentf)
 (recentf-mode 1)
+(setq recentf-max-saved-items 200)
 
 ;; Ignore notices
 (setq erc-hide-list '("JOIN" "PART" "QUIT"))
@@ -55,8 +56,8 @@
 (setq-default cursor-type '(hbar . 3))
 (setq-default cursor-in-non-selected-windows 'hollow)
 
-
-(mouse-avoidance-mode 'animate)
+;; We use the program unclutter to hide mouse universally for us
+;(mouse-avoidance-mode 'animate)
 
 (setq column-number-mode t)
 
