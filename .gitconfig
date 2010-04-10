@@ -1,6 +1,7 @@
 [alias]
 br = branch
-st = status
+# The idea is that st shows less information by not showing untracked files
+st = status -uno
 co = checkout
 ci = commit
 # http://upsilon.cc/~zack/blog/posts/2010/01/git_flag_of_the_day_--color-words/
