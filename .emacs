@@ -633,4 +633,5 @@
 
 
 ;;;; This should be placed at the end!! So that all files will be properly opened.
-(save-visited-files-restore)
+; This causes problems for emacs daemon running at startup, because it pauses to ask questions.
+;(save-visited-files-restore)

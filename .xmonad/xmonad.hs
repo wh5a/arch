@@ -7,6 +7,8 @@ import SpawnOn
 -- Patched to ignore resize increment hints, see http://code.google.com/p/xmonad/issues/detail?id=375
 -- Some text-based programs have such hints which can be found in the WM_NORMAL_HINTS property via xprop.
 import FloatKeys
+-- Patched to handle scrolls
+import Tabbed
 import Data.Monoid
 import qualified XMonad.StackSet as W  
 import XMonad.Layout.NoBorders
@@ -38,7 +40,6 @@ import XMonad.Layout.PerWorkspace
 import XMonad.Hooks.Place
 -- Full screen programs: http://code.google.com/p/xmonad/issues/detail?id=228
 import XMonad.Hooks.ManageHelpers
-import XMonad.Layout.Tabbed
 import Data.Ratio
 -- import XMonad.Layout.Minimize
 import XMonad.Layout.MouseResizableTile
@@ -100,6 +101,7 @@ myManageHook = composeOne $
     [ transience
     , isDialog -?> doFloat
     , isFullscreen -?> doFullFloat
+    , appName =? "squeak" -?> doFullFloat
     , className =? "Dialog" -?> doFloat
     , appName =? "emacs" -?> doShift "2:emacs"
     , appName =? "fqterm.bin" -?> doShift "9:web"
@@ -188,6 +190,8 @@ main = do
        , ("M-n", launchApp myXPConfig "dolphin")
 --       , ("M-S-k", kill)   -- By default, M-S-k/ M-S-j move windows
        , ("M-C-c", withFocused myKillWindow)
+       -- Force kill, e.g. Pharo
+       , ("M-S-c", withFocused $ \w -> spawn $ "xkill -id " ++ show w)
        , ("M-d", sinkAll)
          -- M-t tiles window
        , ("M-S-t", withFocused float)

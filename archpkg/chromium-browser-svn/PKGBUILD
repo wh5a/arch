@@ -14,8 +14,8 @@ _revision=trunk
 arch=('i686' 'x86_64')
 url='http://www.chromium.org/'
 license=('BSD')
-depends=('gtk2' 'nss>=3.12' 'gconf' 'glib2' 'ttf-ms-fonts' 'freetype2' 'cairo' 'dbus' 'zlib' 'libjpeg' 'libxml2' 'libxslt' 'bzip2' 'libevent' 'libpng' 'ffmpeg')
-makedepends=('subversion' 'python>=2.4' 'perl>=5' 'bison>=2.3' 'flex>=2.5.34' 'gperf>=3.0.3' 'pkgconfig>=0.20' 'alsa-lib' 'nspr>=4.7.1' 'rsync')
+depends=('gtk2' 'nss>=3.12' 'gconf' 'glib2' 'ttf-ms-fonts' 'freetype2' 'cairo' 'dbus' 'zlib' 'libjpeg' 'bzip2' 'libevent' 'libpng' 'ffmpeg')
+makedepends=('subversion' 'python>=2.4' 'perl>=5' 'bison>=2.3' 'flex>=2.5.34' 'gperf>=3.0.3' 'pkgconfig>=0.20' 'alsa-lib' 'nspr>=4.7.1' 'rsync' 'yasm')
 provides=('chromium-browser' 'chromium' 'chrome')
 conflicts=('chromium-browser' 'chromium' 'chrome')
 source=('chromium.desktop'
@@ -78,11 +78,12 @@ EOF
 	_localconf="${_localconf} -Dlinux_sandbox_path=/usr/lib/chromium/chromium-sandbox -Dlinux_sandbox_chrome_path=/usr/lib/chromium/chromium"
 	_localconf="${_localconf} -Dlinux_strip_binary=1 -Dremove_webcore_debug_symbols=1"
 	_localconf="${_localconf} -Duse_system_zlib=1 -Duse_system_libjpeg=1"
-	_localconf="${_localconf} -Duse_system_libxslt=1 -Duse_system_bzip2=1 -Duse_system_libevent=1"
+	_localconf="${_localconf} -Duse_system_bzip2=1 -Duse_system_libevent=1"
 	_localconf="${_localconf} -Duse_system_libpng=1"
 	_localconf="${_localconf} -Duse_system_ffmpeg=1"
 #	 not used, if using system-ffmpeg...
 #	_localconf="${_localconf} -Dffmpeg_branding=Chrome"
+	_localconf="${_localconf} -Duse_system_yasm=1"
 	if [ ${_shared_build} = "true" ]; then
 		msg "Preparing a shared Build..."
 		_localconf="${_localconf} -Dlibrary=shared_library"
