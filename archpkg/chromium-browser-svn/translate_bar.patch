@@ -1,0 +1,62 @@
+Index: src/chrome/browser/translate/translate_infobars_delegates.cc
+===================================================================
+--- src/chrome/browser/translate/translate_infobars_delegates.cc	(revision 44755)
++++ src/chrome/browser/translate/translate_infobars_delegates.cc	(working copy)
+@@ -71,9 +71,12 @@
+   TranslateManager::GetSupportedLanguages(languages);
+ }
+ 
++// Chrome supports more languages than we're interested, so we take the code from translate_manager.cc and cut it down.
+ void TranslateInfoBarDelegate::GetAvailableTargetLanguages(
+     std::vector<std::string>* languages) {
+-  TranslateManager::GetSupportedLanguages(languages);
++  DCHECK(languages && languages->empty());
++  languages->push_back("en");
++  languages->push_back("zh-CN");
+ }
+ 
+ void TranslateInfoBarDelegate::Translate() {
+Index: src/chrome/browser/translate/translate_manager.cc
+===================================================================
+--- src/chrome/browser/translate/translate_manager.cc	(revision 44755)
++++ src/chrome/browser/translate/translate_manager.cc	(working copy)
+@@ -335,7 +335,8 @@
+     return;
+   }
+ 
+-  std::string target_lang = GetTargetLanguage();
++  // Instead of GetTargetLanguage() from the locale, we hardcode "en"
++  std::string target_lang = "en";
+   // Nothing to do if either the language Chrome is in or the language of the
+   // page is not supported by the translation server.
+   if (target_lang.empty() || !IsSupportedLanguage(page_lang)) {
+Index: src/chrome/browser/gtk/translate_infobars.cc
+===================================================================
+--- src/chrome/browser/gtk/translate_infobars.cc	(revision 44755)
++++ src/chrome/browser/gtk/translate_infobars.cc	(working copy)
+@@ -16,6 +16,7 @@
+ #include "chrome/browser/gtk/menu_gtk.h"
+ #include "chrome/browser/tab_contents/tab_contents.h"
+ #include "chrome/browser/translate/translate_infobars_delegates.h"
++#include "chrome/browser/translate/translate_manager.h"
+ #include "chrome/browser/translate/options_menu_model.h"
+ #include "chrome/browser/translate/page_translated_details.h"
+ #include "chrome/common/notification_service.h"
+@@ -545,7 +546,16 @@
+ }
+ 
+ void TranslateInfoBar::OnTargetModified(GtkWidget* sender) {
+-  int index = GetLanguageComboboxActiveId(GTK_COMBO_BOX(sender));
++  int i = GetLanguageComboboxActiveId(GTK_COMBO_BOX(sender)), index;
++
++  // Since we reduced the target languages, we must translate it to the correct index
++  static std::string our_langs[2] = {"en", "zh-CN"}; // Must agree with GetAvailableTargetLanguages
++  static std::vector<std::string> langs;
++  TranslateManager::GetSupportedLanguages(&langs);
++  for (index = 0; index < langs.size(); ++index)
++    if (our_langs[i] == langs[index])
++      break;
++
+   if (index == GetDelegate()->target_lang_index())
+     return;
+ 
