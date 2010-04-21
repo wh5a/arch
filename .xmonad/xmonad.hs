@@ -151,8 +151,8 @@ main = do
   -- See X.C.Sjanssen for the usage. You need to change xmobarc to read from XMonadLog instead of Stdin too.
   -- Unfortunately, this support is experimental and crashes on some long titles.
   xmproc <- spawnPipe "xmobar /home/wh5a/.xmonad/xmobarc"
-  let mTile = renamed [Replace "Tile"] mouseResizableTile
-      mMirror = renamed [Replace "Mirror"] mouseResizableTileMirrored
+  let mTile = renamed [Replace "Tile"] $ mouseResizableTile {draggerType = BordersDragger}
+      mMirror = renamed [Replace "Mirror"] $ mouseResizableTile {draggerType = BordersDragger, isMirrored = True}
       tab = renamed [CutWordsRight 1] $ tabbed shrinkText myTheme
       maxi x = (renamed [CutWordsLeft 1]) $ maximize x
       conf = ewmh defaultConfig {
