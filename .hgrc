@@ -1,6 +1,7 @@
 [ui]
 username = Wei Hu <weihu@cs.virginia.edu>
 verbose = True
+ignore = ~/.hgignore
 
 [alias]
 # http://hgtip.com/tips/advanced/2010-01-15-styling-mercurials-cli/
