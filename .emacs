@@ -631,6 +631,9 @@
 ; (require 'zenburn)
 ; (color-theme-zenburn)
 
+;; Remember the last position of the cursor
+(setq-default save-place t)
+(require 'saveplace)
 
 ;;;; This should be placed at the end!! So that all files will be properly opened.
 ; This causes problems for emacs daemon running at startup, because it pauses to ask questions.

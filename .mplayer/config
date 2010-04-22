@@ -1,0 +1,10 @@
+# Write your default config options here!
+#subcp=zh_CN.UTF-8
+ass=yes
+ass-color=ffffff00
+
+[gnome-mplayer]
+msglevel=all=5
+vo=gl
+ao=alsa
+
