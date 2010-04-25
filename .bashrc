@@ -169,3 +169,6 @@ function cd {
         pushd > /dev/null "$*"
     fi
 }
+
+# Don't let SPEC CPU 2006 set the locale
+export SPEC_LOCALE_OK=THIS_CAN_BE_ANYTHING
