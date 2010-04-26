@@ -635,6 +635,14 @@
 (setq-default save-place t)
 (require 'saveplace)
 
+;; Always have / at the end of dired directories.
+(add-hook 'dired-mode-hook 'ensure-buffer-name-ends-in-slash)
+(defun ensure-buffer-name-ends-in-slash ()
+  "change buffer name to end with slash"
+  (let ((name (buffer-name)))
+    (if (not (string-match "/$" name))
+        (rename-buffer (concat name "/") t))))
+
 ;;;; This should be placed at the end!! So that all files will be properly opened.
 ; This causes problems for emacs daemon running at startup, because it pauses to ask questions.
 ;(save-visited-files-restore)
