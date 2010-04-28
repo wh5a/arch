@@ -643,6 +643,21 @@
     (if (not (string-match "/$" name))
         (rename-buffer (concat name "/") t))))
 
+;; Popups up a buffer to show the keyring
+(global-set-key "\C-cy" 'anything-show-kill-ring)
+
+;;;; Make cc-mode nicer
+(add-hook 'c-mode-common-hook
+  (lambda ()
+    ; Automatically insert newlines after ;{}
+    (c-toggle-auto-newline 1)
+    ; By default, newline is also inserted *before* {. We want hanging braces.
+    (setq c-hanging-braces-alist
+      '((defun-open after)
+        (substatement-open after)
+        (block-close . c-snug-do-while)))
+    ))
+
 ;;;; This should be placed at the end!! So that all files will be properly opened.
 ; This causes problems for emacs daemon running at startup, because it pauses to ask questions.
 ;(save-visited-files-restore)
