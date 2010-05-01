@@ -22,13 +22,11 @@ source=('chromium.desktop'
 	'html5_video_mimetypes.patch'
 	'gclient'
 	'chromium-browser.sh'
-	'libpng-1.4.patch'
         'extension_on_gallery.patch'
 	'devtools-fontsize.patch')
 md5sums=('897de25e9c25a01f8b1b67abe554a6b7' 'a3fd9ae9188df496294feeb9159690ff'\
-         '070a3342899adab9f65b02bacbc2903e' '2178331349c6ee8f8300bf71d585dc6d'\
-         '0ab6bf6d08e3a028196dd980a88c4313' 'ac8793edbb49de45bac6c6b240542e6f'\
-         '1a80831e5942ba9301b63845331bfa35')
+         'cea9624d65dfdcf8550cae34b91bfe13' '2178331349c6ee8f8300bf71d585dc6d'\
+         'ac8793edbb49de45bac6c6b240542e6f' '1a80831e5942ba9301b63845331bfa35')
 install=('chromium.install')
 
 _builddir=${srcdir}/src
@@ -41,7 +39,6 @@ build() {
 	cd ${srcdir}
 	msg "Preparing Build of Chromium revision ${pkgver}..."
 	patch -Np0 -i ${srcdir}/html5_video_mimetypes.patch
-	patch -Np0 -i ${srcdir}/libpng-1.4.patch
 	patch -Np0 -i ${srcdir}/devtools-fontsize.patch
 	patch -Np0 -i ${srcdir}/extension_on_gallery.patch
 #	patch -Np0 -i ${srcdir}/referer.patch
@@ -84,6 +81,7 @@ EOF
 #	 not used, if using system-ffmpeg...
 #	_localconf="${_localconf} -Dffmpeg_branding=Chrome"
 	_localconf="${_localconf} -Duse_system_yasm=1"
+        _localconf="${_localconf} -Dlinux_use_tcmalloc=0"
 	if [ ${_shared_build} = "true" ]; then
 		msg "Preparing a shared Build..."
 		_localconf="${_localconf} -Dlibrary=shared_library"

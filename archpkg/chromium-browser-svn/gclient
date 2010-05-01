@@ -10,6 +10,6 @@ solutions = [
       "src/third_party/ffmpeg/binaries/chromium/linux/x64": None,
       "src/third_party/ffmpeg/binaries/chromium/linux/x64_dbg": None,
     },
-    "safesync_url": "http://chromium-status.appspot.com/lkgr"
+    "safesync_url": "http://build.chromium.org/buildbot/continuous/linux/LATEST/REVISION"
   },
 ]

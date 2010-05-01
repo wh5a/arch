@@ -1,6 +1,6 @@
 Index: src/chrome/browser/sessions/tab_restore_service.cc
 ===================================================================
---- src/chrome/browser/sessions/tab_restore_service.cc	(revision 45294)
+--- src/chrome/browser/sessions/tab_restore_service.cc	(revision 46068)
 +++ src/chrome/browser/sessions/tab_restore_service.cc	(working copy)
 @@ -42,7 +42,7 @@
  // TabRestoreService ----------------------------------------------------------
@@ -13,7 +13,7 @@ Index: src/chrome/browser/sessions/tab_restore_service.cc
  // The ordering in the file is as follows:
 Index: src/chrome/browser/resources/new_new_tab.css
 ===================================================================
---- src/chrome/browser/resources/new_new_tab.css	(revision 45294)
+--- src/chrome/browser/resources/new_new_tab.css	(revision 46068)
 +++ src/chrome/browser/resources/new_new_tab.css	(working copy)
 @@ -24,7 +24,6 @@
    background: url(chrome://theme/product_logo) no-repeat 0 6px;
@@ -23,16 +23,7 @@ Index: src/chrome/browser/resources/new_new_tab.css
    min-height: 50px;
    -webkit-transition: width .15s;
  }
-@@ -49,7 +48,7 @@
- #most-visited {
-   position: relative;
-   padding: 0;
--  height: 366px;
-+  height: 520px;
-   margin-top: -10px;
-   -webkit-user-select: none;
-   -webkit-transition: height .15s, opacity .15s;
-@@ -493,7 +492,7 @@
+@@ -206,7 +205,7 @@
  
  #recently-closed {
    white-space: nowrap;
@@ -41,105 +32,22 @@ Index: src/chrome/browser/resources/new_new_tab.css
  }
  
  #recently-closed :not(h2) {
-@@ -652,7 +651,7 @@
- }
- 
- #most-visited.list {
--  height: 294px;
-+  height: 410px;
- }
- 
- .list > .thumbnail-container {
-@@ -855,7 +854,7 @@
-   }
- 
-   #most-visited {
--    height: 294px;
-+    height: 410px;
-   }
- 
-   .thumbnail,
-Index: src/chrome/browser/resources/new_new_tab.html
-===================================================================
---- src/chrome/browser/resources/new_new_tab.html	(revision 45294)
-+++ src/chrome/browser/resources/new_new_tab.html	(working copy)
-@@ -100,8 +100,8 @@
-   var small = useSmallGrid();
-   wasSmallGrid = small;
- 
--  var cols = 4;
--  var rows = 2;
-+  var cols = 7;
-+  var rows = 3;
-   var marginWidth = 10;
-   var marginHeight = 7;
-   var borderWidth = 4;
-@@ -133,7 +133,7 @@
-   if (shownSections & Section.THUMB) {
-     var rects = getMostVisitedLayoutRects();
-     var children = $('most-visited').children;
--    for (var i = 0; i < 8; i++) {
-+    for (var i = 0; i < 21; i++) {
-       var t = children[i];
-       t.style.left = rects[i].left + 'px';
-       t.style.top = rects[i].top + 'px';
-@@ -239,7 +239,7 @@
-       updateSimpleSection('recently-closed', Section.RECENT);
-       updateSimpleSection('most-visited-section', Section.THUMB);
-       var el = $('most-visited');
--      for (var i = 1; i < 8; i++) {
-+      for (var i = 1; i < 21; i++) {
-         el.appendChild(el.firstElementChild.cloneNode(true)).id = 't' + i;
-       }
- 
 Index: src/chrome/browser/resources/new_new_tab.js
 ===================================================================
---- src/chrome/browser/resources/new_new_tab.js	(revision 45296)
+--- src/chrome/browser/resources/new_new_tab.js	(revision 46068)
 +++ src/chrome/browser/resources/new_new_tab.js	(working copy)
-@@ -55,7 +55,7 @@
- 
-   // We append the class name with the "filler" so that we can style fillers
-   // differently.
--  var maxItems = 8;
-+  var maxItems = 21;
-   data.length = Math.min(maxItems, data.length);
-   var len = data.length;
-   for (var i = len; i < maxItems; i++) {
-@@ -555,31 +555,6 @@
- function layoutRecentlyClosed() {
-   var recentShown = shownSections & Section.RECENT;
-   updateSimpleSection('recently-closed', Section.RECENT);
+@@ -129,8 +129,6 @@
+     var el = createRecentItem(item);
+     parentEl.insertBefore(el, navEl);
+   });
 -
--  if (recentShown) {
--    var recentElement = $('recently-closed');
--    var style = recentElement.style;
--    // We cannot use clientWidth here since the width has a transition.
--    var spacing = 20;
--    var headerEl = recentElement.firstElementChild;
--    var navEl = recentElement.lastElementChild.lastElementChild;
--    var navWidth = navEl.offsetWidth;
--    // Subtract 10 for the padding
--    var availWidth = (useSmallGrid() ? 690 : 918) - navWidth - 10;
--
--    // Now go backwards and hide as many elements as needed.
--    var elementsToHide = [];
--    for (var el = navEl.previousElementSibling; el;
--         el = el.previousElementSibling) {
--      if (el.offsetLeft + el.offsetWidth + spacing > availWidth) {
--        elementsToHide.push(el);
--      }
--    }
--
--    elementsToHide.forEach(function(el) {
--      el.parentNode.removeChild(el);
--    });
--  }
+-  layoutRecentlyClosed();
  }
  
- /**
+ function createRecentItem(data) {
 Index: src/chrome/browser/dom_ui/new_tab_ui.cc
 ===================================================================
---- src/chrome/browser/dom_ui/new_tab_ui.cc	(revision 45294)
+--- src/chrome/browser/dom_ui/new_tab_ui.cc	(revision 46068)
 +++ src/chrome/browser/dom_ui/new_tab_ui.cc	(working copy)
 @@ -39,13 +39,6 @@
  #include "grit/generated_resources.h"
@@ -166,7 +74,7 @@ Index: src/chrome/browser/dom_ui/new_tab_ui.cc
    // where an interesting entry is either a closed window or a closed tab
 Index: src/chrome/browser/dom_ui/most_visited_handler.cc
 ===================================================================
---- src/chrome/browser/dom_ui/most_visited_handler.cc	(revision 45294)
+--- src/chrome/browser/dom_ui/most_visited_handler.cc	(revision 46068)
 +++ src/chrome/browser/dom_ui/most_visited_handler.cc	(working copy)
 @@ -33,7 +33,7 @@
  namespace {

@@ -3,7 +3,7 @@
 # Mostly based on existing emacs-git AUR
 
 pkgname=emacs-bzr
-pkgver=99933
+pkgver=100093
 pkgrel=1
 pkgdesc='GNU Emacs from official Bzr repository'
 arch=('i686' 'x86_64')
