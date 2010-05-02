@@ -48,15 +48,6 @@ set nows
 let s:lz = &lz
 set lz
 
-" Used after each command: put cursor at end and display position
-if &wrap
-  noremap <SID>L L0:redraw<CR>:file<CR>
-  au VimEnter * normal! L0
-else
-  noremap <SID>L Lg0:redraw<CR>:file<CR>
-  au VimEnter * normal! Lg0
-endif
-
 " When reading from stdin don't consider the file modified.
 au VimEnter * set nomod
 
@@ -187,7 +178,6 @@ fun! s:End()
   unmap <Space>
   unmap <C-V>
   unmap f
-  unmap <C-F>
   unmap z
   unmap <Esc><Space>
   unmap F
