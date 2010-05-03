@@ -492,10 +492,8 @@
               (mode . dired-mode))
             ("PKGBUILD"
               (name . "^\*?PKGBUILD"))
-            ;; ("MyProject1"
-            ;;   (filename . "src/myproject1/"))
-            ;; ("MyProject2"
-            ;;   (filename . "src/myproject2/"))
+            ("SPEC"
+              (filename . "spec2006/"))
             ))))
 (setq
   ibuffer-expert t
@@ -655,7 +653,8 @@
     (setq c-hanging-braces-alist
       '((defun-open after)
         (substatement-open after)
-        (block-close . c-snug-do-while)))
+        (block-close . c-snug-do-while)
+        (brace-list-close . nil)))
     ))
 
 ;;;; This should be placed at the end!! So that all files will be properly opened.
