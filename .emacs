@@ -653,8 +653,12 @@
     (setq c-hanging-braces-alist
       '((defun-open after)
         (substatement-open after)
-        (block-close . c-snug-do-while)
-        (brace-list-close . nil)))
+        (class-open after)
+        (block-close c-snug-do-while)
+        ; Don't insert newline for list of array elements
+        (brace-list-open)
+        (brace-list-close)
+        ))
     ))
 
 ;;;; This should be placed at the end!! So that all files will be properly opened.
