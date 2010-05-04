@@ -81,13 +81,10 @@ export PATH=~/codesurfer-2.1p1/csurf/bin/:$PATH
 export LM_LICENSE_FILE=~/codesurfer-2.1p1/csurf/bin/cs-license.dat
 
 # Emacs-daemon
-# pgrep -u wh5a emacs > /dev/null
-# if [ $? -ne 0 ]; then
-#   emacs -daemon
-# fi
-pgrep -u wh5a emacs > /dev/null || LANG=zh_CN.UTF-8 emacs -daemon
+#pgrep -u wh5a emacs > /dev/null || LANG=zh_CN.UTF-8 emacs -daemon
 
-export EDITOR="emacsclient -c -a emacs"
+# With alternate-editor being empty string, emacsclient knows to start a daemon automatically.
+export EDITOR="emacsclient -c -a ''"
 
 export GREP_OPTIONS='--color=auto --exclude-dir=_darcs --exclude-dir=\.svn --exclude-dir=\.git --exclude-dir=\.hg'
 

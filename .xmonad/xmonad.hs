@@ -18,7 +18,7 @@ import XMonad.Hooks.ManageDocks
 -- http://braincrater.wordpress.com/2008/11/29/pimp-your-xmonad-3-prompt/
 import XMonad.Prompt
 import XMonad.Prompt.RunOrRaise
---import XMonad.Prompt.Shell
+import XMonad.Prompt.Shell
 import XMonad.Prompt.Window
 import XMonad.Prompt.XMonad
 import XMonad.Prompt.AppLauncher
@@ -103,7 +103,7 @@ myManageHook = composeOne $
     , isFullscreen -?> doFullFloat
     , appName =? "squeak" -?> doFullFloat
     , className =? "Dialog" -?> doFloat
-    , appName =? "emacs" -?> doShift "2:emacs"
+--    , appName =? "emacs" -?> doShift "2:emacs"
     , appName =? "fqterm.bin" -?> doShift "9:web"
     , className =? "Toplevel" -?> doShift "3:csurf"
 --    , className =? "Firefox" -?> doShift "9:web"
@@ -151,6 +151,7 @@ main = do
   -- See X.C.Sjanssen for the usage. You need to change xmobarc to read from XMonadLog instead of Stdin too.
   -- Unfortunately, this support is experimental and crashes on some long titles.
   xmproc <- spawnPipe "xmobar /home/wh5a/.xmonad/xmobarc"
+  editor <- getEditor
   let mTile = renamed [Replace "Tile"] $ mouseResizableTile {draggerType = BordersDragger}
       mMirror = renamed [Replace "Mirror"] $ mouseResizableTile {draggerType = BordersDragger, isMirrored = True}
       tab = renamed [CutWordsRight 1] $ tabbed shrinkText myTheme
@@ -186,7 +187,7 @@ main = do
        , ("M-x", xmonadPrompt myXPConfig)
        -- xmonad-eval; not sure what to make use of it
 --       , ("M-S-;", inputPrompt myXPConfig "Eval" >>= flip whenJust (evalExpression defaultEvalConfig))
-       , ("M-e", launchApp myXPConfig "emacsclient -c -a emacs")
+       , ("M-e", launchApp myXPConfig editor)
        , ("M-n", launchApp myXPConfig "dolphin")
 --       , ("M-S-k", kill)   -- By default, M-S-k/ M-S-j move windows
        , ("M-C-c", withFocused myKillWindow)
