@@ -494,11 +494,16 @@
               (name . "^\*?PKGBUILD"))
             ("SPEC"
               (filename . "spec2006/"))
+            ("C"
+              (or
+                (mode . c-mode)
+                (mode . c++-mode)))
             ))))
 (setq
   ibuffer-expert t
   ; Don't show empty groups
   ibuffer-show-empty-filter-groups nil
+  ibuffer-view-ibuffer t
   ibuffer-display-summary nil)
 (add-hook 'ibuffer-mode-hook
   (lambda ()
