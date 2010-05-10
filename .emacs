@@ -459,6 +459,15 @@
 ;; `C-c <-` and `C-c ->` to cycle through window configurations
 (winner-mode 1)
 
+;; Assigns a number to each visible window and allows easy jump.
+(autoload 'window-number-meta-mode "window-number"
+  "A global minor mode that enables use of the M- prefix to select
+windows, use `window-number-mode' to display the window numbers in
+the mode-line."
+  t)
+(window-number-mode 1)
+(window-number-meta-mode 1)
+
 ;; http://emacs-fu.blogspot.com/2010/02/dealing-with-many-buffers-ibuffer.html
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (setq ibuffer-saved-filter-groups
