@@ -648,6 +648,8 @@
 
 ;; Popups up a buffer to show the keyring
 (global-set-key "\C-cy" 'anything-show-kill-ring)
+;; Do not add a string when it is the same as the last one. Only valid since 23.2
+(setq kill-do-not-save-duplicates t)
 
 ;;;; Make cc-mode nicer
 (add-hook 'c-mode-common-hook
@@ -659,6 +661,7 @@
       '((defun-open after)
         (substatement-open after)
         (class-open after)
+        (class-close before)
         (block-close c-snug-do-while)
         ; Don't insert newline for list of array elements
         (brace-list-open)
