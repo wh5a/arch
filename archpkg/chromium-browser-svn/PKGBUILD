@@ -19,14 +19,15 @@ makedepends=('subversion' 'python>=2.4' 'perl>=5' 'bison>=2.3' 'flex>=2.5.34' 'g
 provides=('chromium-browser' 'chromium' 'chrome')
 conflicts=('chromium-browser' 'chromium' 'chrome')
 source=('chromium.desktop'
-	'html5_video_mimetypes.patch'
 	'gclient'
 	'chromium-browser.sh'
         'extension_on_gallery.patch'
 	'devtools-fontsize.patch')
-md5sums=('897de25e9c25a01f8b1b67abe554a6b7' 'a3fd9ae9188df496294feeb9159690ff'\
-         'cea9624d65dfdcf8550cae34b91bfe13' '2178331349c6ee8f8300bf71d585dc6d'\
-         'ac8793edbb49de45bac6c6b240542e6f' '1a80831e5942ba9301b63845331bfa35')
+md5sums=('897de25e9c25a01f8b1b67abe554a6b7'
+         'cea9624d65dfdcf8550cae34b91bfe13'
+         '2178331349c6ee8f8300bf71d585dc6d'
+         'ac8793edbb49de45bac6c6b240542e6f'
+         '1a80831e5942ba9301b63845331bfa35')
 install=('chromium.install')
 
 _builddir=${srcdir}/src
@@ -38,7 +39,6 @@ build() {
 	_source
 	cd ${srcdir}
 	msg "Preparing Build of Chromium revision ${pkgver}..."
-	patch -Np0 -i ${srcdir}/html5_video_mimetypes.patch
 	patch -Np0 -i ${srcdir}/devtools-fontsize.patch
 	patch -Np0 -i ${srcdir}/extension_on_gallery.patch
 #	patch -Np0 -i ${srcdir}/referer.patch
@@ -80,6 +80,7 @@ EOF
 	_localconf="${_localconf} -Duse_system_ffmpeg=1"
 #	 not used, if using system-ffmpeg...
 #	_localconf="${_localconf} -Dffmpeg_branding=Chrome"
+        _localconf="${_localconf} -Dproprietary_codecs=1"
 	_localconf="${_localconf} -Duse_system_yasm=1"
         _localconf="${_localconf} -Dlinux_use_tcmalloc=0"
 	if [ ${_shared_build} = "true" ]; then
