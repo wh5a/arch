@@ -54,7 +54,7 @@ build() {
 	cat << EOF > ${_builddir}/.gyp/include.gypi
 {
 	'target_defaults': {
-		'cflags': [ '${CFLAGS// /','}' ],
+		'cflags': [ '${CFLAGS// /','}', '-D__STDC_CONSTANT_MACROS' ],
 		'ldflags': [ '${LDFLAGS// /','}' ],
 	},
 }
