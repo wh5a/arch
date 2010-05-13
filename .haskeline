@@ -2,3 +2,4 @@ bind: ctrl-p up
 bind: meta-p up
 bind: ctrl-n down
 bind: meta-n down
+historyDuplicates: IgnoreConsecutive

@@ -157,6 +157,11 @@
 ;(setq haskell-literate-default 'tex)
 (require 'haskell-cabal)
 
+;; Mode for GHC Core:
+; 1. ghc -c -ddump-simpl foo.hs > foo.hcr
+; 2. M-x ghc-core-clean-buffer
+(require 'ghc-core)
+
 ; I believe we can customize delimiters, check out the doc.
 (require 'mic-paren)
 (paren-activate)
@@ -472,6 +477,8 @@ the mode-line."
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (setq ibuffer-saved-filter-groups
   (quote (("default"
+            ("SPEC"
+              (filename . "spec2006/"))
             ("Emacs"
               (or
                 (mode . emacs-lisp-mode)
@@ -501,8 +508,6 @@ the mode-line."
               (mode . dired-mode))
             ("PKGBUILD"
               (name . "^\*?PKGBUILD"))
-            ("SPEC"
-              (filename . "spec2006/"))
             ("C"
               (or
                 (mode . c-mode)

@@ -27,7 +27,7 @@ md5sums=('897de25e9c25a01f8b1b67abe554a6b7'
          'cea9624d65dfdcf8550cae34b91bfe13'
          '2178331349c6ee8f8300bf71d585dc6d'
          'ac8793edbb49de45bac6c6b240542e6f'
-         '1a80831e5942ba9301b63845331bfa35')
+         '32899e883518f81d688efca77cc68764')
 install=('chromium.install')
 
 _builddir=${srcdir}/src
