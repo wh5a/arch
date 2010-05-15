@@ -58,6 +58,8 @@ import XMonad.Util.Paste
 import XMonad.Actions.WithAll
 -- Modify the layouts' names. I use it to shorten them.
 import XMonad.Layout.Renamed
+-- Return to the most recently focused window
+import XMonad.Actions.GroupNavigation
 
 myTheme = defaultTheme {
    fontName = "xft:WenQuanYi Zen Hei:pixelsize=17"
@@ -162,13 +164,14 @@ main = do
        , workspaces = ["1:term","2:emacs","3:csurf","4","5","6","7","8","9:web"]
        , manageHook = placeHook (inBounds $ underMouse (0.5,0.5)) <+> manageSpawn <+> manageDocks <+> manageHook defaultConfig <+> myManageHook
        , layoutHook = {- layoutHints $ minimize -} fixFocus $ maxi $ avoidStruts $ smartBorders $ onWorkspace "9:web" (tab ||| mTile ||| Full) $ (mTile ||| mMirror ||| Full)
-       , logHook = dynamicLogWithPP $ xmobarPP {
+       , logHook = (dynamicLogWithPP $ xmobarPP {
                      ppOutput = hPutStrLn xmproc
                      -- http://en.wikipedia.org/wiki/X11_color_names
                    , ppTitle = xmobarColor "yellow" "" -- . shorten 52
                    , ppLayout = xmobarColor "burlywood" ""
                    , ppSep = " "
-                   }
+                   })
+                   >> historyHook
        }
        `additionalMouseBindings`
        [ -- Resize a floating window from whichever corner or edge the mouse is closest to
@@ -226,6 +229,7 @@ main = do
        , ("M-<KP_Down>", withFocused (keysResizeWindow (0, -10) (1%2, 1%2)))
        , ("M1-<Tab>", windows W.focusDown)
        , ("M1-S-<Tab>", windows W.focusUp)
+       , ("M-`", nextMatch History (return True))
        ]
   xmonad conf {
     startupHook = startupHook conf >> setWMName "LG3D"
