@@ -169,3 +169,6 @@ function cd {
 
 # Don't let SPEC CPU 2006 set the locale
 export SPEC_LOCALE_OK=THIS_CAN_BE_ANYTHING
+
+# Replaces the stock qemu for the MIT jos OS: http://pdos.csail.mit.edu/6.828/2009/tools.html
+export PATH=/opt/qemu-patched/bin:$PATH
