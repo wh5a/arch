@@ -14,7 +14,7 @@ _revision=trunk
 arch=('i686' 'x86_64')
 url='http://www.chromium.org/'
 license=('BSD')
-depends=('gtk2' 'nss>=3.12' 'gconf' 'glib2' 'ttf-ms-fonts' 'freetype2' 'cairo' 'dbus' 'zlib' 'libjpeg' 'bzip2' 'libevent' 'libpng' 'ffmpeg')
+depends=('gtk2' 'nss>=3.12' 'gconf' 'glib2' 'ttf-ms-fonts' 'freetype2' 'cairo' 'dbus' 'zlib' 'libjpeg' 'bzip2' 'libevent' 'libpng')
 makedepends=('subversion' 'python>=2.4' 'perl>=5' 'bison>=2.3' 'flex>=2.5.34' 'gperf>=3.0.3' 'pkgconfig>=0.20' 'alsa-lib' 'nspr>=4.7.1' 'rsync' 'yasm')
 provides=('chromium-browser' 'chromium' 'chrome')
 conflicts=('chromium-browser' 'chromium' 'chrome')
@@ -54,7 +54,7 @@ build() {
 	cat << EOF > ${_builddir}/.gyp/include.gypi
 {
 	'target_defaults': {
-		'cflags': [ '${CFLAGS// /','}', '-D__STDC_CONSTANT_MACROS' ],
+		'cflags': [ '${CFLAGS// /','}' ],
 		'ldflags': [ '${LDFLAGS// /','}' ],
 	},
 }
@@ -77,9 +77,9 @@ EOF
 	_localconf="${_localconf} -Duse_system_zlib=1 -Duse_system_libjpeg=1"
 	_localconf="${_localconf} -Duse_system_bzip2=1 -Duse_system_libevent=1"
 	_localconf="${_localconf} -Duse_system_libpng=1"
-	_localconf="${_localconf} -Duse_system_ffmpeg=1"
+#	_localconf="${_localconf} -Duse_system_ffmpeg=1"
 #	 not used, if using system-ffmpeg...
-#	_localconf="${_localconf} -Dffmpeg_branding=Chrome"
+	_localconf="${_localconf} -Dffmpeg_branding=Chrome"
         _localconf="${_localconf} -Dproprietary_codecs=1"
 	_localconf="${_localconf} -Duse_system_yasm=1"
         _localconf="${_localconf} -Dlinux_use_tcmalloc=0"
@@ -98,7 +98,7 @@ EOF
 	install -m 0755 -D ${_builddir}/out/Release/chrome				${pkgdir}/usr/lib/chromium/chromium
 	install -m 4555 -o root -g root -D ${_builddir}/out/Release/chrome_sandbox	${pkgdir}/usr/lib/chromium/chromium-sandbox
 	install -m 0644 -D ${_builddir}/out/Release/chrome.pak				${pkgdir}/usr/lib/chromium/chrome.pak
-	# install -m 0644 -D ${_builddir}/out/Release/libffmpegsumo.so			${pkgdir}/usr/lib/chromium/libffmpegsumo.so
+	install -m 0644 -D ${_builddir}/out/Release/libffmpegsumo.so			${pkgdir}/usr/lib/chromium/libffmpegsumo.so
 	ln -s /usr/lib/libavcodec.so.52 ${pkgdir}/usr/lib/chromium/libavcodec.so.52
 	ln -s /usr/lib/libavformat.so.52 ${pkgdir}/usr/lib/chromium/libavformat.so.52
 	ln -s /usr/lib/libavutil.so.50 ${pkgdir}/usr/lib/chromium/libavutil.so.50
