@@ -190,7 +190,7 @@ main = do
        , ("M-x", xmonadPrompt myXPConfig)
        -- xmonad-eval; not sure what to make use of it
 --       , ("M-S-;", inputPrompt myXPConfig "Eval" >>= flip whenJust (evalExpression defaultEvalConfig))
-       , ("M-e", launchApp myXPConfig editor)
+       , ("M-e", launchApp myXPConfig $ "LANG=zh_CN.UTF-8 " ++ editor)
        , ("M-n", launchApp myXPConfig "dolphin")
 --       , ("M-S-k", kill)   -- By default, M-S-k/ M-S-j move windows
        , ("M-C-c", withFocused myKillWindow)

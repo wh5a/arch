@@ -465,6 +465,11 @@
 (winner-mode 1)
 
 ;; Assigns a number to each visible window and allows easy jump.
+(autoload 'window-number-mode "window-number"
+  "A global minor mode that enables selection of windows according to
+numbers with the C-x C-j prefix.  Another mode,
+`window-number-meta-mode' enables the use of the M- prefix."
+  t)
 (autoload 'window-number-meta-mode "window-number"
   "A global minor mode that enables use of the M- prefix to select
 windows, use `window-number-mode' to display the window numbers in
@@ -682,6 +687,12 @@ the mode-line."
         (brace-list-close)
         ))
     ))
+
+(add-hook 'asm-mode-hook
+  (lambda ()
+    ; asm-mode indents code at tab stops (by default are multiples of 8)
+    (add-to-list 'tab-stop-list 2)))
+
 
 ;;;; This should be placed at the end!! So that all files will be properly opened.
 ; This causes problems for emacs daemon running at startup, because it pauses to ask questions.
