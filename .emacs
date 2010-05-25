@@ -288,6 +288,7 @@
       (define-key tuareg-interactive-mode-map "\C-c,"
         'caml-toggle-comment-endofline)
       (yas/minor-mode)
+      (setq tuareg-in-indent 0)		; no indentation after `in' keywords
       ))
 ; The Whitespace Thing, only if the first line is:
 ;(*pp ocaml+twt*)
@@ -691,6 +692,7 @@ the mode-line."
 (add-hook 'asm-mode-hook
   (lambda ()
     ; asm-mode indents code at tab stops (by default are multiples of 8)
+    (make-local-variable 'tab-stop-list)
     (add-to-list 'tab-stop-list 2)))
 
 
