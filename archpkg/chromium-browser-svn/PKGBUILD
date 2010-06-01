@@ -20,14 +20,10 @@ provides=('chromium-browser' 'chromium' 'chrome')
 conflicts=('chromium-browser' 'chromium' 'chrome')
 source=('chromium.desktop'
 	'gclient'
-	'chromium-browser.sh'
-        'extension_on_gallery.patch'
-	'devtools-fontsize.patch')
+	'chromium-browser.sh')
 md5sums=('897de25e9c25a01f8b1b67abe554a6b7'
          'cea9624d65dfdcf8550cae34b91bfe13'
-         '2178331349c6ee8f8300bf71d585dc6d'
-         'ac8793edbb49de45bac6c6b240542e6f'
-         '32899e883518f81d688efca77cc68764')
+         '2178331349c6ee8f8300bf71d585dc6d')
 install=('chromium.install')
 
 _builddir=${srcdir}/src
@@ -39,8 +35,6 @@ build() {
 	_source
 	cd ${srcdir}
 	msg "Preparing Build of Chromium revision ${pkgver}..."
-	patch -Np0 -i ${srcdir}/devtools-fontsize.patch
-	patch -Np0 -i ${srcdir}/extension_on_gallery.patch
 #	patch -Np0 -i ${srcdir}/referer.patch
         cd ${_builddir}
 	# strip -Werror - the build process treats warnings as error and aborts; we dont want that...
