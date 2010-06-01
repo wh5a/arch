@@ -2,14 +2,14 @@
 # Maintainer: Wei Hu <weihu@cs.virginia.edu>
 
 pkgname=emacs-tuareg-mode
-pkgver=2.0.0
+pkgver=2.0.1
 pkgrel=1
 pkgdesc="Emacs tuareg mode for ocaml"
 arch=('i686' 'x86_64')
 url="https://forge.ocamlcore.org/projects/tuareg/"
 depends=('emacs')
-source=(https://forge.ocamlcore.org/frs/download.php/402/tuareg-$pkgver.tgz)
-md5sums=('be88ba0366ee4f5a88c21322632f1774')
+source=(https://forge.ocamlcore.org/frs/download.php/410/tuareg-$pkgver.tgz)
+md5sums=('3f9bc8f3b0ea8115d4371309c1e8f955')
 license=('GPL')
 install=emacs-tuareg-mode.install
 #conflicts=(emacs-ocaml-mode)
@@ -20,7 +20,6 @@ build() {
   emacs --batch --eval '(progn
                           (push "." load-path)
                           (byte-compile-file "tuareg.el")
-                          (byte-compile-file "sym-lock.el")
                           (byte-compile-file "camldebug.el"))'
   install -d $pkgdir/usr/share/emacs/site-lisp/tuareg || return 1
   cp *.el{,c} \
