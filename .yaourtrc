@@ -1,4 +1,3 @@
-#DontNeedToPressEnter
-EditPkgbuild no
-#NoConfirm yes
-PacmanBin /usr/bin/powerpill
+EDITFILES=0
+FORCEENGLISH=1
+PACMANBIN="/usr/bin/powerpill"

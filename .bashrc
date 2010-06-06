@@ -8,6 +8,7 @@ alias ll='ls -l'
 # Get reflector (AUR) for the latest mirrors
 alias b='sudo bauerbill'
 alias p='sudo pacman'
+alias up="sudo sh -c 'rebase; pacman -Su'"
 alias y='yaourt' # --noconfirm'
 alias skype='LD_PRELOAD=/usr/lib/libv4l/v4l1compat.so /opt/skype/skype'
 

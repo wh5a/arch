@@ -523,7 +523,7 @@ the mode-line."
   ibuffer-expert t
   ; Don't show empty groups
   ibuffer-show-empty-filter-groups nil
-  ibuffer-view-ibuffer t
+;  ibuffer-view-ibuffer t
   ibuffer-display-summary nil)
 (add-hook 'ibuffer-mode-hook
   (lambda ()
@@ -687,6 +687,7 @@ the mode-line."
         (brace-list-open)
         (brace-list-close)
         ))
+    (setq c-label-minimum-indentation 0)
     ))
 
 (add-hook 'asm-mode-hook
