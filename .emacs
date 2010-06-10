@@ -514,6 +514,8 @@ the mode-line."
               (mode . dired-mode))
             ("PKGBUILD"
               (name . "^\*?PKGBUILD"))
+            ("W3m"
+              (mode . w3m-mode))
             ("C"
               (or
                 (mode . c-mode)
@@ -696,6 +698,14 @@ the mode-line."
     (make-local-variable 'tab-stop-list)
     (add-to-list 'tab-stop-list 2)))
 
+;; Sometimes useful for documentation lookup
+; http://emacser.com/w3m.htm
+(require 'w3m-load)
+(setq
+  w3m-home-page "http://wh5a.github.com/cil/doc/html/cil/api/index.html"
+  w3m-default-display-inline-images t
+  w3m-session-crash-recovery nil
+  w3m-use-title-buffer-name t)
 
 ;;;; This should be placed at the end!! So that all files will be properly opened.
 ; This causes problems for emacs daemon running at startup, because it pauses to ask questions.
