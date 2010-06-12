@@ -3,7 +3,7 @@
 # Mostly based on existing emacs-git AUR
 
 pkgname=emacs-bzr
-pkgver=100093
+pkgver=100586
 pkgrel=1
 pkgdesc='GNU Emacs from official Bzr repository'
 arch=('i686' 'x86_64')
@@ -14,9 +14,6 @@ makedepends=('bzr' 'pkgconfig')
 provides=('emacs=$pkgver')
 conflicts=('emacs' 'emacs-otf' 'emacs-cvs' 'emacs-git')
 replaces=('emacs' 'emacs-cvs' 'emacs-git')
-install=$pkgname.install
-source=("${pkgname}.install")
-md5sums=('053284a9c6d063f8babb6f2de7a10a7f')
 
 # Web Interface: https://code.launchpad.net/~vcs-imports/emacs/trunk
 _bzrtrunk='http://bzr.savannah.gnu.org/r/emacs/trunk'
@@ -29,9 +26,13 @@ build() {
   if [[ -d $_bzrmod/.bzr ]]; then
     (cd $_bzrmod && bzr pull -v && cd ..)
     msg "Local branch updated or server timeout"
+#    (cd $_bzrmod && bzr update -v && cd ..)
+#    msg "Local checkout updated or server timeout"
   else
     bzr branch --standalone -v $_bzrtrunk $_bzrmod
     msg "Branching done or server timeout"
+#    bzr co --lightweight -v $_bzrtrunk $_bzrmod
+#    msg "Checkout done or server timeout"
   fi
 
   # cp -urT $_bzrmod/ ${_bzrmod}-build
@@ -39,6 +40,12 @@ build() {
 
   #  msg "Trying to ensure building from a clean(-ish) state..."
   #  make clean
+
+  # Temporary fix for a bug in GCC 4.5
+  gcc_ver=`gcc --version | head -1 | cut -d ' ' -f 3 | cut -d . -f 1,2`
+  if [ $gcc_ver='4.5' ]; then
+    export CFLAGS='-O2 -fno-optimize-sibling-calls'
+  fi
 
   mandir=/usr/share/man
   msg "Starting make..."

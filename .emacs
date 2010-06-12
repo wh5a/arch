@@ -704,8 +704,8 @@ the mode-line."
 (setq
   w3m-home-page "http://wh5a.github.com/cil/doc/html/cil/api/index.html"
   w3m-default-display-inline-images t
-  w3m-session-crash-recovery nil
   w3m-use-title-buffer-name t)
+(define-key w3m-mode-map [C-tab] 'w3m-next-buffer)
 
 ;;;; This should be placed at the end!! So that all files will be properly opened.
 ; This causes problems for emacs daemon running at startup, because it pauses to ask questions.
