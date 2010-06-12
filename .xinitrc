@@ -31,4 +31,4 @@ fqterm &
 unclutter -root &
 # Mouse gesture
 #easystroke &
-exec xmonad
+exec dbus-launch --exit-with-session xmonad

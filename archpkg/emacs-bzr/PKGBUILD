@@ -50,6 +50,7 @@ build() {
   mandir=/usr/share/man
   msg "Starting make..."
   cd ${_bzrmod}
+#  bzr revert -r 100581
   ./configure --prefix=/usr \
     --sysconfdir=/etc \
     --localstatedir=/var \
@@ -63,8 +64,8 @@ build() {
   msg "Cleaning up..."
   mv $pkgdir/usr/bin/{ctags,ctags.emacs} || return 1
   mv $pkgdir/usr/bin/{etags,etags.emacs} || return 1
-  mv $pkgdir${mandir}/man1/{etags.1,etags.emacs.1} || return 1
-  mv $pkgdir${mandir}/man1/{ctags.1,ctags.emacs.1} || return 1
+  mv $pkgdir${mandir}/man1/{etags.1.gz,etags.emacs.1.gz} || return 1
+  mv $pkgdir${mandir}/man1/{ctags.1.gz,ctags.emacs.1.gz} || return 1
 
   find $pkgdir/usr/share/emacs -type d -exec chmod 755 {} \;
   find $pkgdir/usr/share/emacs -exec chown root.root {} \;

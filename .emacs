@@ -707,6 +707,15 @@ the mode-line."
   w3m-use-title-buffer-name t)
 (define-key w3m-mode-map [C-tab] 'w3m-next-buffer)
 
+;; Desktop notification: http://julien.danjou.info/blog/2010.html#Desktop%20notification%20support%20for%20Emacs
+; Only available since June 2010
+(require 'notifications)
+;; (notifications-notify 
+;;     :title "You've got mail!"
+;;     :body "There's 34 mails unread"
+;;     :app-icon "~/.emacs.d/icons/mail.png"
+;;     :urgency 'low)
+
 ;;;; This should be placed at the end!! So that all files will be properly opened.
 ; This causes problems for emacs daemon running at startup, because it pauses to ask questions.
 ;(save-visited-files-restore)
