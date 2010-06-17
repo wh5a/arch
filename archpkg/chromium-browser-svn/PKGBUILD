@@ -40,7 +40,7 @@ build() {
 	# strip -Werror - the build process treats warnings as error and aborts; we dont want that...
 	sed -i "s/'-Werror'/''/" -i build/common.gypi || return 1
 	# temporary fix (sort of) for proxybug w. kde4
-	sed -e 's/\.kde/.kde4/' -i net/proxy/proxy_config_service_linux.cc || return 1
+#	sed -e 's/\.kde/.kde4/' -i net/proxy/proxy_config_service_linux.cc || return 1
 	# Write out corrrect revision number in 'About Chromium'
 	echo ${pkgver} > build/LASTCHANGE.in || return 1
 	# CFLAGS/LDFLAGS
@@ -93,6 +93,7 @@ EOF
 	install -m 4555 -o root -g root -D ${_builddir}/out/Release/chrome_sandbox	${pkgdir}/usr/lib/chromium/chromium-sandbox
 	install -m 0644 -D ${_builddir}/out/Release/chrome.pak				${pkgdir}/usr/lib/chromium/chrome.pak
 	# install -m 0644 -D ${_builddir}/out/Release/libffmpegsumo.so			${pkgdir}/usr/lib/chromium/libffmpegsumo.so
+	install -m 0644 -D "${_builddir}/out/Release/resources.pak"			"${pkgdir}/usr/lib/chromium/resources.pak"
 	ln -s /usr/lib/libavcodec.so.52 ${pkgdir}/usr/lib/chromium/libavcodec.so.52
 	ln -s /usr/lib/libavformat.so.52 ${pkgdir}/usr/lib/chromium/libavformat.so.52
 	ln -s /usr/lib/libavutil.so.50 ${pkgdir}/usr/lib/chromium/libavutil.so.50
