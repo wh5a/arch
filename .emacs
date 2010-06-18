@@ -14,6 +14,9 @@
 
 (transient-mark-mode t)
 
+;; Make it more like other programs
+(delete-selection-mode t)
+
 (setq js-indent-level 2)
 (setq lisp-indent-offset 2)
 
@@ -715,6 +718,10 @@ the mode-line."
 ;;     :body "There's 34 mails unread"
 ;;     :app-icon "~/.emacs.d/icons/mail.png"
 ;;     :urgency 'low)
+
+;;;; Color strings that matches color names. Examples: blue, #c83964
+;; http://julien.danjou.info/rainbow-mode.html
+(require 'rainbow-mode)
 
 ;;;; This should be placed at the end!! So that all files will be properly opened.
 ; This causes problems for emacs daemon running at startup, because it pauses to ask questions.
