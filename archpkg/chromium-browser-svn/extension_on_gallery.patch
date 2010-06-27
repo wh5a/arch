@@ -1,8 +1,8 @@
 Index: src/chrome/common/extensions/url_pattern.cc
 ===================================================================
---- src/chrome/common/extensions/url_pattern.cc	(revision 49012)
+--- src/chrome/common/extensions/url_pattern.cc	(revision 50928)
 +++ src/chrome/common/extensions/url_pattern.cc	(working copy)
-@@ -82,6 +82,18 @@
+@@ -92,6 +92,18 @@
  }
  
  bool URLPattern::MatchesUrl(const GURL &test) const {
@@ -23,15 +23,15 @@ Index: src/chrome/common/extensions/url_pattern.cc
  
 Index: src/chrome/renderer/user_script_slave.cc
 ===================================================================
---- src/chrome/renderer/user_script_slave.cc	(revision 49012)
+--- src/chrome/renderer/user_script_slave.cc	(revision 50928)
 +++ src/chrome/renderer/user_script_slave.cc	(working copy)
-@@ -164,11 +164,6 @@
-       return true;
-   }
+@@ -148,11 +148,6 @@
+   if (!URLPattern::IsValidScheme(frame_url.scheme()))
+     return true;
  
 -  // Don't inject user scripts into the gallery itself.  This prevents
 -  // a user script from removing the "report abuse" link, for example.
--  if (frame_url.host() == GURL(extension_urls::kGalleryBrowsePrefix).host())
+-  if (frame_url.host() == GURL(Extension::ChromeStoreURL()).host())
 -    return true;
 -
    PerfTimer timer;
@@ -39,15 +39,15 @@ Index: src/chrome/renderer/user_script_slave.cc
    int num_scripts = 0;
 Index: src/chrome/renderer/render_view.cc
 ===================================================================
---- src/chrome/renderer/render_view.cc	(revision 49012)
+--- src/chrome/renderer/render_view.cc	(revision 50928)
 +++ src/chrome/renderer/render_view.cc	(working copy)
-@@ -4847,13 +4847,6 @@
+@@ -5008,13 +5008,6 @@
  
  void RenderView::ExecuteCodeImpl(WebFrame* frame,
                                   const ViewMsg_ExecuteCode_Params& params) {
 -  // Don't execute scripts in gallery pages.
 -  GURL frame_url = GURL(frame->url());
--  if (frame_url.host() == GURL(extension_urls::kGalleryBrowsePrefix).host()) {
+-  if (frame_url.host() == GURL(Extension::ChromeStoreURL()).host()) {
 -    Send(new ViewMsg_ExecuteCodeFinished(routing_id_, params.request_id, true));
 -    return;
 -  }

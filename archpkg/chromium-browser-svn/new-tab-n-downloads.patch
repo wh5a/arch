@@ -1,6 +1,6 @@
 Index: src/chrome/browser/sessions/tab_restore_service.cc
 ===================================================================
---- src/chrome/browser/sessions/tab_restore_service.cc	(revision 47711)
+--- src/chrome/browser/sessions/tab_restore_service.cc	(revision 50928)
 +++ src/chrome/browser/sessions/tab_restore_service.cc	(working copy)
 @@ -42,7 +42,7 @@
  // TabRestoreService ----------------------------------------------------------
@@ -13,17 +13,17 @@ Index: src/chrome/browser/sessions/tab_restore_service.cc
  // The ordering in the file is as follows:
 Index: src/chrome/browser/resources/new_new_tab.css
 ===================================================================
---- src/chrome/browser/resources/new_new_tab.css	(revision 47711)
+--- src/chrome/browser/resources/new_new_tab.css	(revision 50928)
 +++ src/chrome/browser/resources/new_new_tab.css	(working copy)
-@@ -28,7 +28,6 @@
-   background: url(chrome://theme/product_logo) no-repeat 0 6px;
+@@ -23,7 +23,6 @@
+   min-height: 100%;
+   padding-bottom: 25px; /* Make room for the bottom positioned footer. */
    position: relative;
-   margin: 0 auto;
 -  width: 920px;
-   min-height: 50px;
-   -webkit-transition: width .15s;
  }
-@@ -210,7 +209,7 @@
+ 
+ html[dir=rtl] #main {
+@@ -197,7 +196,7 @@
  
  #recently-closed {
    white-space: nowrap;
@@ -34,27 +34,33 @@ Index: src/chrome/browser/resources/new_new_tab.css
  #recently-closed > span > span  {
 Index: src/chrome/browser/resources/new_new_tab.html
 ===================================================================
---- src/chrome/browser/resources/new_new_tab.html	(revision 47711)
+--- src/chrome/browser/resources/new_new_tab.html	(revision 50928)
 +++ src/chrome/browser/resources/new_new_tab.html	(working copy)
-@@ -155,11 +155,12 @@
+@@ -157,7 +157,10 @@
      </div>
  
      <div id="recently-closed" class="section" section="RECENT">
 -      <h2 i18n-content="recentlyclosed"></h2>
 +      <h2>
 +      <a href="chrome://history/"
-+         i18n-content="viewfullhistory"></a>
++         i18n-content="history"></a>
 +      </h2>
-       <span>
-         <span class="nav">
--          <a href="chrome://history/" class="item"
--              i18n-content="viewfullhistory"></a>
-         </span>
-       </span>
+       <span class="nav"></span>
      </div>
+ 
+@@ -195,9 +198,6 @@
+   </div>
+ 
+   <div id="footer">
+-    <a href="chrome://history"><span class="link-color"
+-                                     i18n-content="history"></span></a>
+-    <hr>
+     <a href="chrome://downloads"><span class="link-color"
+                                        i18n-content="downloads"></span></a>
+     <hr>
 Index: src/chrome/browser/resources/ntp/most_visited.css
 ===================================================================
---- src/chrome/browser/resources/ntp/most_visited.css	(revision 47711)
+--- src/chrome/browser/resources/ntp/most_visited.css	(revision 50928)
 +++ src/chrome/browser/resources/ntp/most_visited.css	(working copy)
 @@ -3,7 +3,7 @@
  #most-visited {
@@ -76,7 +82,7 @@ Index: src/chrome/browser/resources/ntp/most_visited.css
    .thumbnail,
 Index: src/chrome/browser/resources/ntp/most_visited.js
 ===================================================================
---- src/chrome/browser/resources/ntp/most_visited.js	(revision 47711)
+--- src/chrome/browser/resources/ntp/most_visited.js	(revision 50928)
 +++ src/chrome/browser/resources/ntp/most_visited.js	(working copy)
 @@ -234,9 +234,9 @@
                '<div></div>' +
@@ -110,7 +116,7 @@ Index: src/chrome/browser/resources/ntp/most_visited.js
            var t = children[i];
            t.style.left = rects[i].left + 'px';
            t.style.top = rects[i].top + 'px';
-@@ -490,7 +490,7 @@
+@@ -491,7 +491,7 @@
      set data(data) {
        // We append the class name with the "filler" so that we can style fillers
        // differently.
@@ -121,11 +127,11 @@ Index: src/chrome/browser/resources/ntp/most_visited.js
        for (var i = len; i < maxItems; i++) {
 Index: src/chrome/browser/resources/new_new_tab.js
 ===================================================================
---- src/chrome/browser/resources/new_new_tab.js	(revision 47711)
+--- src/chrome/browser/resources/new_new_tab.js	(revision 50928)
 +++ src/chrome/browser/resources/new_new_tab.js	(working copy)
-@@ -166,8 +166,6 @@
-     var el = createRecentItem(item);
-     parentEl.insertBefore(el, navEl);
+@@ -71,8 +71,6 @@
+   recentItems.forEach(function(item) {
+     parentEl.appendChild(createRecentItem(item));
    });
 -
 -  layoutRecentlyClosed();
@@ -134,7 +140,7 @@ Index: src/chrome/browser/resources/new_new_tab.js
  function createRecentItem(data) {
 Index: src/chrome/browser/resources/downloads.html
 ===================================================================
---- src/chrome/browser/resources/downloads.html	(revision 47711)
+--- src/chrome/browser/resources/downloads.html	(revision 50928)
 +++ src/chrome/browser/resources/downloads.html	(working copy)
 @@ -166,7 +166,6 @@
    color: #080;
@@ -146,7 +152,7 @@ Index: src/chrome/browser/resources/downloads.html
  
 Index: src/chrome/browser/dom_ui/new_tab_ui.cc
 ===================================================================
---- src/chrome/browser/dom_ui/new_tab_ui.cc	(revision 47711)
+--- src/chrome/browser/dom_ui/new_tab_ui.cc	(revision 50928)
 +++ src/chrome/browser/dom_ui/new_tab_ui.cc	(working copy)
 @@ -39,13 +39,6 @@
  #include "grit/generated_resources.h"
@@ -162,7 +168,7 @@ Index: src/chrome/browser/dom_ui/new_tab_ui.cc
  // Strings sent to the page via jstemplates used to set the direction of the
  // HTML document based on locale.
  const wchar_t kRTLHtmlTextDirection[] = L"rtl";
-@@ -264,7 +257,7 @@
+@@ -233,7 +226,7 @@
    ListValue list_value;
    std::set<std::wstring> unique_items;
    int added_count = 0;
@@ -173,7 +179,7 @@ Index: src/chrome/browser/dom_ui/new_tab_ui.cc
    // where an interesting entry is either a closed window or a closed tab
 Index: src/chrome/browser/dom_ui/most_visited_handler.cc
 ===================================================================
---- src/chrome/browser/dom_ui/most_visited_handler.cc	(revision 47711)
+--- src/chrome/browser/dom_ui/most_visited_handler.cc	(revision 50928)
 +++ src/chrome/browser/dom_ui/most_visited_handler.cc	(working copy)
 @@ -36,7 +36,7 @@
  namespace {
