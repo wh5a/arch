@@ -1,0 +1,28 @@
+Index: src/chrome/browser/translate/translate_manager2.cc
+===================================================================
+--- src/chrome/browser/translate/translate_manager2.cc	(revision 50962)
++++ src/chrome/browser/translate/translate_manager2.cc	(working copy)
+@@ -321,7 +321,8 @@
+   if (GetTranslateInfoBarDelegate2(tab))
+     return;
+ 
+-  std::string target_lang = GetTargetLanguage();
++  // Instead of GetTargetLanguage() from the locale, we hardcode "en"
++  std::string target_lang = "en";
+   // Nothing to do if either the language Chrome is in or the language of the
+   // page is not supported by the translation server.
+   if (target_lang.empty() || !IsSupportedLanguage(page_lang)) {
+Index: src/chrome/browser/translate/translate_manager.cc
+===================================================================
+--- src/chrome/browser/translate/translate_manager.cc	(revision 50962)
++++ src/chrome/browser/translate/translate_manager.cc	(working copy)
+@@ -335,7 +335,8 @@
+     return;
+   }
+ 
+-  std::string target_lang = GetTargetLanguage();
++  // Instead of GetTargetLanguage() from the locale, we hardcode "en"
++  std::string target_lang = "en";
+   // Nothing to do if either the language Chrome is in or the language of the
+   // page is not supported by the translation server.
+   if (target_lang.empty() || !IsSupportedLanguage(page_lang)) {
