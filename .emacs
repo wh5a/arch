@@ -160,6 +160,12 @@
 ;(setq haskell-literate-default 'tex)
 (require 'haskell-cabal)
 
+;;;; Refactoror. See README.txt for usage.
+(add-to-list 'load-path "~/hare/editors/Emacs/")
+(autoload 'haskell-refac-mode "haskell-refac"
+  "Minor mode for refactoring Haskell programs" t)
+(add-hook 'haskell-mode-hook 'haskell-refac-mode)
+
 ;; Mode for GHC Core:
 ; 1. ghc -c -ddump-simpl foo.hs > foo.hcr
 ; 2. M-x ghc-core-clean-buffer
