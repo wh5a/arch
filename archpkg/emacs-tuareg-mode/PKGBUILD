@@ -3,7 +3,7 @@
 
 pkgname=emacs-tuareg-mode
 pkgver=2.0.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Emacs tuareg mode for ocaml"
 arch=('i686' 'x86_64')
 url="https://forge.ocamlcore.org/projects/tuareg/"
@@ -15,7 +15,7 @@ install=emacs-tuareg-mode.install
 #conflicts=(emacs-ocaml-mode)
 
 build() {
-  cd $srcdir/tuareg
+  cd $srcdir/tuareg-$pkgver
   
   emacs --batch --eval '(progn
                           (push "." load-path)
