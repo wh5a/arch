@@ -76,7 +76,7 @@ EOF
 #	_localconf="${_localconf} -Dffmpeg_branding=Chrome"
         _localconf="${_localconf} -Dproprietary_codecs=1"
 	_localconf="${_localconf} -Duse_system_yasm=1"
-        _localconf="${_localconf} -Dlinux_use_tcmalloc=0"
+#        _localconf="${_localconf} -Dlinux_use_tcmalloc=0"
 	if [ ${_shared_build} = "true" ]; then
 		msg "Preparing a shared Build..."
 		_localconf="${_localconf} -Dlibrary=shared_library"
