@@ -316,7 +316,10 @@
 (add-hook 'caml+twt-mode-hook
   (lambda ()
     ; A hack to force the execution of tuareg-fontify
-    (setq major-mode 'tuareg-mode)))
+    (setq major-mode 'tuareg-mode)
+    ; Suppress the special function for '|' if we are in twt mode
+    (local-unset-key "|")
+    ))
 
 ; CIL: M-x cil-debug
 (load-file "~/cil/tips/debugging.el")
