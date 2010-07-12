@@ -145,7 +145,7 @@ bind -m emacs -x '"\ev": _xpaste'
 
 # Read by chromium-browser.sh, which is usually installed to /usr/bin/chromium
 export CHROMIUM_USER_FLAGS="--enable-indexed-database --enable-privacy-blacklists --omnibox-popup-count=15 --enable-experimental-extension-apis --enable-webgl --enable-sync-passwords --enable-sync-typed-urls --always-enable-dev-tools --enable-apps --purge-memory-button --enable-sync-extensions --sync-url=https://clients4.google.com/chrome-sync/dev"
-# --enable-vertical-tabs --enable-seccomp-sandbox --bookmark-menu --enable-udd-profiles --user-data-dir=/foo/bar
+# --enable-vertical-tabs --enable-seccomp-sandbox --bookmark-menu --enable-udd-profiles --user-data-dir=/foo/bar --enable-tabbed-options
 
 # http://github.com/wh5a/git-achievements
 # http://wh5a.github.com/git-achievements/
