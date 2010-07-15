@@ -717,6 +717,7 @@ the mode-line."
   w3m-default-display-inline-images t
   w3m-use-title-buffer-name t)
 (define-key w3m-mode-map [C-tab] 'w3m-next-buffer)
+(define-key w3m-mode-map [C-S-iso-lefttab] 'w3m-previous-buffer)
 
 ;; Desktop notification: http://julien.danjou.info/blog/2010.html#Desktop%20notification%20support%20for%20Emacs
 ; Only available since June 2010

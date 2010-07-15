@@ -1,8 +1,8 @@
 Index: src/chrome/browser/app_menu_model.cc
 ===================================================================
---- src/chrome/browser/app_menu_model.cc	(revision 46160)
+--- src/chrome/browser/app_menu_model.cc	(revision 51813)
 +++ src/chrome/browser/app_menu_model.cc	(working copy)
-@@ -55,10 +55,8 @@
+@@ -68,10 +68,8 @@
  
    AddSeparator();
    AddCheckItemWithStringId(IDC_SHOW_BOOKMARK_BAR, IDS_SHOW_BOOKMARK_BAR);
@@ -16,20 +16,20 @@ Index: src/chrome/browser/app_menu_model.cc
    // Create the manage extensions menu item.
 Index: src/chrome/browser/views/accelerator_table_gtk.cc
 ===================================================================
---- src/chrome/browser/views/accelerator_table_gtk.cc	(revision 46160)
+--- src/chrome/browser/views/accelerator_table_gtk.cc	(revision 52462)
 +++ src/chrome/browser/views/accelerator_table_gtk.cc	(working copy)
-@@ -128,7 +128,7 @@
-   { base::VKEY_F11, false, true, true, IDC_FULLSCREEN },
-   { base::VKEY_DELETE, false, true, true, IDC_TASK_MANAGER },
-   { base::VKEY_OEM_COMMA, false, true, false, IDC_SYSTEM_OPTIONS },
+@@ -155,7 +155,7 @@
+ #if defined(OS_CHROMEOS)
+   { base::VKEY_F5, false, false, false, IDC_SYSTEM_OPTIONS },
+ #endif
 -  { base::VKEY_B, true, true, false, IDC_SHOW_BOOKMARK_BAR },
 +  { base::VKEY_B, true, true, false, IDC_SHOW_BOOKMARK_MANAGER },
  #if !defined(OS_CHROMEOS)
    { base::VKEY_F1, false, false, false, IDC_HELP_PAGE },
  #endif
-@@ -139,6 +139,7 @@
-   { base::VKEY_C, true, true, false, IDC_COMPACT_NAVBAR },
+@@ -166,6 +166,7 @@
    { base::VKEY_F, false, true, true, IDC_FULLSCREEN },
+   { base::VKEY_LWIN, false, false, false, IDC_SEARCH },
  #endif
 +  { base::VKEY_E, true, true, false, IDC_MANAGE_EXTENSIONS},
  };
@@ -37,7 +37,7 @@ Index: src/chrome/browser/views/accelerator_table_gtk.cc
  const size_t kAcceleratorMapLength = arraysize(kAcceleratorMap);
 Index: src/chrome/browser/gtk/accelerators_gtk.cc
 ===================================================================
---- src/chrome/browser/gtk/accelerators_gtk.cc	(revision 46160)
+--- src/chrome/browser/gtk/accelerators_gtk.cc	(revision 51813)
 +++ src/chrome/browser/gtk/accelerators_gtk.cc	(working copy)
 @@ -151,7 +151,7 @@
    { GDK_o, IDC_OPEN_FILE, GDK_CONTROL_MASK },
