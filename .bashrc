@@ -37,6 +37,8 @@ shopt -s cmdhist
 export HISTCONTROL=ignoredups
 # Huge history
 export HISTSIZE=1000000
+# Ignore a few specified commands
+export HISTIGNORE=ls:'ls -l':fg:up
 
 # Syntax-highlighting pager
 alias cless='/usr/share/vim/vim72/macros/less.sh'
@@ -172,4 +174,4 @@ function cd {
 export SPEC_LOCALE_OK=THIS_CAN_BE_ANYTHING
 
 # Replaces the stock qemu for the MIT jos OS: http://pdos.csail.mit.edu/6.828/2009/tools.html
-export PATH=/opt/qemu-patched/bin:$PATH
+#export PATH=/opt/qemu-patched/bin:$PATH
