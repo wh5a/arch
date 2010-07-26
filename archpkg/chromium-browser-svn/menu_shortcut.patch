@@ -1,45 +1,22 @@
-Index: src/chrome/browser/app_menu_model.cc
-===================================================================
---- src/chrome/browser/app_menu_model.cc	(revision 51813)
-+++ src/chrome/browser/app_menu_model.cc	(working copy)
-@@ -68,10 +68,8 @@
- 
-   AddSeparator();
-   AddCheckItemWithStringId(IDC_SHOW_BOOKMARK_BAR, IDS_SHOW_BOOKMARK_BAR);
--  AddItemWithStringId(IDC_FULLSCREEN, IDS_FULLSCREEN);
--  AddSeparator();
--  AddItemWithStringId(IDC_SHOW_HISTORY, IDS_SHOW_HISTORY);
-   AddItemWithStringId(IDC_SHOW_BOOKMARK_MANAGER, IDS_BOOKMARK_MANAGER);
-+  AddItemWithStringId(IDC_SHOW_HISTORY, IDS_SHOW_HISTORY);
-   AddItemWithStringId(IDC_SHOW_DOWNLOADS, IDS_SHOW_DOWNLOADS);
- 
-   // Create the manage extensions menu item.
 Index: src/chrome/browser/views/accelerator_table_gtk.cc
 ===================================================================
---- src/chrome/browser/views/accelerator_table_gtk.cc	(revision 52462)
+--- src/chrome/browser/views/accelerator_table_gtk.cc	(revision 53603)
 +++ src/chrome/browser/views/accelerator_table_gtk.cc	(working copy)
-@@ -155,7 +155,7 @@
- #if defined(OS_CHROMEOS)
-   { base::VKEY_F5, false, false, false, IDC_SYSTEM_OPTIONS },
- #endif
--  { base::VKEY_B, true, true, false, IDC_SHOW_BOOKMARK_BAR },
-+  { base::VKEY_B, true, true, false, IDC_SHOW_BOOKMARK_MANAGER },
- #if !defined(OS_CHROMEOS)
-   { base::VKEY_F1, false, false, false, IDC_HELP_PAGE },
- #endif
-@@ -166,6 +166,7 @@
-   { base::VKEY_F, false, true, true, IDC_FULLSCREEN },
-   { base::VKEY_LWIN, false, false, false, IDC_SEARCH },
- #endif
+@@ -116,7 +116,8 @@
+   { base::VKEY_NUMPAD7,        false, true,  false, IDC_SELECT_TAB_6 },
+   { base::VKEY_8,              false, true,  false, IDC_SELECT_TAB_7 },
+   { base::VKEY_NUMPAD8,        false, true,  false, IDC_SELECT_TAB_7 },
+-  { base::VKEY_B,              true,  true,  false, IDC_SHOW_BOOKMARK_BAR },
++  { base::VKEY_B,              true,  true,  false, IDC_SHOW_BOOKMARK_MANAGER },
 +  { base::VKEY_E, true, true, false, IDC_MANAGE_EXTENSIONS},
- };
- 
- const size_t kAcceleratorMapLength = arraysize(kAcceleratorMap);
+   { base::VKEY_J,              false, true,  false, IDC_SHOW_DOWNLOADS },
+   { base::VKEY_H,              false, true,  false, IDC_SHOW_HISTORY },
+   { base::VKEY_F,              false, false, true,  IDC_SHOW_APP_MENU},
 Index: src/chrome/browser/gtk/accelerators_gtk.cc
 ===================================================================
---- src/chrome/browser/gtk/accelerators_gtk.cc	(revision 51813)
+--- src/chrome/browser/gtk/accelerators_gtk.cc	(revision 53603)
 +++ src/chrome/browser/gtk/accelerators_gtk.cc	(working copy)
-@@ -151,7 +151,7 @@
+@@ -153,7 +153,7 @@
    { GDK_o, IDC_OPEN_FILE, GDK_CONTROL_MASK },
    { GDK_f, IDC_FIND, GDK_CONTROL_MASK },
    { GDK_p, IDC_PRINT, GDK_CONTROL_MASK },
@@ -48,9 +25,9 @@ Index: src/chrome/browser/gtk/accelerators_gtk.cc
      GdkModifierType(GDK_CONTROL_MASK | GDK_SHIFT_MASK) },
    { GDK_F11, IDC_FULLSCREEN, GdkModifierType(0) },
    { GDK_Delete, IDC_CLEAR_BROWSING_DATA,
-@@ -166,6 +166,8 @@
+@@ -168,6 +168,8 @@
    { GDK_s, IDC_SAVE_PAGE, GDK_CONTROL_MASK },
-   { GDK_e, IDC_SHOW_PAGE_MENU, GDK_MOD1_MASK },
+   { GDK_e, IDC_SHOW_APP_MENU, GDK_MOD1_MASK },
    { GDK_f, IDC_SHOW_APP_MENU, GDK_MOD1_MASK },
 +  { GDK_e, IDC_MANAGE_EXTENSIONS,
 +    GdkModifierType(GDK_CONTROL_MASK | GDK_SHIFT_MASK) },
