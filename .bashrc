@@ -148,6 +148,8 @@ bind -m emacs -x '"\ev": _xpaste'
 # Read by chromium-browser.sh, which is usually installed to /usr/bin/chromium
 export CHROMIUM_USER_FLAGS="--enable-indexed-database --enable-privacy-blacklists --omnibox-popup-count=15 --enable-experimental-extension-apis --enable-webgl --always-enable-dev-tools --enable-apps --purge-memory-button --allow-scripting-gallery"
 # --enable-vertical-tabs --enable-seccomp-sandbox --bookmark-menu --user-data-dir=/foo/bar --enable-tabbed-options
+# Couldn't figure out how to add this command option to the env-variable, so do it as an alias.
+alias chromium='chromium --register-pepper-plugins="libpdf.so;application/pdf"'
 
 # http://github.com/wh5a/git-achievements
 # http://wh5a.github.com/git-achievements/
