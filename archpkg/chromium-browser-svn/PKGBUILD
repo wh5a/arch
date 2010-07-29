@@ -71,9 +71,9 @@ EOF
 	_localconf="${_localconf} -Duse_system_zlib=1 -Duse_system_libjpeg=1"
 	_localconf="${_localconf} -Duse_system_bzip2=1 -Duse_system_libevent=1"
 	_localconf="${_localconf} -Duse_system_libpng=1"
-#	_localconf="${_localconf} -Duse_system_ffmpeg=1"
+	_localconf="${_localconf} -Duse_system_ffmpeg=1"
 #	 not used, if using system-ffmpeg...
-	_localconf="${_localconf} -Dffmpeg_branding=Chrome"
+#	_localconf="${_localconf} -Dffmpeg_branding=Chrome"
         _localconf="${_localconf} -Dproprietary_codecs=1"
 	_localconf="${_localconf} -Duse_system_yasm=1"
 	if [ ${_shared_build} = "true" ]; then
@@ -91,7 +91,7 @@ EOF
 	install -m 0755 -D ${_builddir}/out/Release/chrome				${pkgdir}/usr/lib/chromium/chromium
 	install -m 4555 -o root -g root -D ${_builddir}/out/Release/chrome_sandbox	${pkgdir}/usr/lib/chromium/chromium-sandbox
 	install -m 0644 -D ${_builddir}/out/Release/chrome.pak				${pkgdir}/usr/lib/chromium/chrome.pak
-	install -m 0644 -D ${_builddir}/out/Release/libffmpegsumo.so			${pkgdir}/usr/lib/chromium/libffmpegsumo.so
+#	install -m 0644 -D ${_builddir}/out/Release/libffmpegsumo.so			${pkgdir}/usr/lib/chromium/libffmpegsumo.so
 	install -m 0644 -D "${_builddir}/out/Release/resources.pak"			"${pkgdir}/usr/lib/chromium/resources.pak"
 	ln -s /usr/lib/libavcodec.so.52 ${pkgdir}/usr/lib/chromium/libavcodec.so.52
 	ln -s /usr/lib/libavformat.so.52 ${pkgdir}/usr/lib/chromium/libavformat.so.52
