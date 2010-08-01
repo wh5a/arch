@@ -225,7 +225,14 @@
   (setq ac-modes
       (append '(scheme-mode haskell-mode literate-haskell-mode tuareg-mode js-mode inferior-haskell-mode)
               ac-modes))
+  ; http://github.com/brianjcj/auto-complete-clang
+  (require 'auto-complete-clang)
   )
+
+(add-hook 'c-mode-common-hook
+   (lambda ()
+     (push 'ac-source-clang ac-sources)
+     ))
 
 (add-hook 'inferior-haskell-mode-hook
    (lambda ()
