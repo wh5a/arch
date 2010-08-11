@@ -1,8 +1,8 @@
 Index: src/chrome/browser/sessions/tab_restore_service.cc
 ===================================================================
---- src/chrome/browser/sessions/tab_restore_service.cc	(revision 50928)
+--- src/chrome/browser/sessions/tab_restore_service.cc	(revision 55786)
 +++ src/chrome/browser/sessions/tab_restore_service.cc	(working copy)
-@@ -42,7 +42,7 @@
+@@ -48,7 +48,7 @@
  // TabRestoreService ----------------------------------------------------------
  
  // static
@@ -13,7 +13,7 @@ Index: src/chrome/browser/sessions/tab_restore_service.cc
  // The ordering in the file is as follows:
 Index: src/chrome/browser/resources/new_new_tab.css
 ===================================================================
---- src/chrome/browser/resources/new_new_tab.css	(revision 50928)
+--- src/chrome/browser/resources/new_new_tab.css	(revision 55771)
 +++ src/chrome/browser/resources/new_new_tab.css	(working copy)
 @@ -23,7 +23,6 @@
    min-height: 100%;
@@ -34,9 +34,9 @@ Index: src/chrome/browser/resources/new_new_tab.css
  #recently-closed > span > span  {
 Index: src/chrome/browser/resources/new_new_tab.html
 ===================================================================
---- src/chrome/browser/resources/new_new_tab.html	(revision 50928)
+--- src/chrome/browser/resources/new_new_tab.html	(revision 55771)
 +++ src/chrome/browser/resources/new_new_tab.html	(working copy)
-@@ -157,7 +157,10 @@
+@@ -152,7 +152,10 @@
      </div>
  
      <div id="recently-closed" class="section" section="RECENT">
@@ -48,7 +48,7 @@ Index: src/chrome/browser/resources/new_new_tab.html
        <span class="nav"></span>
      </div>
  
-@@ -195,9 +198,6 @@
+@@ -189,9 +192,6 @@
    </div>
  
    <div id="footer">
@@ -58,31 +58,9 @@ Index: src/chrome/browser/resources/new_new_tab.html
      <a href="chrome://downloads"><span class="link-color"
                                         i18n-content="downloads"></span></a>
      <hr>
-Index: src/chrome/browser/resources/ntp/most_visited.css
-===================================================================
---- src/chrome/browser/resources/ntp/most_visited.css	(revision 50928)
-+++ src/chrome/browser/resources/ntp/most_visited.css	(working copy)
-@@ -3,7 +3,7 @@
- #most-visited {
-   position: relative;
-   padding: 0;
--  height: 366px;
-+  height: 550px;
-   margin-top: -10px;
-   -webkit-user-select: none;
- }
-@@ -241,7 +241,7 @@
- 
- @media (max-width: 940px) {
-   #most-visited {
--    height: 294px;
-+    height: 440px;
-   }
- 
-   .thumbnail,
 Index: src/chrome/browser/resources/ntp/most_visited.js
 ===================================================================
---- src/chrome/browser/resources/ntp/most_visited.js	(revision 50928)
+--- src/chrome/browser/resources/ntp/most_visited.js	(revision 55771)
 +++ src/chrome/browser/resources/ntp/most_visited.js	(working copy)
 @@ -234,9 +234,9 @@
                '<div></div>' +
@@ -125,11 +103,33 @@ Index: src/chrome/browser/resources/ntp/most_visited.js
        data.length = Math.min(maxItems, data.length);
        var len = data.length;
        for (var i = len; i < maxItems; i++) {
+Index: src/chrome/browser/resources/ntp/most_visited.css
+===================================================================
+--- src/chrome/browser/resources/ntp/most_visited.css	(revision 55771)
++++ src/chrome/browser/resources/ntp/most_visited.css	(working copy)
+@@ -3,7 +3,7 @@
+ #most-visited {
+   position: relative;
+   padding: 0;
+-  height: 366px;
++  height: 550px;
+   margin-top: -10px;
+   -webkit-user-select: none;
+ }
+@@ -241,7 +241,7 @@
+ 
+ @media (max-width: 940px) {
+   #most-visited {
+-    height: 294px;
++    height: 440px;
+   }
+ 
+   .thumbnail,
 Index: src/chrome/browser/resources/new_new_tab.js
 ===================================================================
---- src/chrome/browser/resources/new_new_tab.js	(revision 50928)
+--- src/chrome/browser/resources/new_new_tab.js	(revision 55771)
 +++ src/chrome/browser/resources/new_new_tab.js	(working copy)
-@@ -71,8 +71,6 @@
+@@ -29,8 +29,6 @@
    recentItems.forEach(function(item) {
      parentEl.appendChild(createRecentItem(item));
    });
@@ -140,7 +140,7 @@ Index: src/chrome/browser/resources/new_new_tab.js
  function createRecentItem(data) {
 Index: src/chrome/browser/resources/downloads.html
 ===================================================================
---- src/chrome/browser/resources/downloads.html	(revision 50928)
+--- src/chrome/browser/resources/downloads.html	(revision 55771)
 +++ src/chrome/browser/resources/downloads.html	(working copy)
 @@ -166,7 +166,6 @@
    color: #080;
@@ -152,9 +152,9 @@ Index: src/chrome/browser/resources/downloads.html
  
 Index: src/chrome/browser/dom_ui/new_tab_ui.cc
 ===================================================================
---- src/chrome/browser/dom_ui/new_tab_ui.cc	(revision 50928)
+--- src/chrome/browser/dom_ui/new_tab_ui.cc	(revision 55771)
 +++ src/chrome/browser/dom_ui/new_tab_ui.cc	(working copy)
-@@ -39,13 +39,6 @@
+@@ -40,13 +40,6 @@
  #include "grit/generated_resources.h"
  
  namespace {
@@ -167,26 +167,28 @@ Index: src/chrome/browser/dom_ui/new_tab_ui.cc
 -
  // Strings sent to the page via jstemplates used to set the direction of the
  // HTML document based on locale.
- const wchar_t kRTLHtmlTextDirection[] = L"rtl";
-@@ -233,7 +226,7 @@
+ const char kRTLHtmlTextDirection[] = "rtl";
+@@ -235,7 +228,7 @@
    ListValue list_value;
-   std::set<std::wstring> unique_items;
+   std::set<std::string> unique_items;
    int added_count = 0;
 -  const int max_count = 10;
 +  const int max_count = 30;
  
    // We filter the list of recently closed to only show 'interesting' entries,
    // where an interesting entry is either a closed window or a closed tab
-Index: src/chrome/browser/dom_ui/most_visited_handler.cc
+Index: src/chrome/browser/history/top_sites.cc
 ===================================================================
---- src/chrome/browser/dom_ui/most_visited_handler.cc	(revision 50928)
-+++ src/chrome/browser/dom_ui/most_visited_handler.cc	(working copy)
-@@ -36,7 +36,7 @@
- namespace {
+--- src/chrome/browser/history/top_sites.cc	(revision 55771)
++++ src/chrome/browser/history/top_sites.cc	(working copy)
+@@ -37,8 +37,8 @@
+ namespace history {
  
- // The number of most visited pages we show.
--const size_t kMostVisitedPages = 8;
-+const size_t kMostVisitedPages = 21;
- 
- // The number of days of history we consider for most visited entries.
- const int kMostVisitedScope = 90;
+ // How many top sites to store in the cache.
+-static const size_t kTopSitesNumber = 20;
+-static const size_t kTopSitesShown = 8;
++static const size_t kTopSitesNumber = 21;
++static const size_t kTopSitesShown = 21;
+ static const int kDaysOfHistory = 90;
+ // Time from startup to first HistoryService query.
+ static const int64 kUpdateIntervalSecs = 15;
