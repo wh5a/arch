@@ -17,6 +17,7 @@
 ;; Make it more like other programs
 (delete-selection-mode t)
 
+
 (setq js-indent-level 2)
 (setq lisp-indent-offset 2)
 
@@ -462,10 +463,17 @@
     (up-list (abs levels))
     (eval-last-sexp nil)))
 
-;; Similar to the kill-ring keybindings, but deal with clipboard
-(global-set-key (kbd "C-c C-w") 'clipboard-kill-region)
-(global-set-key (kbd "C-c C-y") 'clipboard-yank)
-(global-set-key (kbd "C-c M-w") 'clipboard-kill-ring-save)
+;;;; Selection has changed in Emacs 24.1. See the relevant etc/NEWS:
+;; The way Emacs interacts with the clipboard and primary selection, by
+;; default, is now similar to other X applications.  In particular, kill
+;; and yank use the clipboard, in addition to the primary selection.
+(global-set-key (kbd "S-<insert>")
+  (lambda ()
+    (interactive)
+    (let ((primary (x-get-selection 'PRIMARY)))
+      (if primary
+        (insert primary)
+        (error "No primary selection")))))
 
 ;; doing a pg-up followed by a pg-down should return to the original place.
 (require 'pager)
@@ -737,6 +745,7 @@ the mode-line."
 
 ;;;; Color strings that matches color names. Examples: blue, #c83964
 ;; http://julien.danjou.info/rainbow-mode.html
+;; Now available thru the built-in elpa since Emacs 24.1
 (require 'rainbow-mode)
 
 ;;;; This should be placed at the end!! So that all files will be properly opened.
