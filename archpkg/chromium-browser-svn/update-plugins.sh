@@ -12,7 +12,8 @@ cd $DIR
 wget ${URL}${FILE}
 
 ar x $FILE data.tar.lzma
-tar xf data.tar.lzma $PDF $SWF
-sudo mv -v $PDF $SWF /usr/lib/chromium/
+# We can also extract and copy the flash player, but I don't find it useful.
+tar xf data.tar.lzma $PDF
+sudo mv -v $PDF /usr/lib/chromium/
 
 cd $PWD

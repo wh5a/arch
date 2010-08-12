@@ -41,11 +41,18 @@ URxvt*color15 : #EEEEEC
 ! My urxvt perl extensions
 ! Ctrl-select to copy text into clipboard
 ! Another trick: Shift-click to move around
+! And some scripts from http://github.com/muennich/urxvt-perls, https://bbs.archlinux.org/viewtopic.php?id=102671
 URxvt.perl-lib: /home/wh5a/.urxvt
 ! man urxvtperl
-URxvt.perl-ext-common: default,-option-popup,matcher,-selection-popup,xim-onthespot,ctrl-clipboard
+URxvt.perl-ext-common: default,-option-popup,matcher,-selection-popup,xim-onthespot,ctrl-clipboard,url-select,clipboard
 URxvt.urlLauncher: chromium
 URxvt.matcher.rend.0: fg8 Uline Italic
+! Copy from/paste to clipboard
+URxvt.keysym.M-c:   perl:clipboard:copy
+URxvt.keysym.M-v:   perl:clipboard:paste
+URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+! M-u to start navigating URLs, and j/k to move between them.
+URxvt.keysym.M-u: perl:url-select:select_next
 !URxvt.colorUL: #86a2be
 ! Right click to launch the URL
 URxvt.matcher.button: 3

@@ -141,9 +141,8 @@ _xpaste() {
 bind -m emacs -x '"\eu": _xdiscard'
 bind -m emacs -x '"\ek": _xkill'
 bind -m emacs -x '"\ey": _xyank'
-# Couldn't bind to \C-v. Seems it's builtin and couldn't be overriden
-# Use M-v to paste from the clipboard
-bind -m emacs -x '"\ev": _xpaste'
+# We implement pasting from the clipboard in urxvt instead of bash
+#bind -m emacs -x '"\ev": _xpaste'
 
 # Read by chromium-browser.sh, which is usually installed to /usr/bin/chromium
 export CHROMIUM_USER_FLAGS="--enable-indexed-database --enable-privacy-blacklists --omnibox-popup-count=15 --enable-experimental-extension-apis --enable-webgl --always-enable-dev-tools --purge-memory-button --allow-scripting-gallery"
