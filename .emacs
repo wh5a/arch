@@ -47,8 +47,13 @@
 (require 'doc-view)
 
 ;;;; Enhance redo
-(require 'redo)
-(global-set-key "\M-z" 'redo)
+;(require 'redo)
+;(global-set-key "\M-z" 'redo)
+;; Better undo:  http://www.emacswiki.org/emacs/UndoTree
+; A fork is at http://github.com/pheaver/undo-tree.el
+(require 'undo-tree)
+;; C-_ & M-_ for regular undo/redo. C-x u to enter the fancy visualiser.
+(global-undo-tree-mode)
 
 (setq font-lock-maximum-decoration t)
 
