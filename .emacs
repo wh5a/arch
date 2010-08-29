@@ -46,6 +46,11 @@
 ; http://www.tsdh.de/cgi-bin/wiki.pl/doc-view.el
 (require 'doc-view)
 
+; C-x C-+
+(global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
+; C-x C--
+(global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
+
 ;;;; Enhance redo
 ;(require 'redo)
 ;(global-set-key "\M-z" 'redo)
@@ -752,6 +757,13 @@ the mode-line."
 ;; http://julien.danjou.info/rainbow-mode.html
 ;; Now available thru the built-in elpa since Emacs 24.1
 (require 'rainbow-mode)
+
+;; Blackboard Colour Theme for Emacs. From http://emacser.com/torture-emacs.htm
+;(load-file "~/Emacs/blackboard.el")
+;(color-theme-blackboard)
+
+;; http://www.emacswiki.org/emacs/SmartCompile
+(require 'smart-compile)
 
 ;;;; This should be placed at the end!! So that all files will be properly opened.
 ; This causes problems for emacs daemon running at startup, because it pauses to ask questions.
