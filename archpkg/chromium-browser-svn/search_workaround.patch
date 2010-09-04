@@ -1,13 +1,12 @@
 Index: src/chrome/browser/search_engines/template_url.cc
 ===================================================================
---- src/chrome/browser/search_engines/template_url.cc	(revision 51470)
+--- src/chrome/browser/search_engines/template_url.cc	(revision 58572)
 +++ src/chrome/browser/search_engines/template_url.cc	(working copy)
-@@ -309,27 +309,28 @@
+@@ -342,27 +342,27 @@
         i != replacements_.rend(); ++i) {
      switch (i->type) {
        case ENCODING:
 -        url.insert(i->index, input_encoding);
-+        /* Temporary workaround according to http://crbug.com/41887 */
 +        url.replace(i->index, 0, input_encoding);
          break;
  
@@ -21,13 +20,13 @@ Index: src/chrome/browser/search_engines/template_url.cc
          break;
  
        case GOOGLE_BASE_URL:
--        url.insert(i->index, GoogleBaseURLValue());
-+        url.replace(i->index, 0, GoogleBaseURLValue());
+-        url.insert(i->index, search_terms_data.GoogleBaseURLValue());
++        url.replace(i->index, 0, search_terms_data.GoogleBaseURLValue());
          break;
  
        case GOOGLE_BASE_SUGGEST_URL:
--        url.insert(i->index, GoogleBaseSuggestURLValue());
-+        url.replace(i->index, 0, GoogleBaseSuggestURLValue());
+-        url.insert(i->index, search_terms_data.GoogleBaseSuggestURLValue());
++        url.replace(i->index, 0, search_terms_data.GoogleBaseSuggestURLValue());
          break;
  
        case GOOGLE_ORIGINAL_QUERY_FOR_SUGGESTION:
@@ -37,8 +36,8 @@ Index: src/chrome/browser/search_engines/template_url.cc
                                 "&");
          break;
  
-@@ -343,7 +344,7 @@
-         RLZTracker::GetAccessPointRlz(rlz_lib::CHROME_OMNIBOX, &rlz_string);
+@@ -375,7 +375,7 @@
+         std::wstring rlz_string = search_terms_data.GetRlzParameterValue();
          if (!rlz_string.empty()) {
            rlz_string = L"rlz=" + rlz_string + L"&";
 -          url.insert(i->index, WideToUTF8(rlz_string));
@@ -46,7 +45,7 @@ Index: src/chrome/browser/search_engines/template_url.cc
          }
  #endif
          break;
-@@ -354,17 +355,17 @@
+@@ -386,17 +386,17 @@
          base::WideToCodepage(terms, input_encoding.c_str(),
                               base::OnStringConversionError::SKIP,
                               &unescaped_terms);
@@ -57,8 +56,8 @@ Index: src/chrome/browser/search_engines/template_url.cc
        }
  
        case LANGUAGE:
--        url.insert(i->index, g_browser_process->GetApplicationLocale());
-+        url.replace(i->index, 0, g_browser_process->GetApplicationLocale());
+-        url.insert(i->index, search_terms_data.GetApplicationLocale());
++        url.replace(i->index, 0, search_terms_data.GetApplicationLocale());
          break;
  
        case SEARCH_TERMS:

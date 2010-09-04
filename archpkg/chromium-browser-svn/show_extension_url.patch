@@ -1,13 +1,15 @@
 Index: src/chrome/browser/extensions/extension_dom_ui.cc
 ===================================================================
---- src/chrome/browser/extensions/extension_dom_ui.cc	(revision 45618)
+--- src/chrome/browser/extensions/extension_dom_ui.cc	(revision 58572)
 +++ src/chrome/browser/extensions/extension_dom_ui.cc	(working copy)
-@@ -70,7 +70,7 @@
- 
- ExtensionDOMUI::ExtensionDOMUI(TabContents* tab_contents)
-     : DOMUI(tab_contents) {
--  should_hide_url_ = true;
+@@ -127,9 +127,7 @@
+   if (!extension)
+     extension = service->GetExtensionByWebExtent(url);
+   DCHECK(extension);
+-  // Only hide the url for internal pages (e.g. chrome-extension or packaged
+-  // component apps like bookmark manager.
+-  should_hide_url_ = !extension->is_app();
 +  should_hide_url_ = false;
-   bindings_ = BindingsPolicy::EXTENSION;
  
-   // For chrome:// overrides, some of the defaults are a little different.
+   bindings_ = BindingsPolicy::EXTENSION;
+   // Bind externalHost to Extension DOMUI loaded in Chrome Frame.
