@@ -150,8 +150,8 @@ export CHROMIUM_USER_FLAGS="--enable-indexed-database --enable-privacy-blacklist
 
 # http://github.com/wh5a/git-achievements
 # http://wh5a.github.com/git-achievements/
-export PATH=$PATH:~/git-achievements
-alias git='git-achievements'
+#export PATH=$PATH:~/git-achievements
+#alias git='git-achievements'
 
 # http://github.com/ddollar/git-utils
 export PATH=$PATH:~/git-utils
