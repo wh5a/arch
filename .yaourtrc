@@ -1,3 +1,4 @@
 EDITFILES=0
 FORCEENGLISH=1
 PACMANBIN="/usr/bin/powerpill"
+AURVOTE=0
