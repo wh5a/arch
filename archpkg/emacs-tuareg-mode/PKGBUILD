@@ -2,14 +2,14 @@
 # Maintainer: Wei Hu <weihu@cs.virginia.edu>
 
 pkgname=emacs-tuareg-mode
-pkgver=2.0.1
-pkgrel=2
+pkgver=2.0.2
+pkgrel=1
 pkgdesc="Emacs tuareg mode for ocaml"
 arch=('i686' 'x86_64')
 url="https://forge.ocamlcore.org/projects/tuareg/"
 depends=('emacs')
-source=(https://forge.ocamlcore.org/frs/download.php/410/tuareg-$pkgver.tgz)
-md5sums=('3f9bc8f3b0ea8115d4371309c1e8f955')
+source=(https://forge.ocamlcore.org/frs/download.php/468/tuareg-$pkgver.tgz)
+md5sums=('71f54eb051d9e4ad84e1250c7e5b9534')
 license=('GPL')
 install=emacs-tuareg-mode.install
 #conflicts=(emacs-ocaml-mode)
