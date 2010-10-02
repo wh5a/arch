@@ -1,14 +1,12 @@
 Index: src/chrome/browser/extensions/extension_dom_ui.cc
 ===================================================================
---- src/chrome/browser/extensions/extension_dom_ui.cc	(revision 58572)
+--- src/chrome/browser/extensions/extension_dom_ui.cc	(revision 61262)
 +++ src/chrome/browser/extensions/extension_dom_ui.cc	(working copy)
-@@ -127,9 +127,7 @@
-   if (!extension)
-     extension = service->GetExtensionByWebExtent(url);
+@@ -131,7 +131,7 @@
    DCHECK(extension);
--  // Only hide the url for internal pages (e.g. chrome-extension or packaged
--  // component apps like bookmark manager.
--  should_hide_url_ = !extension->is_app();
+   // Only hide the url for internal pages (e.g. chrome-extension or packaged
+   // component apps like bookmark manager.
+-  should_hide_url_ = !extension->is_hosted_app();
 +  should_hide_url_ = false;
  
    bindings_ = BindingsPolicy::EXTENSION;
