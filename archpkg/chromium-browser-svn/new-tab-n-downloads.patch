@@ -33,19 +33,6 @@ Index: src/chrome/browser/resources/new_new_tab.css
  }
  
  .section.hidden > * {
-Index: src/chrome/browser/resources/new_new_tab.html
-===================================================================
---- src/chrome/browser/resources/new_new_tab.html	(revision 58578)
-+++ src/chrome/browser/resources/new_new_tab.html	(working copy)
-@@ -163,7 +163,7 @@
-         noexpand="true">
-       <h2>
-         <div class="back"></div>
--        <span i18n-content="recentlyclosed"></span>
-+        <a href="chrome://history/"><span i18n-content="recentlyclosed"></a>
-       </h2>
-       <div class="miniview"></div>
-     </div>
 Index: src/chrome/browser/resources/ntp/most_visited.js
 ===================================================================
 --- src/chrome/browser/resources/ntp/most_visited.js	(revision 58578)
