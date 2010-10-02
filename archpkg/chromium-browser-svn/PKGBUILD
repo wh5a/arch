@@ -15,7 +15,7 @@ arch=('i686' 'x86_64')
 url='http://www.chromium.org/'
 license=('BSD')
 depends=('gtk2' 'nss>=3.12' 'gconf' 'glib2' 'ttf-ms-fonts' 'freetype2' 'cairo' 'dbus' 'zlib' 'libjpeg' 'bzip2' 'libevent' 'libpng' 'ffmpeg')
-makedepends=('subversion' 'python>=2.4' 'perl>=5' 'bison>=2.3' 'flex>=2.5.34' 'gperf>=3.0.3' 'pkgconfig>=0.20' 'alsa-lib' 'nspr>=4.7.1' 'rsync' 'yasm')
+makedepends=('subversion' 'python>=2.4' 'perl>=5' 'bison>=2.3' 'flex>=2.5.34' 'gperf>=3.0.3' 'pkgconfig>=0.20' 'alsa-lib' 'nspr>=4.7.1' 'rsync' 'gnome-keyring' 'yasm')
 provides=('chromium-browser' 'chromium' 'chrome')
 conflicts=('chromium-browser' 'chromium' 'chrome')
 source=('chromium.desktop'
