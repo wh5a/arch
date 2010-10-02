@@ -1,8 +1,8 @@
 Index: src/chrome/browser/sessions/tab_restore_service.cc
 ===================================================================
---- src/chrome/browser/sessions/tab_restore_service.cc	(revision 58578)
+--- src/chrome/browser/sessions/tab_restore_service.cc	(revision 61295)
 +++ src/chrome/browser/sessions/tab_restore_service.cc	(working copy)
-@@ -49,7 +49,7 @@
+@@ -50,7 +50,7 @@
  // TabRestoreService ----------------------------------------------------------
  
  // static
@@ -13,9 +13,9 @@ Index: src/chrome/browser/sessions/tab_restore_service.cc
  // The ordering in the file is as follows:
 Index: src/chrome/browser/resources/new_new_tab.css
 ===================================================================
---- src/chrome/browser/resources/new_new_tab.css	(revision 58578)
+--- src/chrome/browser/resources/new_new_tab.css	(revision 61295)
 +++ src/chrome/browser/resources/new_new_tab.css	(working copy)
-@@ -25,7 +25,7 @@
+@@ -31,7 +31,7 @@
  #main,
  .section,
  .maxiview {
@@ -24,7 +24,7 @@ Index: src/chrome/browser/resources/new_new_tab.css
  }
  
  html[dir=rtl] #main {
-@@ -407,7 +407,7 @@
+@@ -416,7 +416,7 @@
    display: none;
    margin: 10px 0 30px;
    white-space: nowrap;
@@ -35,9 +35,9 @@ Index: src/chrome/browser/resources/new_new_tab.css
  .section.hidden > * {
 Index: src/chrome/browser/resources/ntp/most_visited.js
 ===================================================================
---- src/chrome/browser/resources/ntp/most_visited.js	(revision 58578)
+--- src/chrome/browser/resources/ntp/most_visited.js	(revision 61295)
 +++ src/chrome/browser/resources/ntp/most_visited.js	(working copy)
-@@ -235,9 +235,9 @@
+@@ -251,9 +251,9 @@
                '<div></div>' +
              '</div>' +
            '</a>';
@@ -49,7 +49,7 @@ Index: src/chrome/browser/resources/ntp/most_visited.js
          children[i].id = 't' + i;
        }
      },
-@@ -245,8 +245,8 @@
+@@ -261,8 +261,8 @@
      getMostVisitedLayoutRects_: function() {
        var small = this.useSmallGrid;
  
@@ -60,7 +60,7 @@ Index: src/chrome/browser/resources/ntp/most_visited.js
        var marginWidth = 10;
        var marginHeight = 7;
        var borderWidth = 4;
-@@ -279,7 +279,7 @@
+@@ -295,7 +295,7 @@
        if (this.visible) {
          var rects = this.getMostVisitedLayoutRects_();
          var children = this.element.children;
@@ -69,7 +69,7 @@ Index: src/chrome/browser/resources/ntp/most_visited.js
            var t = children[i];
            t.style.left = rects[i].left + 'px';
            t.style.top = rects[i].top + 'px';
-@@ -493,7 +493,7 @@
+@@ -526,7 +526,7 @@
      set data(data) {
        // We append the class name with the "filler" so that we can style fillers
        // differently.
@@ -80,7 +80,7 @@ Index: src/chrome/browser/resources/ntp/most_visited.js
        for (var i = len; i < maxItems; i++) {
 Index: src/chrome/browser/resources/ntp/most_visited.css
 ===================================================================
---- src/chrome/browser/resources/ntp/most_visited.css	(revision 58578)
+--- src/chrome/browser/resources/ntp/most_visited.css	(revision 61295)
 +++ src/chrome/browser/resources/ntp/most_visited.css	(working copy)
 @@ -2,7 +2,7 @@
  
@@ -102,7 +102,7 @@ Index: src/chrome/browser/resources/ntp/most_visited.css
    .thumbnail,
 Index: src/chrome/browser/resources/downloads.html
 ===================================================================
---- src/chrome/browser/resources/downloads.html	(revision 58578)
+--- src/chrome/browser/resources/downloads.html	(revision 61295)
 +++ src/chrome/browser/resources/downloads.html	(working copy)
 @@ -166,7 +166,6 @@
    color: #080;
@@ -114,9 +114,9 @@ Index: src/chrome/browser/resources/downloads.html
  
 Index: src/chrome/browser/dom_ui/new_tab_ui.cc
 ===================================================================
---- src/chrome/browser/dom_ui/new_tab_ui.cc	(revision 58578)
+--- src/chrome/browser/dom_ui/new_tab_ui.cc	(revision 61295)
 +++ src/chrome/browser/dom_ui/new_tab_ui.cc	(working copy)
-@@ -44,13 +44,6 @@
+@@ -46,13 +46,6 @@
  #include "grit/theme_resources.h"
  
  namespace {
@@ -130,7 +130,7 @@ Index: src/chrome/browser/dom_ui/new_tab_ui.cc
  // Strings sent to the page via jstemplates used to set the direction of the
  // HTML document based on locale.
  const char kRTLHtmlTextDirection[] = "rtl";
-@@ -223,7 +216,7 @@
+@@ -225,7 +218,7 @@
    ListValue list_value;
    std::set<std::string> unique_items;
    int added_count = 0;
@@ -141,7 +141,7 @@ Index: src/chrome/browser/dom_ui/new_tab_ui.cc
    // where an interesting entry is either a closed window or a closed tab
 Index: src/chrome/browser/history/top_sites.cc
 ===================================================================
---- src/chrome/browser/history/top_sites.cc	(revision 58578)
+--- src/chrome/browser/history/top_sites.cc	(revision 61295)
 +++ src/chrome/browser/history/top_sites.cc	(working copy)
 @@ -35,8 +35,8 @@
  namespace history {
@@ -154,3 +154,16 @@ Index: src/chrome/browser/history/top_sites.cc
  static const int kDaysOfHistory = 90;
  // Time from startup to first HistoryService query.
  static const int64 kUpdateIntervalSecs = 15;
+Index: src/chrome/browser/resources/new_new_tab.html
+===================================================================
+--- src/chrome/browser/resources/new_new_tab.html	(revision 61295)
++++ src/chrome/browser/resources/new_new_tab.html	(working copy)
+@@ -164,7 +164,7 @@
+         noexpand="true">
+       <h2>
+         <div class="back"></div>
+-        <span i18n-content="recentlyclosed"></span>
++        <a href="chrome://history/"><span i18n-content="recentlyclosed"></span></a>
+         <button class="section-close-button"></button>
+       </h2>
+       <div class="miniview"></div>

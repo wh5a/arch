@@ -1,8 +1,8 @@
 Index: src/third_party/WebKit/WebCore/page/SecurityOrigin.cpp
 ===================================================================
---- src/third_party/WebKit/WebCore/page/SecurityOrigin.cpp	(revision 68896)
+--- src/third_party/WebKit/WebCore/page/SecurityOrigin.cpp	(revision 68975)
 +++ src/third_party/WebKit/WebCore/page/SecurityOrigin.cpp	(working copy)
-@@ -468,6 +468,21 @@
+@@ -468,6 +468,22 @@
  
  bool SecurityOrigin::shouldHideReferrer(const KURL& url, const String& referrer)
  {
@@ -18,6 +18,7 @@ Index: src/third_party/WebKit/WebCore/page/SecurityOrigin.cpp
 +        || h.contains("hiphotos.baidu.com", false)
 +        || h.contains("ph.126.net", false)
 +        || h.contains("img.blog.arting365.com", false)
++        || h.contains("babytreeimg.com", false)
 +        )
 +        return true;
 +
