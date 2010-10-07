@@ -67,8 +67,8 @@
 ;; Cursor blinking by default since 24?
 (blink-cursor-mode 0)
 ; The default cursor (a box) blocks the char under it for a few secs. Rumor says it's some GTK bug. Remove the next lines when the bug's fixed.
-(setq-default cursor-type '(hbar . 3))
-(setq-default cursor-in-non-selected-windows 'hollow)
+;(setq-default cursor-type '(hbar . 3))
+;(setq-default cursor-in-non-selected-windows 'hollow)
 
 ;; make-pointer-invisible hids cursor when typing, since 23.2
 ;(mouse-avoidance-mode 'animate)

@@ -1,9 +1,11 @@
+" http://nvie.com/posts/how-i-boosted-my-vim/
 set nocompatible
 syntax on
 set ignorecase hlsearch incsearch smartcase
 " Disable screen clearing
 set t_te=
 set autoindent expandtab tabstop=4 shiftwidth=4
+" set relativenumber
 filetype plugin indent on
 if has('mouse')
   set mouse=a
