@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 """cache_clean - a simple python script to clean up the /var/cache/pacman/pkg directory.
 More versatile than 'pacman -Sc' in that you can select how many old versions
 to keep.
