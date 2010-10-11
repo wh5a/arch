@@ -621,18 +621,15 @@ the mode-line."
 ;(highlight-tail-mode)
 
 ;; Highlight "TODO:"s  http://emacs-fu.blogspot.com/2008/12/highlighting-todo-fixme-and-friends.html
-;; http://stackoverflow.com/questions/2242572/emacs-todo-indicator-at-left-side
-;
-; (add-hook 'find-file-hooks
-;   (lambda ()
-;     (font-lock-add-keywords nil
-;       '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))))
-;
-;; A more complete solution: http://www.emacswiki.org/emacs/FixmeMode
-; Supports auto highlighting, and navigating between TODOs
-(require 'fixme-mode)
-;; Enabled for modes listed in 'fixme-modes
-(fixme-mode 1)
+;                      http://stackoverflow.com/questions/2242572/emacs-todo-indicator-at-left-side
+;                      http://stackoverflow.com/questions/2367611/emacs-highlighting-todo-only-in-comments
+(require 'fic-mode)  ; Better than fixme-mode
+(add-hook 'c++-mode-hook 'turn-on-fic-mode)
+(add-hook 'c-mode-hook 'turn-on-fic-mode)
+(add-hook 'emacs-lisp-mode-hook 'turn-on-fic-mode)
+(add-hook 'tuareg-mode-hook 'turn-on-fic-mode)
+(add-hook 'caml+twt-mode-hook 'turn-on-fic-mode)
+(add-hook 'haskell-mode-hook 'turn-on-fic-mode)
 
 ;; Popup a terminal in the working directory
 (defun popup-term ()
