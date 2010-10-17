@@ -1,5 +1,4 @@
 import XMonad
-import Fixfocus
 -- Patched to show no border for maximized windows
 import Maximize
 -- Patched to handle spawned processes' children for shell scripts/wrappers
@@ -60,6 +59,8 @@ import XMonad.Actions.WithAll
 import XMonad.Layout.Renamed
 -- Return to the most recently focused window
 import XMonad.Actions.GroupNavigation
+-- A better solution than FixFocus
+import XMonad.Layout.TrackFloating
 
 myTheme = defaultTheme {
    fontName = "xft:WenQuanYi Zen Hei:pixelsize=17"
@@ -163,7 +164,7 @@ main = do
 --       , borderWidth = 1
        , workspaces = ["1:term","2:emacs","3:csurf","4","5","6","7","8","9:web"]
        , manageHook = placeHook (inBounds $ underMouse (0.5,0.5)) <+> manageSpawn <+> manageDocks <+> manageHook defaultConfig <+> myManageHook
-       , layoutHook = {- layoutHints $ minimize -} fixFocus $ maxi $ avoidStruts $ smartBorders $ onWorkspace "9:web" (tab ||| mTile ||| Full) $ (mTile ||| mMirror ||| Full)
+       , layoutHook = {- layoutHints $ minimize -} trackFloating $ maxi $ avoidStruts $ smartBorders $ onWorkspace "9:web" (tab ||| mTile ||| Full) $ (mTile ||| mMirror ||| Full)
        , logHook = (dynamicLogWithPP $ xmobarPP {
                      ppOutput = hPutStrLn xmproc
                      -- http://en.wikipedia.org/wiki/X11_color_names
