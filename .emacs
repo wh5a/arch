@@ -77,6 +77,17 @@
 
 (setq x-stretch-cursor t)
 
+;;;; DiredX, extra functionality for Dired
+;; http://www.emacswiki.org/emacs/DiredExtra
+(add-hook 'dired-load-hook
+  (function (lambda ()
+              ; Unfortunately, "C-x C-j" conflicts with window-number-mode below
+              (load "dired-x")
+              )))
+; "C-x d" opens a dired buffer
+; "C-x C-d" opens a dired buffer for current file and jumps to it
+(define-key global-map "\C-x\C-d" 'dired-jump)
+
 ;;;; Auto fill
 ;; M-q to reformat paragraph
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
