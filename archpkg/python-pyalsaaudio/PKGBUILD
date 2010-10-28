@@ -1,0 +1,22 @@
+# Contributor: SpepS <dreamspepser at yahoo dot it>
+
+pkgname=python-pyalsaaudio
+pkgver=0.6
+pkgrel=1
+pkgdesc="Python ALSA wrapper"
+arch=('i686' 'x86_64')
+url="http://pyalsaaudio.sourceforge.net"
+license=('PSF')
+depends=('python2' 'alsa-lib')
+source=(http://downloads.sourceforge.net/sourceforge/pyalsaaudio/pyalsaaudio-$pkgver.tar.gz)
+md5sums=('94811fc4de883996eac4046d36fe2364')
+
+build() {
+
+  cd $srcdir/pyalsaaudio-$pkgver
+
+  # Python2 build
+  export PYTHON="python2"
+
+  python2 setup.py install --root=$pkgdir
+}
