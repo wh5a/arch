@@ -174,3 +174,6 @@ export SPEC_LOCALE_OK=THIS_CAN_BE_ANYTHING
 
 # Replaces the stock qemu for the MIT jos OS: http://pdos.csail.mit.edu/6.828/2009/tools.html
 #export PATH=/opt/qemu-patched/bin:$PATH
+
+# llvm-gcc and klee
+export PATH=/opt/klee/Release/bin:/opt/llvm-gcc-4.2-2.7-i686-linux/bin:/opt/llvm-2.7/Release/bin:$PATH
