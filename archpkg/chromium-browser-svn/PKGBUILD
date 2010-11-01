@@ -3,7 +3,7 @@ pkgname=chromium-browser-svn
 # than we think we have. If we get the PKGVER from svn, we need to run svn with
 # LC_ALL=en_US.utf8 so we don't have to try matching foreign words for
 # "Revision".
-pkgver=(`curl http://build.chromium.org/buildbot/continuous/linux/LATEST/REVISION -o -`)
+pkgver=(`curl http://build.chromium.org/f/chromium/continuous/linux/LATEST/REVISION -o -`)
 pkgrel=1
 pkgdesc='An open-source browser project that aims to build a safer, faster, and more stable way for all users to experience the web'
 # doing a shared build currently(01/13/2010) fails...
