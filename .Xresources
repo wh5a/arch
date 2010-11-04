@@ -61,4 +61,4 @@ Xcursor.theme: whiteglass
 Xcursor.size: 25
 
 !Emacs.useXIM: false
-Emacs.font: Inconsolata-10
+Emacs.font: Inconsolata-14

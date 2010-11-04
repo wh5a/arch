@@ -22,7 +22,7 @@ LANG=en_US.utf8 urxvtc &
 xhost +local:root
 # Clipboard manager
 parcellite &
-trayer --edge top --align right --SetDockType true --expand true --width 7 &
+trayer --edge top --align right --SetDockType true --expand true --width 8 &
 gvtray &
 # emacsclient -c &
 #firefox &
@@ -31,4 +31,5 @@ fqterm &
 unclutter -root &
 # Mouse gesture
 #easystroke &
+gnome-settings-daemon
 exec dbus-launch --exit-with-session xmonad

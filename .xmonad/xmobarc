@@ -1,7 +1,7 @@
-Config { font = "xft:WenQuanYi Zen Hei:pixelsize=20"
+Config { font = "xft:WenQuanYi Zen Hei:pixelsize=17"
        , bgColor = "black"
        , fgColor = "white"
-       , position = TopW L 93
+       , position = TopW L 92
        , lowerOnStart = True
        , commands = [ 
                       Run Cpu ["-L","3","-H","50","--normal","green","--high","red","-t","<total>"] 50
