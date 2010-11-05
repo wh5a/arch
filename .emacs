@@ -146,8 +146,14 @@
 ;; strip trailing whitespace, including excess newlines.                                           
 (setq-default nuke-trailing-whitespace-p t)
 
-; In X resource
-;(set-default-font "Inconsolata-12")
+; Emacs honors X resource on startup, but after that it also reads config
+; from gnome-settings-daemon if it is running. We set the default font here.
+(add-hook 'after-make-frame-functions
+  (lambda (frame)
+    ; Ineffective
+    ;(set-default-font "Inconsolata-13")
+    (set-frame-parameter frame 'font "Inconsolata-13")
+    ))
 
 ; resize the fonts: C-x C--, C-x C-=
 ; Already loaded by default
