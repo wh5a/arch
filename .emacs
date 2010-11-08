@@ -17,9 +17,12 @@
 ;; Make it more like other programs
 (delete-selection-mode t)
 
+(setq
+  js-indent-level 2
+  lisp-indent-offset 2)
 
-(setq js-indent-level 2)
-(setq lisp-indent-offset 2)
+;; Prefer to split window horizontally because screens are wide
+(setq split-width-threshold 130)
 
 (ido-mode t)
 (ido-everywhere 1)
@@ -201,8 +204,9 @@
 ; I believe we can customize delimiters, check out the doc.
 (require 'mic-paren)
 (paren-activate)
-(setq paren-sexp-mode t)
-(setq paren-match-face 'highlight)
+(setq
+  paren-sexp-mode t
+  paren-match-face 'highlight)
 ; By default (i.e. in lisp), when the matching '(' is out of screen, we show the text after '('.
 ; In C, it makes more sense to show the text before '{'.
 (add-hook 'c-mode-common-hook
@@ -261,6 +265,7 @@
    (lambda ()
      (push 'ac-source-clang ac-sources)
      ))
+(setq ac-clang-auto-save nil)
 
 (add-hook 'inferior-haskell-mode-hook
    (lambda ()
