@@ -1,0 +1,44 @@
+pkgname=gcc-code-assist
+pkgver=20101108
+pkgrel=1
+pkgdesc="A tool that goes with gccsense, a program that allows to complete C/C++"
+arch=('i686' 'x86_64')
+url="http://cx4a.org/software/gccsense/"
+license=('GPL3')
+depends=('cloog-ppl' 'mpfr')
+source=()
+md5sums=()
+
+_gitroot="http://cx4a.org/repo/gcc.git"
+_gitname="gcc"
+
+build() {
+  msg "Connecting to GIT server"
+
+  if [ -d $_gitname ] ; then
+    cd $_gitname && git pull
+    msg "The local files are updated."
+  else
+    git clone $_gitroot
+    cd $_gitname
+    git checkout code-assist
+    ./configure --prefix=/usr \
+      --program-suffix=-code-assist \
+      --enable-languages=c,c++ \
+      --disable-bootstrap \
+      --disable-multilib \
+      --libdir=/usr/lib/gcc-code-assist \
+      --libexecdir=/usr/lib/gcc-code-assist \
+      --datadir=/usr/share/gcc-code-assist \
+      --infodir=/usr/share/info/gcc-code-assist \
+      --mandir=/usr/share/man/gcc-code-assist
+  fi
+
+  msg "Starting make..."
+  make
+}
+
+package() {
+  cd "$srcdir/$_gitname"
+  make DESTDIR="$pkgdir/" install
+}

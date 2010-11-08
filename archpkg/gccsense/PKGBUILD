@@ -1,0 +1,36 @@
+pkgname=gccsense
+pkgver=20101108
+pkgrel=1
+pkgdesc="A program that allows to complete C/C++, pulling info from gcc"
+arch=('any')
+url="http://cx4a.org/software/gccsense/"
+license=('GPL3')
+depends=('gcc-code-assist' 'ruby')
+source=()
+md5sums=()
+
+_gitroot="http://cx4a.org/repo/gccsense.git"
+_gitname="gccsense"
+
+build() {
+  msg "Connecting to GIT server"
+
+  if [ -d $_gitname ] ; then
+    cd $_gitname && git pull
+    msg "The local files are updated."
+  else
+    git clone $_gitroot
+    cd $_gitname
+  fi
+
+  msg "Starting make..."
+  make
+}
+
+package() {
+  cd "$srcdir/$_gitname"
+  mkdir -p $pkgdir/usr/share
+  cp -rp etc $pkgdir
+  cp -rp bin $pkgdir/usr
+  cp -rp doc $pkgdir/usr/share
+}
