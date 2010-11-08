@@ -29,8 +29,8 @@ build() {
 
 package() {
   cd "$srcdir/$_gitname"
-  mkdir -p $pkgdir/usr/share
-  cp -rp etc $pkgdir
+  mkdir -p $pkgdir/usr/share/emacs/site-lisp
+  cp etc/gccsense.el $pkgdir/usr/share/emacs/site-lisp
   cp -rp bin $pkgdir/usr
   cp -rp doc $pkgdir/usr/share
 }
