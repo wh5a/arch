@@ -61,7 +61,7 @@ build() {
 	_localconf="${_localconf} -Duse_system_zlib=1 -Duse_system_libjpeg=1"
 	_localconf="${_localconf} -Duse_system_bzip2=1 -Duse_system_libevent=1"
 	_localconf="${_localconf} -Duse_system_libpng=1"
-	_localconf="${_localconf} -Duse_system_ffmpeg=1"
+	_localconf="${_localconf} -Duse_system_ffmpeg=1 -Duse_system_vpx=1"
 #	 not used, if using system-ffmpeg...
 #	_localconf="${_localconf} -Dffmpeg_branding=Chrome"
         _localconf="${_localconf} -Dproprietary_codecs=1"
