@@ -66,3 +66,6 @@ let { cmds = [".","pwd","ls","redir","redirErr","grep","find","b","le","defs"] ;
 
 -- This extension introduces a few more keywords, which can be problematic to programs using them inadvertently
 -- :set -XArr
+
+-- http://stackoverflow.com/questions/4174629/impact-on-style-of-ghc-wall/4176570#4176570
+:set -XNamedFieldPuns -XRecordWildCards
