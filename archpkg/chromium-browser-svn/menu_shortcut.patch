@@ -1,8 +1,8 @@
-Index: src/chrome/browser/views/accelerator_table_gtk.cc
+Index: src/chrome/browser/ui/views/accelerator_table_gtk.cc
 ===================================================================
---- src/chrome/browser/views/accelerator_table_gtk.cc	(revision 58572)
-+++ src/chrome/browser/views/accelerator_table_gtk.cc	(working copy)
-@@ -124,7 +124,8 @@
+--- src/chrome/browser/ui/views/accelerator_table_gtk.cc	(revision 66100)
++++ src/chrome/browser/ui/views/accelerator_table_gtk.cc	(working copy)
+@@ -133,7 +133,8 @@
    { app::VKEY_NUMPAD7,        false, true,  false, IDC_SELECT_TAB_6 },
    { app::VKEY_8,              false, true,  false, IDC_SELECT_TAB_7 },
    { app::VKEY_NUMPAD8,        false, true,  false, IDC_SELECT_TAB_7 },
@@ -14,7 +14,7 @@ Index: src/chrome/browser/views/accelerator_table_gtk.cc
    { app::VKEY_F,              false, false, true,  IDC_SHOW_APP_MENU},
 Index: src/chrome/browser/gtk/accelerators_gtk.cc
 ===================================================================
---- src/chrome/browser/gtk/accelerators_gtk.cc	(revision 58572)
+--- src/chrome/browser/gtk/accelerators_gtk.cc	(revision 66100)
 +++ src/chrome/browser/gtk/accelerators_gtk.cc	(working copy)
 @@ -154,7 +154,7 @@
    { GDK_o, IDC_OPEN_FILE, GDK_CONTROL_MASK },
