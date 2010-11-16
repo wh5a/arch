@@ -60,7 +60,7 @@
 ;; Better undo:  http://www.emacswiki.org/emacs/UndoTree
 ; A fork is at http://github.com/pheaver/undo-tree.el
 (require 'undo-tree)
-;; C-_ & M-_ for regular undo/redo. C-x u to enter the fancy visualiser.
+;; C-_ & M-_ for regular undo/redo. C-x u to enter the fancy visualiser. Press 't' to toggle timestamps.
 (global-undo-tree-mode)
 
 (setq font-lock-maximum-decoration t)
