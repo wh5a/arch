@@ -8,7 +8,9 @@
 
 (setq compilation-skip-threshold 2)
 
-(setq inhibit-splash-screen t)
+(setq
+  inhibit-splash-screen t
+  inhibit-startup-buffer-menu t)
 
 (push "~/Emacs" load-path)
 
@@ -783,6 +785,12 @@ the mode-line."
 
 ;; http://www.emacswiki.org/emacs/SmartCompile
 (require 'smart-compile)
+
+;; http://alexott.net/en/writings/emacs-devenv/EmacsErlang.html
+(setq erlang-root-dir "/usr/lib/erlang")
+(require 'erlang-start)
+; distel. Couldn't get it to work
+;(add-to-list 'load-path "~/Emacs/distel/elisp")
 
 ;;;; This should be placed at the end!! So that all files will be properly opened.
 ; This causes problems for emacs daemon running at startup, because it pauses to ask questions.
