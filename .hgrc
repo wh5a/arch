@@ -2,6 +2,8 @@
 username = Wei Hu <weihu@cs.virginia.edu>
 verbose = True
 ignore = ~/.hgignore
+# kdiff3 has problems displaying changed Chinese text? meld works fine
+merge = emacs
 
 [alias]
 # http://hgtip.com/tips/advanced/2010-01-15-styling-mercurials-cli/
@@ -24,6 +26,8 @@ graphlog =
 bookmarks =
 # Progress bar
 progress =
+# hg view
+hgk =
 
 [pager]
 attend = annotate, cat, diff, export, glog, log, qdiff, help, slog
@@ -31,3 +35,6 @@ attend = annotate, cat, diff, export, glog, log, qdiff, help, slog
 # http://mercurial.selenic.com/wiki/BookmarksExtension
 [bookmarks]
 track.current = True
+
+[merge-tools]
+emacs.args = -q --eval "(ediff-merge-with-ancestor \"$local\" \"$other\" \"$base\" nil \"$output\")"
