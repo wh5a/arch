@@ -17,6 +17,6 @@ tar xf data.tar.lzma $PDF
 sudo mv -v $PDF /usr/lib/chromium/
 # Instead of extracting the flash player from Chrome, we trust that Arch provides the latest version.
 # The point of creating the link is that Chrome will sandbox flash if it's "built-in"
-sudo ln -s $OSSWF /usr/lib/chromium/libgcflashplayer.so
+#sudo ln -s $OSSWF /usr/lib/chromium/libgcflashplayer.so
 
 cd $PWD

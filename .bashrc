@@ -145,7 +145,7 @@ bind -m emacs -x '"\ey": _xyank'
 #bind -m emacs -x '"\ev": _xpaste'
 
 # Read by chromium-browser.sh, which is usually installed to /usr/bin/chromium
-export CHROMIUM_USER_FLAGS="--omnibox-popup-count=15 --enable-experimental-extension-apis --always-enable-dev-tools --purge-memory-button --allow-scripting-gallery --disable-accelerated-compositing --disable-accelerated-2d-canvas --enable-top-sites --enable-predictive-instant --allow-file-access-from-files --enable-snap-start --enable-page-prerender --enable-preconnect --enable-seccomp-sandbox"
+export CHROMIUM_USER_FLAGS="--omnibox-popup-count=15 --enable-experimental-extension-apis --always-enable-dev-tools --purge-memory-button --allow-scripting-gallery --disable-accelerated-compositing --disable-accelerated-2d-canvas --enable-top-sites --enable-predictive-instant --allow-file-access-from-files --enable-page-prerender --enable-preconnect --enable-seccomp-sandbox"
 # --enable-vertical-tabs --enable-seccomp-sandbox --bookmark-menu --user-data-dir=/foo/bar --enable-tabbed-options --register-pepper-plugins=libpdf.so;application/pdf --show-composited-layer-borders --enable-gpu-rendering --enable-gpu-plugin --enable-print-preview --enable-confirm-to-quit
 
 # http://github.com/wh5a/git-achievements

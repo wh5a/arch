@@ -8,7 +8,9 @@
 
 (setq compilation-skip-threshold 2)
 
-(setq inhibit-splash-screen t)
+(setq
+  inhibit-splash-screen t
+  inhibit-startup-buffer-menu t)
 
 (push "~/Emacs" load-path)
 
@@ -783,6 +785,31 @@ the mode-line."
 
 ;; http://www.emacswiki.org/emacs/SmartCompile
 (require 'smart-compile)
+
+;;;; Some nice Erlang shortcuts:
+; C-c C-k    compile
+;;;; I may be doing it wrong, but to use distel I have to C-c C-l to load the inferior erlang first
+; M-.        find definition through the Erlang environment
+; C-c C-d :  evaluate an expression (from user input or selection) in shell
+; C-c C-d e  start an interactive session like Emacs *scratch*
+; M-/        complete erlang functions
+;; http://alexott.net/en/writings/emacs-devenv/EmacsErlang.html
+(setq erlang-root-dir "/usr/lib/erlang")
+(require 'erlang-start)
+;; http://bc.tech.coop/blog/070528.html
+(add-to-list 'load-path "~/Emacs/distel/elisp")
+(require 'distel)
+(distel-setup)
+(add-hook 'erlang-extended-mode-hook
+  '(lambda ()
+     (let ((node-name "distel"))
+       ;; when starting an Erlang shell, set the default node name for distel
+       (setq inferior-erlang-machine-options (list "-sname" node-name))
+       ;; Adapt code from erl-choose-nodename so that we don't need to type in the node name
+       (setq erl-nodename-cache (intern (concat node-name "@"
+                                          (erl-determine-hostname)))))
+     (define-key erlang-extended-mode-map "\M-/" 'erl-complete)
+     ))
 
 ;;;; This should be placed at the end!! So that all files will be properly opened.
 ; This causes problems for emacs daemon running at startup, because it pauses to ask questions.
