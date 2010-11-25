@@ -1,6 +1,6 @@
 Index: src/chrome/browser/sessions/tab_restore_service.cc
 ===================================================================
---- src/chrome/browser/sessions/tab_restore_service.cc	(revision 66920)
+--- src/chrome/browser/sessions/tab_restore_service.cc	(revision 67108)
 +++ src/chrome/browser/sessions/tab_restore_service.cc	(working copy)
 @@ -50,7 +50,7 @@
  // TabRestoreService ----------------------------------------------------------
@@ -13,7 +13,7 @@ Index: src/chrome/browser/sessions/tab_restore_service.cc
  // The ordering in the file is as follows:
 Index: src/chrome/browser/resources/new_new_tab.css
 ===================================================================
---- src/chrome/browser/resources/new_new_tab.css	(revision 66920)
+--- src/chrome/browser/resources/new_new_tab.css	(revision 67108)
 +++ src/chrome/browser/resources/new_new_tab.css	(working copy)
 @@ -33,7 +33,7 @@
  .maxiview,
@@ -24,9 +24,31 @@ Index: src/chrome/browser/resources/new_new_tab.css
  }
  
  html[dir=rtl] #main {
+@@ -457,7 +457,7 @@
+   display: none;
+   margin: 10px 0 30px;
+   white-space: nowrap;
+-  overflow-x: hidden;
++  overflow-x: scroll;
+ }
+ 
+ .section.hidden > * {
+Index: src/chrome/browser/resources/new_new_tab.js
+===================================================================
+--- src/chrome/browser/resources/new_new_tab.js	(revision 67108)
++++ src/chrome/browser/resources/new_new_tab.js	(working copy)
+@@ -591,8 +591,6 @@
+   var recentElement = $('recently-closed');
+   var miniview = recentElement.querySelector('.miniview');
+ 
+-  updateMiniviewClipping(miniview);
+-
+   if (miniview.hasChildNodes()) {
+     if (!(shownSections & MINIMIZED_RECENT)) {
+       recentElement.classList.remove('disabled');
 Index: src/chrome/browser/resources/ntp/most_visited.js
 ===================================================================
---- src/chrome/browser/resources/ntp/most_visited.js	(revision 66920)
+--- src/chrome/browser/resources/ntp/most_visited.js	(revision 67108)
 +++ src/chrome/browser/resources/ntp/most_visited.js	(working copy)
 @@ -250,9 +250,9 @@
                '<div></div>' +
@@ -71,7 +93,7 @@ Index: src/chrome/browser/resources/ntp/most_visited.js
        for (var i = len; i < maxItems; i++) {
 Index: src/chrome/browser/resources/ntp/most_visited.css
 ===================================================================
---- src/chrome/browser/resources/ntp/most_visited.css	(revision 66920)
+--- src/chrome/browser/resources/ntp/most_visited.css	(revision 67108)
 +++ src/chrome/browser/resources/ntp/most_visited.css	(working copy)
 @@ -2,7 +2,7 @@
  
@@ -93,7 +115,7 @@ Index: src/chrome/browser/resources/ntp/most_visited.css
    .thumbnail,
 Index: src/chrome/browser/resources/downloads.html
 ===================================================================
---- src/chrome/browser/resources/downloads.html	(revision 66920)
+--- src/chrome/browser/resources/downloads.html	(revision 67108)
 +++ src/chrome/browser/resources/downloads.html	(working copy)
 @@ -166,7 +166,6 @@
    color: #080;
@@ -105,7 +127,7 @@ Index: src/chrome/browser/resources/downloads.html
  
 Index: src/chrome/browser/dom_ui/new_tab_ui.cc
 ===================================================================
---- src/chrome/browser/dom_ui/new_tab_ui.cc	(revision 66920)
+--- src/chrome/browser/dom_ui/new_tab_ui.cc	(revision 67108)
 +++ src/chrome/browser/dom_ui/new_tab_ui.cc	(working copy)
 @@ -48,13 +48,6 @@
  #include "grit/theme_resources.h"
@@ -132,7 +154,7 @@ Index: src/chrome/browser/dom_ui/new_tab_ui.cc
    // We filter the list of recently closed to only show 'interesting' entries,
 Index: src/chrome/browser/history/top_sites.cc
 ===================================================================
---- src/chrome/browser/history/top_sites.cc	(revision 66920)
+--- src/chrome/browser/history/top_sites.cc	(revision 67108)
 +++ src/chrome/browser/history/top_sites.cc	(working copy)
 @@ -42,9 +42,9 @@
  
@@ -148,7 +170,7 @@ Index: src/chrome/browser/history/top_sites.cc
  static const int64 kUpdateIntervalSecs = 15;
 Index: src/chrome/browser/resources/new_new_tab.html
 ===================================================================
---- src/chrome/browser/resources/new_new_tab.html	(revision 66920)
+--- src/chrome/browser/resources/new_new_tab.html	(revision 67108)
 +++ src/chrome/browser/resources/new_new_tab.html	(working copy)
 @@ -180,7 +180,7 @@
          noexpand="true">
