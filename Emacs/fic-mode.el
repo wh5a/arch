@@ -30,7 +30,7 @@
 ;;
 ;; M-x fic-mode
 ;;
-;; NOTE: you might need to force re-fontification initially
+;; NOTE: If you manually turn on fic-mode, you you might need to force re-fontification initially
 ;;   M-x font-lock-fontify-buffer
 
 (defcustom fic-highlighted-words '("FIXME" "TODO" "BUG" "KLUDGE")
@@ -53,7 +53,7 @@
 (modify-face 'font-lock-fic-face fic-foreground-color
              fic-background-color nil t nil t nil nil)
 
-(defvar fic-search-list-re (regexp-opt fic-highlighted-words nil)
+(defvar fic-search-list-re (regexp-opt fic-highlighted-words 'words)
   "regexp constructed from 'fic-highlighted-words")
 
 (defun fic-in-doc/comment-region (pos)

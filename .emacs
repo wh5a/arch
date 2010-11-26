@@ -710,8 +710,14 @@ the mode-line."
 ;;                                auto-mode-alist))
 
 ;; A dark color theme: http://emacs-fu.blogspot.com/2010/04/zenburn-color-theme.html
-; (require 'zenburn)
-; (color-theme-zenburn)
+; Latest version on github
+(require 'zenburn)
+(color-theme-zenburn)
+;; Another color theme: https://github.com/crafterm/twilight-emacs
+;(require 'color-theme)
+;(color-theme-initialize)
+;(load-file "~/Emacs/twilight-emacs/color-theme-twilight.el")
+;(color-theme-twilight)
 
 ;; Remember the last position of the cursor
 (setq-default save-place t)
