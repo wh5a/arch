@@ -178,3 +178,6 @@ export SPEC_LOCALE_OK=THIS_CAN_BE_ANYTHING
 
 # llvm-gcc and klee
 export PATH=/opt/klee/Release/bin:/opt/llvm-gcc-4.2-2.7-i686-linux/bin:/opt/llvm-2.7/Release/bin:$PATH
+
+# smlnj on AUR
+export SMLNJ_HOME=/usr/lib/smlnj
