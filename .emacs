@@ -160,6 +160,9 @@
     (set-frame-parameter frame 'font "Inconsolata-13")
     ))
 
+; See FAQ "modify the titlebar to contain the current file name"
+(setq frame-title-format (concat "%b - " invocation-name "@" system-name))
+
 ; resize the fonts: C-x C--, C-x C-=
 ; Already loaded by default
 ;(require 'face-remap)
