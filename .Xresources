@@ -1,5 +1,5 @@
 ! https://wiki.archlinux.org/index.php/Rxvt-unicode
-! rxvt-unicode-256color was removed from [community], use rxvt-unicode-afterimage instead
+! rxvt-unicode-256color was removed from [community], use rxvt-unicode from [archlinuxfr] instead (seems newer than [extra])
 ! urxvt supports search with M-s
 URxvt.font: xft:Inconsolata-16
 URxvt.scrollBar_right: True
