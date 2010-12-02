@@ -160,8 +160,16 @@
     (set-frame-parameter frame 'font "Inconsolata-13")
     ))
 
-; See FAQ "modify the titlebar to contain the current file name"
+;;;; http://www.emacswiki.org/emacs/FrameTitle
+;; See FAQ "modify the titlebar to contain the current file name"
+; X-Window title
 (setq frame-title-format (concat "%b - " invocation-name "@" system-name))
+; xterm title. The xterm-title package doesn't work me out of the box
+(require 'xterm-frobs)
+(defun my-xterm-title-hook ()
+  (when (not (display-graphic-p))
+    (xterm-set-window-title (concat (buffer-name) " - " invocation-name "@" system-name))))
+(add-hook 'post-command-hook  'my-xterm-title-hook)
 
 ; resize the fonts: C-x C--, C-x C-=
 ; Already loaded by default
