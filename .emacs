@@ -26,6 +26,7 @@
 ;; Prefer to split window horizontally because screens are wide
 (setq split-width-threshold 130)
 
+;; When working together with tramp on remote files, refresh the file list with C-l
 (ido-mode t)
 (ido-everywhere 1)
 (setq
