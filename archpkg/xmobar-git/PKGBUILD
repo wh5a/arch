@@ -1,5 +1,5 @@
 pkgname=xmobar-git
-pkgver=20101208
+pkgver=20101214
 pkgrel=1
 pkgdesc="A minimal status bar for the XMonad Window Manager"
 arch=('i686' 'x86_64')
