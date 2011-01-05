@@ -38,3 +38,8 @@ track.current = True
 
 [merge-tools]
 emacs.args = -q --eval "(ediff-merge-with-ancestor \"$local\" \"$other\" \"$base\" nil \"$output\")"
+
+[extensions]
+hgext.rebase =
+hgsubversion =
+
