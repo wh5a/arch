@@ -59,7 +59,10 @@ URxvt.keysym.M-u: perl:url-select:select_next
 ! Right click to launch the URL
 URxvt.matcher.button: 3
 
+! Disable Ctrl-Shift key combo
 URxvt.iso14755: False
+! The default TERM value rxvt-unicode-256color is not available under /usr/share/terminfo/r/ on older systems
+URxvt.termName: rxvt-256color
 
 Xcursor.theme: whiteglass
 Xcursor.size: 25
