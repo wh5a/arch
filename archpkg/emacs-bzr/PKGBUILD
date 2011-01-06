@@ -3,14 +3,14 @@
 # Mostly based on existing emacs-git AUR
 
 pkgname=emacs-bzr
-pkgver=102629
+pkgver=102765
 pkgrel=1
 pkgdesc='GNU Emacs from official Bzr repository'
 arch=('i686' 'x86_64')
 url='http://www.gnu.org/software/emacs/'
 license=('GPL3')
 depends=('dbus-core' 'libpng' 'libtiff' 'librsvg' 'giflib' 'gtk2' 'libxpm' 'libjpeg>=7' 'texinfo' 'hicolor-icon-theme')
-makedepends=('bzr' 'pkgconfig')
+makedepends=('bzr' 'pkg-config')
 provides=('emacs=$pkgver')
 conflicts=('emacs' 'emacs-otf' 'emacs-cvs' 'emacs-git')
 replaces=('emacs' 'emacs-cvs' 'emacs-git')
@@ -48,8 +48,10 @@ build() {
   fi
 
   mandir=/usr/share/man
-  msg "Starting make..."
   cd ${_bzrmod}
+  msg "Cleaning up old .elc files..."
+  find . -name '*elc' -exec rm {} \;
+  msg "Starting make..."
   ./configure --prefix=/usr \
     --sysconfdir=/etc \
     --localstatedir=/var \
