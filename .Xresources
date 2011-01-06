@@ -59,6 +59,8 @@ URxvt.keysym.M-u: perl:url-select:select_next
 ! Right click to launch the URL
 URxvt.matcher.button: 3
 
+URxvt.iso14755: False
+
 Xcursor.theme: whiteglass
 Xcursor.size: 25
 
