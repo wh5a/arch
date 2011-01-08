@@ -234,7 +234,7 @@
 ;; Such candidates can come from various sources, including yasnippet keywords!
 
 ;; yasnippet is available in the AUR as emacs-yasnippet
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/yas")
+;(add-to-list 'load-path "/usr/share/emacs/site-lisp/yas")
 (require 'yasnippet)
 (yas/initialize)
 (yas/load-directory "/usr/share/emacs/site-lisp/yas/snippets")
@@ -389,7 +389,8 @@
 (global-set-key (kbd "C-.") 'recent-jump-forward)
 
 ;; SLIME
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/slime/")
+;(add-to-list 'load-path "/usr/share/emacs/site-lisp/slime/")
+;(add-to-list 'load-path "/usr/share/emacs/site-lisp/slime/contrib")
 (require 'slime)
 (slime-setup '(slime-fancy slime-asdf slime-autodoc))
 ;(setq inferior-lisp-program "/path/to/lisp-executable")
