@@ -667,6 +667,7 @@ the mode-line."
 (add-hook 'tuareg-mode-hook 'turn-on-fic-mode)
 (add-hook 'caml+twt-mode-hook 'turn-on-fic-mode)
 (add-hook 'haskell-mode-hook 'turn-on-fic-mode)
+(add-hook 'scheme-mode-hook 'turn-on-fic-mode)
 
 ;; Popup a terminal in the working directory
 (defun popup-term ()
