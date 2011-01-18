@@ -294,6 +294,7 @@
 (setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode)) auto-mode-alist))
 
 (require 'csurf)
+;(push "~/.csurf/plugins/" tags-table-list)
 
 (load "auctex.el" nil t t)
 (load "preview-latex.el" nil t t)
@@ -380,7 +381,7 @@
 
 ; CIL: M-x cil-debug
 (load-file "~/cil/tips/debugging.el")
-(push "~/cil/TAGS" tags-table-list)
+(push "~/cil/" tags-table-list)
 ; case sensitive
 (setq tags-case-fold-search nil)
 
