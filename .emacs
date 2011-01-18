@@ -38,6 +38,10 @@
   )
 ; A new feature since Apr 2010: visit recently closed files easily
 (setq ido-use-virtual-buffers t)
+; Jump to key areas of your buffer, most usually functions definitions in source code.
+; http://www.masteringemacs.org/articles/2011/01/14/effective-editing-movement/
+(require 'idomenu)
+(global-set-key (kbd "M-i") 'idomenu)
 
 (require 'recentf)
 (recentf-mode 1)
@@ -421,42 +425,6 @@
    (edit-server-stop)
    (edit-server-start)
    )
-
-;; http://www.emacswiki.org/emacs/ImenuMode
-;; Awesome function that makes use of imenu and ido to navigate in the current buffer
-(defun ido-imenu ()
-    "Will update the imenu index and then use ido to select a symbol to navigate to"
-    (interactive)
-    (imenu--make-index-alist)
-    (let ((name-and-pos '())
-          (symbol-names '()))
-      (flet ((addsymbols (symbol-list)
-                         (when (listp symbol-list)
-                           (dolist (symbol symbol-list)
-                             (let ((name nil) (position nil))
-                               (cond
-                                ((and (listp symbol) (imenu--subalist-p symbol))
-                                 (addsymbols symbol))
-   
-                                ((listp symbol)
-                                 (setq name (car symbol))
-                                 (setq position (cdr symbol)))
-   
-                                ((stringp symbol)
-                                 (setq name symbol)
-                                 (setq position (get-text-property 1 'org-imenu-marker symbol))))
-   
-                               (unless (or (null position) (null name))
-                                 (add-to-list 'symbol-names name)
-                                 (add-to-list 'name-and-pos (cons name position))))))))
-        (addsymbols imenu--index-alist))
-      (let* ((selected-symbol (ido-completing-read "Symbol? " symbol-names))
-             (position (cdr (assoc selected-symbol name-and-pos))))
-        (cond
-         ((overlayp position)
-          (goto-char (overlay-start position)))
-         (t
-          (goto-char position))))))
 
 ;; Icicles not compatible with ido. To use it, uncomment these lines.
 ; (push "~/Emacs/icicles" load-path)
