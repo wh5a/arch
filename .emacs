@@ -19,6 +19,10 @@
 ;; Make it more like other programs
 (delete-selection-mode t)
 
+;; Make a file executable if Emacs considers it a script
+(add-hook 'after-save-hook
+  'executable-make-buffer-file-executable-if-script-p)
+
 (setq
   js-indent-level 2
   lisp-indent-offset 2)
