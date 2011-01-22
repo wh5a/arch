@@ -1,8 +1,8 @@
 Index: src/chrome/browser/search_engines/template_url.cc
 ===================================================================
---- src/chrome/browser/search_engines/template_url.cc	(revision 58572)
+--- src/chrome/browser/search_engines/template_url.cc	(revision 71996)
 +++ src/chrome/browser/search_engines/template_url.cc	(working copy)
-@@ -342,27 +342,27 @@
+@@ -341,27 +341,27 @@
         i != replacements_.rend(); ++i) {
      switch (i->type) {
        case ENCODING:
@@ -36,19 +36,19 @@ Index: src/chrome/browser/search_engines/template_url.cc
                                 "&");
          break;
  
-@@ -375,7 +375,7 @@
-         std::wstring rlz_string = search_terms_data.GetRlzParameterValue();
+@@ -374,7 +374,7 @@
+         string16 rlz_string = search_terms_data.GetRlzParameterValue();
          if (!rlz_string.empty()) {
            rlz_string = L"rlz=" + rlz_string + L"&";
--          url.insert(i->index, WideToUTF8(rlz_string));
-+          url.replace(i->index, 0, WideToUTF8(rlz_string));
+-          url.insert(i->index, UTF16ToUTF8(rlz_string));
++          url.replace(i->index, 0, UTF16ToUTF8(rlz_string));
          }
  #endif
          break;
-@@ -386,17 +386,17 @@
-         base::WideToCodepage(terms, input_encoding.c_str(),
-                              base::OnStringConversionError::SKIP,
-                              &unescaped_terms);
+@@ -385,17 +385,17 @@
+         base::UTF16ToCodepage(terms, input_encoding.c_str(),
+                               base::OnStringConversionError::SKIP,
+                               &unescaped_terms);
 -        url.insert(i->index, std::string(unescaped_terms.begin(),
 +        url.replace(i->index, 0, std::string(unescaped_terms.begin(),
                                           unescaped_terms.end()));

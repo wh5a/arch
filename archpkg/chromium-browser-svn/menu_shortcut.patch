@@ -1,22 +1,22 @@
 Index: src/chrome/browser/ui/views/accelerator_table_gtk.cc
 ===================================================================
---- src/chrome/browser/ui/views/accelerator_table_gtk.cc	(revision 66100)
+--- src/chrome/browser/ui/views/accelerator_table_gtk.cc	(revision 71996)
 +++ src/chrome/browser/ui/views/accelerator_table_gtk.cc	(working copy)
-@@ -133,7 +133,8 @@
-   { app::VKEY_NUMPAD7,        false, true,  false, IDC_SELECT_TAB_6 },
-   { app::VKEY_8,              false, true,  false, IDC_SELECT_TAB_7 },
-   { app::VKEY_NUMPAD8,        false, true,  false, IDC_SELECT_TAB_7 },
--  { app::VKEY_B,              true,  true,  false, IDC_SHOW_BOOKMARK_BAR },
-+  { app::VKEY_B,              true,  true,  false, IDC_SHOW_BOOKMARK_MANAGERR },
-+  { app::VKEY_E, true, true, false, IDC_MANAGE_EXTENSIONS},
-   { app::VKEY_J,              false, true,  false, IDC_SHOW_DOWNLOADS },
-   { app::VKEY_H,              false, true,  false, IDC_SHOW_HISTORY },
-   { app::VKEY_F,              false, false, true,  IDC_SHOW_APP_MENU},
+@@ -136,7 +136,8 @@
+   { ui::VKEY_NUMPAD7,        false, true,  false, IDC_SELECT_TAB_6 },
+   { ui::VKEY_8,              false, true,  false, IDC_SELECT_TAB_7 },
+   { ui::VKEY_NUMPAD8,        false, true,  false, IDC_SELECT_TAB_7 },
+-  { ui::VKEY_B,              true,  true,  false, IDC_SHOW_BOOKMARK_BAR },
++  { ui::VKEY_B,              true,  true,  false, IDC_SHOW_BOOKMARK_MANAGERR },
++  { ui::VKEY_E, true, true, false, IDC_MANAGE_EXTENSIONS},
+   { ui::VKEY_J,              false, true,  false, IDC_SHOW_DOWNLOADS },
+   { ui::VKEY_H,              false, true,  false, IDC_SHOW_HISTORY },
+   { ui::VKEY_F,              false, false, true,  IDC_SHOW_APP_MENU},
 Index: src/chrome/browser/gtk/accelerators_gtk.cc
 ===================================================================
---- src/chrome/browser/gtk/accelerators_gtk.cc	(revision 66100)
+--- src/chrome/browser/gtk/accelerators_gtk.cc	(revision 71071)
 +++ src/chrome/browser/gtk/accelerators_gtk.cc	(working copy)
-@@ -154,7 +154,7 @@
+@@ -155,7 +155,7 @@
    { GDK_o, IDC_OPEN_FILE, GDK_CONTROL_MASK },
    { GDK_f, IDC_FIND, GDK_CONTROL_MASK },
    { GDK_p, IDC_PRINT, GDK_CONTROL_MASK },
@@ -25,7 +25,7 @@ Index: src/chrome/browser/gtk/accelerators_gtk.cc
      GdkModifierType(GDK_CONTROL_MASK | GDK_SHIFT_MASK) },
    { GDK_F11, IDC_FULLSCREEN, GdkModifierType(0) },
    { GDK_Delete, IDC_CLEAR_BROWSING_DATA,
-@@ -169,6 +169,8 @@
+@@ -170,6 +170,8 @@
    { GDK_s, IDC_SAVE_PAGE, GDK_CONTROL_MASK },
    { GDK_e, IDC_SHOW_APP_MENU, GDK_MOD1_MASK },
    { GDK_f, IDC_SHOW_APP_MENU, GDK_MOD1_MASK },
