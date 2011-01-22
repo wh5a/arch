@@ -30,6 +30,15 @@
 ;; Prefer to split window horizontally because screens are wide
 (setq split-width-threshold 130)
 
+;; A unified package manager https://github.com/dimitri/el-get
+; http://emacser.com/el-get.htm Follow the install instructions
+(push "~/.emacs.d/el-get/el-get" load-path)
+; List the packages you want
+(setq el-get-sources
+      '(el-get))
+(require 'el-get)
+(el-get)  ; M-x el-get-update-all
+
 ;; When working together with tramp on remote files, refresh the file list with C-l
 (ido-mode t)
 (ido-everywhere 1)
