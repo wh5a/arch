@@ -146,8 +146,8 @@ bind -m emacs -x '"\ey": _xyank'
 
 # Read by chromium-browser.sh, which is usually installed to /usr/bin/chromium
 # See chrome/common/chrome_switches.cc for all flags, see chrome/browser/about_flags.cc for about:flags
-export CHROMIUM_USER_FLAGS="--enable-experimental-extension-apis --always-enable-dev-tools --purge-memory-button --allow-scripting-gallery --enable-accelerated-2d-canvas --enable-accelerated-layers --enable-gpu-plugin --enable-top-sites --enable-predictive-instant --allow-file-access-from-files --enable-page-prerender --enable-preconnect --enable-blocked-content-animation --enable-click-to-play --enable-content-prefetch --enable-fastback --reload-killed-tabs"
-# --enable-vertical-tabs --user-data-dir=/foo/bar --enable-tabbed-options --register-pepper-plugins=libpdf.so;application/pdf --show-composited-layer-borders --enable-print-preview --enable-confirm-to-quit
+export CHROMIUM_USER_FLAGS="--enable-experimental-extension-apis --always-enable-dev-tools --purge-memory-button --allow-scripting-gallery --enable-accelerated-2d-canvas --enable-accelerated-layers --enable-accelerated-plugins --enable-gpu-plugin --allow-file-access-from-files --enable-page-prerender --enable-preconnect --enable-click-to-play --enable-content-prefetch --enable-fastback --reload-killed-tabs --enable-webaudio --enable-in-browser-thumbnailing"
+# --enable-vertical-tabs --user-data-dir=/foo/bar --register-pepper-plugins=libpdf.so;application/pdf --show-composited-layer-borders --enable-print-preview --enable-confirm-to-quit
 
 # http://github.com/wh5a/git-achievements
 # http://wh5a.github.com/git-achievements/

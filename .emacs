@@ -35,7 +35,7 @@
 (push "~/.emacs.d/el-get/el-get" load-path)
 ; List the packages you want
 (setq el-get-sources
-      '(el-get))
+      '(el-get full-ack))
 (require 'el-get)
 (el-get)  ; M-x el-get-update-all
 
