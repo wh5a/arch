@@ -68,7 +68,7 @@ build() {
 	_localconf="${_localconf} -Duse_system_yasm=1"
 	_localconf="${_localconf} -Dremoting=0"
         # Borrow from Gentoo: http://gentoo-portage.com/www-client/chromium
-	_localconf="${_localconf} -Duse_gconf=0 -Duse_system_icu=1 -Duse_system_sqlite=1"
+	_localconf="${_localconf} -Duse_gconf=0 -Duse_system_icu=1 -Duse_system_sqlite=0"
 	if [ ${_shared_build} = "true" ]; then
 		msg "Preparing a shared Build..."
 		_localconf="${_localconf} -Dlibrary=shared_library"
