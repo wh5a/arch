@@ -146,6 +146,11 @@ shiftInsert w =
                                "xdotool key --clearmodifiers --window " ++ show w ++  " ctrl+v; echo -n $CLIP | xsel -i -b")
      else sendKey shiftMask xK_Insert
 
+-- Start applications on specific workspaces, e.g., spawnToWorkspace "urxvt" "4"
+-- http://stackoverflow.com/questions/4917820/start-applications-on-specific-workspaces-in-xmonad
+spawnToWorkspace :: String -> String -> X ()
+spawnToWorkspace program workspace = spawn program >> (windows $ W.greedyView workspace)
+
 main = do
   -- http://haskell.org/haskellwiki/Xmonad/Notable_changes_since_0.9
   -- sp <- mkSpawner
