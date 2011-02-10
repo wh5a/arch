@@ -92,6 +92,10 @@ export EDITOR="emacsclient -c -a ''"
 export GREP_OPTIONS='--color=auto --exclude-dir=_darcs --exclude-dir=\.svn --exclude-dir=\.git --exclude-dir=\.hg'
 
 export OOO_FORCE_DESKTOP=kde
+# Hack to make xdg-open call gnome-open
+export GNOME_DESKTOP_SESSION_ID=anything
+# Or kde-open:
+# export KDE_FULL_SESSION=true
 
 export PATH=~/cil/bin/:$PATH
 
