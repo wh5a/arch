@@ -3,7 +3,7 @@
 # Mostly based on existing emacs-git AUR
 
 pkgname=emacs-bzr
-pkgver=102765
+pkgver=103648
 pkgrel=1
 pkgdesc='GNU Emacs from official Bzr repository'
 arch=('i686' 'x86_64')
@@ -40,12 +40,6 @@ build() {
 
   #  msg "Trying to ensure building from a clean(-ish) state..."
   #  make clean
-
-  # Temporary fix for a bug in GCC 4.5
-  gcc_ver=`gcc --version | head -1 | cut -d ' ' -f 3 | cut -d . -f 1,2`
-  if [ $gcc_ver='4.5' ]; then
-    CFLAGS="${CFLAGS} -fno-optimize-sibling-calls"
-  fi
 
   mandir=/usr/share/man
   cd ${_bzrmod}
