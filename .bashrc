@@ -150,7 +150,7 @@ bind -m emacs -x '"\ey": _xyank'
 
 # Read by chromium-browser.sh, which is usually installed to /usr/bin/chromium
 # See chrome/common/chrome_switches.cc for all flags, see chrome/browser/about_flags.cc for about:flags
-export CHROMIUM_USER_FLAGS="--enable-experimental-extension-apis --always-enable-dev-tools --purge-memory-button --allow-scripting-gallery --enable-accelerated-2d-canvas --enable-accelerated-layers --enable-accelerated-plugins --enable-gpu-plugin --allow-file-access-from-files --enable-page-prerender --enable-preconnect --enable-click-to-play --enable-content-prefetch --enable-fastback --reload-killed-tabs --enable-webaudio --enable-in-browser-thumbnailing"
+export CHROMIUM_USER_FLAGS="--enable-experimental-extension-apis --always-enable-dev-tools --purge-memory-button --allow-scripting-gallery --enable-accelerated-2d-canvas --enable-accelerated-layers --enable-accelerated-plugins --enable-gpu-plugin --allow-file-access-from-files --enable-page-prerender --enable-preconnect --enable-click-to-play --enable-content-prefetch --enable-fastback --reload-killed-tabs --enable-webaudio --enable-in-browser-thumbnailing --disable-accelerated-compositing"
 # --enable-vertical-tabs --user-data-dir=/foo/bar --register-pepper-plugins=libpdf.so;application/pdf --show-composited-layer-borders --enable-print-preview --enable-confirm-to-quit
 
 # http://github.com/wh5a/git-achievements
@@ -182,3 +182,6 @@ export SPEC_LOCALE_OK=THIS_CAN_BE_ANYTHING
 
 # llvm-gcc and klee
 export PATH=/opt/klee/Release/bin:/opt/llvm-gcc-4.2-2.7-i686-linux/bin:/opt/llvm-2.7/Release/bin:$PATH
+
+alias aid='ssh -o TCPKeepAlive=no -L:8079:moose.aristanetworks.com:8080 gateway -N -f'
+alias bs9='ssh -f gateway -L 2222:bs9:22 -N'
