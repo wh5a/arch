@@ -1,19 +1,18 @@
 # Contributed by Neil Santos <nsantos16+aur@gmail.com>
-# ---
-# Mostly based on existing emacs-git AUR
 
 pkgname=emacs-bzr
-pkgver=103648
+pkgver=103814
 pkgrel=1
 pkgdesc='GNU Emacs from official Bzr repository'
 arch=('i686' 'x86_64')
 url='http://www.gnu.org/software/emacs/'
 license=('GPL3')
-depends=('dbus-core' 'libpng' 'libtiff' 'librsvg' 'giflib' 'gtk2' 'libxpm' 'libjpeg>=7' 'texinfo' 'hicolor-icon-theme')
-makedepends=('bzr' 'pkg-config')
+depends=('dbus-core' 'libpng' 'libtiff' 'librsvg' 'giflib' 'gtk2' 'libxpm' 'libjpeg>=7' 'hicolor-icon-theme')
+makedepends=('bzr' 'pkg-config' 'texinfo')
 provides=('emacs=$pkgver')
 conflicts=('emacs' 'emacs-otf' 'emacs-cvs' 'emacs-git')
 replaces=('emacs' 'emacs-cvs' 'emacs-git')
+install=$pkgname.install
 
 # Web Interface: https://code.launchpad.net/~vcs-imports/emacs/trunk
 _bzrtrunk='http://bzr.savannah.gnu.org/r/emacs/trunk'
@@ -46,21 +45,22 @@ build() {
   msg "Cleaning up old .elc files..."
   find . -name '*elc' -exec rm {} \;
   msg "Starting make..."
-  ./configure --prefix=/usr \
+  ./autogen.sh && ./configure --prefix=/usr \
     --sysconfdir=/etc \
     --localstatedir=/var \
     --libexecdir=/usr/lib \
     --mandir=${mandir} \
     --without-sound \
     --with-x-toolkit=gtk || return 1
+  make bootstrap || return 1
   make || return 1
   make DESTDIR=${pkgdir} install || return 1
 
   msg "Cleaning up..."
   mv $pkgdir/usr/bin/{ctags,ctags.emacs} || return 1
   mv $pkgdir/usr/bin/{etags,etags.emacs} || return 1
-  mv $pkgdir${mandir}/man1/{etags.1.gz,etags.emacs.1.gz} || return 1
-  mv $pkgdir${mandir}/man1/{ctags.1.gz,ctags.emacs.1.gz} || return 1
+  mv $pkgdir${mandir}/man1/{etags.1,etags.emacs.1}.gz || return 1
+  mv $pkgdir${mandir}/man1/{ctags.1,ctags.emacs.1}.gz || return 1
 
   find $pkgdir/usr/share/emacs -type d -exec chmod 755 {} \;
   find $pkgdir/usr/share/emacs -exec chown root.root {} \;
@@ -68,4 +68,6 @@ build() {
   chmod 775 $pkgdir/var/games/emacs
   chmod 664 $pkgdir/var/games/emacs/*
   chown -R root:50 $pkgdir/var/games
+
+  rm $pkgdir/usr/share/info/dir || return 1
 }
