@@ -5,11 +5,8 @@
 
 alias ls='ls --color=auto -F'
 alias ll='ls -l'
-# Get reflector (AUR) for the latest mirrors
-alias b='sudo bauerbill'
 alias p='sudo pacman'
-alias up="sudo sh -c 'rebase; pacman -Syu'"
-alias y='yaourt' # --noconfirm'
+alias y='sudo yaourt' # --noconfirm'
 alias skype='LD_PRELOAD=/usr/lib/libv4l/v4l1compat.so /opt/skype/skype'
 
 # set PATH so it includes user's private bin if it exists
@@ -184,4 +181,4 @@ export SPEC_LOCALE_OK=THIS_CAN_BE_ANYTHING
 export PATH=/opt/klee/Release/bin:/opt/llvm-gcc-4.2-2.7-i686-linux/bin:/opt/llvm-2.7/Release/bin:$PATH
 
 alias aid='ssh -o TCPKeepAlive=no -L:8079:moose.aristanetworks.com:8080 gateway -N -f'
-alias bs9='ssh -f gateway -L 2222:bs9:22 -N'
+alias bs9='ssh -f gateway -L 2222:bs9.sjc:22 -N'
