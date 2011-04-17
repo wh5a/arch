@@ -2,8 +2,9 @@
                                                                                                                   
    // If URL has no dots in host name or is an arista host, use the proxy.                                        
    if (isPlainHostName(host) ||                                                                                   
-       shExpMatch(url,"*.arastra.com*") ||                                                                        
-       shExpMatch(url,"*.aristanetworks.com*"))                                                                   
+       shExpMatch(url,"*.arastra.com*") ||
+       shExpMatch(url,"*.aristanetworks.com*") ||
+       shExpMatch(url,"*.optumsoft.com*"))
          return "PROXY 127.0.0.1:8079; DIRECT";                                                                   
                                                                                                                   
    return "DIRECT";     

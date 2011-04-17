@@ -31,5 +31,5 @@ fqterm &
 unclutter -root &
 # Mouse gesture
 #easystroke &
-gnome-settings-daemon
+gnome-settings-daemon &
 exec dbus-launch --exit-with-session xmonad
