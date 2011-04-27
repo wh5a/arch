@@ -6,7 +6,7 @@
 alias ls='ls --color=auto -F'
 alias ll='ls -l'
 alias p='sudo pacman'
-alias y='sudo yaourt' # --noconfirm'
+alias y='yaourt' # --noconfirm'
 alias skype='LD_PRELOAD=/usr/lib/libv4l/v4l1compat.so /opt/skype/skype'
 
 # set PATH so it includes user's private bin if it exists
@@ -147,7 +147,7 @@ bind -m emacs -x '"\ey": _xyank'
 
 # Read by chromium-browser.sh, which is usually installed to /usr/bin/chromium
 # See chrome/common/chrome_switches.cc for all flags, see chrome/browser/about_flags.cc for about:flags
-export CHROMIUM_USER_FLAGS="--enable-experimental-extension-apis --always-enable-dev-tools --purge-memory-button --allow-scripting-gallery --enable-accelerated-2d-canvas --enable-accelerated-layers --enable-accelerated-plugins --enable-gpu-plugin --allow-file-access-from-files --enable-page-prerender --enable-preconnect --enable-click-to-play --enable-content-prefetch --enable-fastback --reload-killed-tabs --enable-webaudio --enable-in-browser-thumbnailing --disable-accelerated-compositing --proxy-pac-url=file:///home/wh5a/proxy"
+export CHROMIUM_USER_FLAGS="--enable-experimental-extension-apis --always-enable-dev-tools --purge-memory-button --allow-scripting-gallery --enable-accelerated-2d-canvas --enable-accelerated-layers --enable-accelerated-plugins --enable-gpu-plugin --allow-file-access-from-files --enable-page-prerender --enable-preconnect --enable-click-to-play --enable-content-prefetch --enable-fastback --reload-killed-tabs --enable-webaudio --enable-in-browser-thumbnailing --disable-accelerated-compositing --proxy-pac-url=file:///home/wh5a/proxy --enable-history-quick-provider --enable-sync-sessions --enable-sync-typed-urls --enable-tab-groups-context-menu"
 # --enable-vertical-tabs --user-data-dir=/foo/bar --register-pepper-plugins=libpdf.so;application/pdf --show-composited-layer-borders --enable-print-preview --enable-confirm-to-quit
 
 # http://github.com/wh5a/git-achievements
