@@ -1,7 +1,7 @@
 # Contributed by Neil Santos <nsantos16+aur@gmail.com>
 
 pkgname=emacs-bzr
-pkgver=103814
+pkgver=103951
 pkgrel=1
 pkgdesc='GNU Emacs from official Bzr repository'
 arch=('i686' 'x86_64')

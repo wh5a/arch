@@ -55,7 +55,7 @@ build() {
 	else
 		_localconf="${_localconf} -Dtarget_arch=ia32"
 	fi
-	_localconf="${_localconf} -Dgcc_version=44 -Dno_strict_aliasing=1"
+	_localconf="${_localconf} -Dgcc_version=46 -Dno_strict_aliasing=1"
 	_localconf="${_localconf} -Dlinux_sandbox_path=/usr/lib/chromium/chromium-sandbox -Dlinux_sandbox_chrome_path=/usr/lib/chromium/chromium"
 	_localconf="${_localconf} -Dlinux_strip_binary=1 -Dremove_webcore_debug_symbols=1"
 	_localconf="${_localconf} -Duse_system_zlib=1 -Duse_system_libjpeg=1"
