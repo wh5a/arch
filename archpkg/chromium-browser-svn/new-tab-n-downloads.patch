@@ -1,8 +1,8 @@
 Index: src/chrome/browser/sessions/tab_restore_service.cc
 ===================================================================
---- src/chrome/browser/sessions/tab_restore_service.cc	(revision 67108)
+--- src/chrome/browser/sessions/tab_restore_service.cc	(revision 86235)
 +++ src/chrome/browser/sessions/tab_restore_service.cc	(working copy)
-@@ -50,7 +50,7 @@
+@@ -54,7 +54,7 @@
  // TabRestoreService ----------------------------------------------------------
  
  // static
@@ -11,20 +11,33 @@ Index: src/chrome/browser/sessions/tab_restore_service.cc
  
  // Identifier for commands written to file.
  // The ordering in the file is as follows:
-Index: src/chrome/browser/resources/new_new_tab.css
+Index: src/chrome/browser/resources/new_tab.js
 ===================================================================
---- src/chrome/browser/resources/new_new_tab.css	(revision 67108)
-+++ src/chrome/browser/resources/new_new_tab.css	(working copy)
-@@ -33,7 +33,7 @@
- .maxiview,
+--- src/chrome/browser/resources/new_tab.js	(revision 86235)
++++ src/chrome/browser/resources/new_tab.js	(working copy)
+@@ -770,8 +770,6 @@
+   var recentElement = $('recently-closed');
+   var miniview = getSectionMiniview(recentElement);
+ 
+-  updateMiniviewClipping(miniview);
+-
+   if (miniview.hasChildNodes()) {
+     recentElement.classList.remove('disabled');
+     miniview.classList.add('opaque');
+Index: src/chrome/browser/resources/new_tab.css
+===================================================================
+--- src/chrome/browser/resources/new_tab.css	(revision 86235)
++++ src/chrome/browser/resources/new_tab.css	(working copy)
+@@ -34,7 +34,7 @@
  #login-container,
- #notification-container {
+ #notification-container,
+ #closed-sections-bar {
 -  width: 920px;
 +  width: 1200px;
  }
  
  html[dir=rtl] #main {
-@@ -457,7 +457,7 @@
+@@ -529,7 +529,7 @@
    display: none;
    margin: 10px 0 30px;
    white-space: nowrap;
@@ -32,23 +45,35 @@ Index: src/chrome/browser/resources/new_new_tab.css
 +  overflow-x: scroll;
  }
  
- .section.hidden > * {
-Index: src/chrome/browser/resources/new_new_tab.js
+ .section.collapsed > * {
+Index: src/chrome/browser/resources/downloads.html
 ===================================================================
---- src/chrome/browser/resources/new_new_tab.js	(revision 67108)
-+++ src/chrome/browser/resources/new_new_tab.js	(working copy)
-@@ -591,8 +591,6 @@
-   var recentElement = $('recently-closed');
-   var miniview = recentElement.querySelector('.miniview');
- 
--  updateMiniviewClipping(miniview);
--
-   if (miniview.hasChildNodes()) {
-     if (!(shownSections & MINIMIZED_RECENT)) {
-       recentElement.classList.remove('disabled');
+--- src/chrome/browser/resources/downloads.html	(revision 86235)
++++ src/chrome/browser/resources/downloads.html	(working copy)
+@@ -150,7 +150,6 @@
+   color: #5566DD;
+   max-width: 500px;
+   white-space: nowrap;
+-  overflow: hidden;
+   text-overflow: ellipsis;
+   text-decoration: none;
+   padding-top: 4px;
+Index: src/chrome/browser/resources/new_tab.html
+===================================================================
+--- src/chrome/browser/resources/new_tab.html	(revision 86235)
++++ src/chrome/browser/resources/new_tab.html	(working copy)
+@@ -184,7 +184,7 @@
+         section="RECENT" noexpand="true">
+       <h2>
+         <div class="back"></div>
+-        <span i18n-content="recentlyclosed"></span>
++        <a href="chrome://history/"><span i18n-content="recentlyclosed"></span></a>
+         <button class="section-close-button"></button>
+       </h2>
+       <div class="miniview"></div>
 Index: src/chrome/browser/resources/ntp/most_visited.js
 ===================================================================
---- src/chrome/browser/resources/ntp/most_visited.js	(revision 67108)
+--- src/chrome/browser/resources/ntp/most_visited.js	(revision 86235)
 +++ src/chrome/browser/resources/ntp/most_visited.js	(working copy)
 @@ -250,9 +250,9 @@
                '<div></div>' +
@@ -93,7 +118,7 @@ Index: src/chrome/browser/resources/ntp/most_visited.js
        for (var i = len; i < maxItems; i++) {
 Index: src/chrome/browser/resources/ntp/most_visited.css
 ===================================================================
---- src/chrome/browser/resources/ntp/most_visited.css	(revision 67108)
+--- src/chrome/browser/resources/ntp/most_visited.css	(revision 86235)
 +++ src/chrome/browser/resources/ntp/most_visited.css	(working copy)
 @@ -2,7 +2,7 @@
  
@@ -104,7 +129,7 @@ Index: src/chrome/browser/resources/ntp/most_visited.css
    -webkit-user-select: none;
  }
  
-@@ -239,7 +239,7 @@
+@@ -236,7 +236,7 @@
  
  @media (max-width: 940px) {
    #most-visited-maxiview {
@@ -113,37 +138,24 @@ Index: src/chrome/browser/resources/ntp/most_visited.css
    }
  
    .thumbnail,
-Index: src/chrome/browser/resources/downloads.html
+Index: src/chrome/browser/ui/webui/ntp/new_tab_ui.cc
 ===================================================================
---- src/chrome/browser/resources/downloads.html	(revision 67108)
-+++ src/chrome/browser/resources/downloads.html	(working copy)
-@@ -166,7 +166,6 @@
-   color: #080;
-   max-width: 500px;
-   white-space: nowrap;
--  overflow: hidden;
-   text-overflow: ellipsis;
- }
- 
-Index: src/chrome/browser/dom_ui/new_tab_ui.cc
-===================================================================
---- src/chrome/browser/dom_ui/new_tab_ui.cc	(revision 67108)
-+++ src/chrome/browser/dom_ui/new_tab_ui.cc	(working copy)
-@@ -48,13 +48,6 @@
- #include "grit/theme_resources.h"
+--- src/chrome/browser/ui/webui/ntp/new_tab_ui.cc	(revision 86235)
++++ src/chrome/browser/ui/webui/ntp/new_tab_ui.cc	(working copy)
+@@ -52,12 +52,6 @@
  
  namespace {
--
+ 
 -// The number of recent bookmarks we show.
 -const int kRecentBookmarks = 9;
 -
 -// The number of search URLs to show.
 -const int kSearchURLs = 3;
 -
- // Strings sent to the page via jstemplates used to set the direction of the
- // HTML document based on locale.
- const char kRTLHtmlTextDirection[] = "rtl";
-@@ -528,7 +521,7 @@
+ // The amount of time there must be no painting for us to consider painting
+ // finished.  Observed times are in the ~1200ms range on Windows.
+ const int kTimeoutMs = 2000;
+@@ -570,7 +564,7 @@
  // static
  void NewTabUI::AddRecentlyClosedEntries(
      const TabRestoreService::Entries& entries, ListValue* entry_list_value) {
@@ -154,9 +166,9 @@ Index: src/chrome/browser/dom_ui/new_tab_ui.cc
    // We filter the list of recently closed to only show 'interesting' entries,
 Index: src/chrome/browser/history/top_sites.cc
 ===================================================================
---- src/chrome/browser/history/top_sites.cc	(revision 67108)
+--- src/chrome/browser/history/top_sites.cc	(revision 86235)
 +++ src/chrome/browser/history/top_sites.cc	(working copy)
-@@ -42,9 +42,9 @@
+@@ -43,9 +43,9 @@
  
  // Max number of temporary images we'll cache. See comment above
  // temp_images_ for details.
@@ -168,16 +180,3 @@ Index: src/chrome/browser/history/top_sites.cc
  static const int kDaysOfHistory = 90;
  // Time from startup to first HistoryService query.
  static const int64 kUpdateIntervalSecs = 15;
-Index: src/chrome/browser/resources/new_new_tab.html
-===================================================================
---- src/chrome/browser/resources/new_new_tab.html	(revision 67108)
-+++ src/chrome/browser/resources/new_new_tab.html	(working copy)
-@@ -180,7 +180,7 @@
-         noexpand="true">
-       <h2>
-         <div class="back"></div>
--        <span i18n-content="recentlyclosed"></span>
-+        <a href="chrome://history/"><span i18n-content="recentlyclosed"></span></a>
-         <button class="section-close-button"></button>
-       </h2>
-       <div class="miniview"></div>

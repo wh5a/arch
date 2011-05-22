@@ -1,51 +1,13 @@
-Index: src/chrome/browser/gtk/gtk_util.cc
+Index: src/chrome/browser/ui/gtk/gtk_util.cc
 ===================================================================
---- src/chrome/browser/gtk/gtk_util.cc	(revision 46907)
-+++ src/chrome/browser/gtk/gtk_util.cc	(working copy)
-@@ -239,44 +239,8 @@
+--- src/chrome/browser/ui/gtk/gtk_util.cc	(revision 86235)
++++ src/chrome/browser/ui/gtk/gtk_util.cc	(working copy)
+@@ -343,6 +343,8 @@
  }
  
  void CenterOverWindow(GtkWindow* window, GtkWindow* parent) {
--  gfx::Rect frame_bounds = gtk_util::GetWidgetScreenBounds(GTK_WIDGET(parent));
--  gfx::Point origin = frame_bounds.origin();
--  gfx::Size size = gtk_util::GetWidgetSize(GTK_WIDGET(window));
--  origin.Offset(
--      (frame_bounds.width() - size.width()) / 2,
--      (frame_bounds.height() - size.height()) / 2);
--
--  // Prevent moving window out of monitor bounds.
--  GdkScreen* screen = gtk_window_get_screen(parent);
--  if (screen) {
--    // It would be better to check against workarea for given monitor
--    // but getting workarea for particular monitor is tricky.
--    gint monitor = gdk_screen_get_monitor_at_window(screen,
--        GTK_WIDGET(parent)->window);
--    GdkRectangle rect;
--    gdk_screen_get_monitor_geometry(screen, monitor, &rect);
--
--    // Check the right bottom corner.
--    if (origin.x() > rect.x + rect.width - size.width())
--      origin.set_x(rect.x + rect.width - size.width());
--    if (origin.y() > rect.y + rect.height - size.height())
--      origin.set_y(rect.y + rect.height - size.height());
--
--    // Check the left top corner.
--    if (origin.x() < rect.x)
--      origin.set_x(rect.x);
--    if (origin.y() < rect.y)
--      origin.set_y(rect.y);
--  }
--
--  gtk_window_move(window, origin.x(), origin.y());
--
--  // Move to user expected desktop if window is already visible.
--  if (GTK_WIDGET(window)->window) {
--    x11_util::ChangeWindowDesktop(
--        x11_util::GetX11WindowFromGtkWidget(GTK_WIDGET(window)),
--        x11_util::GetX11WindowFromGtkWidget(GTK_WIDGET(parent)));
--  }
 +  // Do nothing for XMonad
 +  return;
- }
- 
- void MakeAppModalWindowGroup() {
+   gfx::Rect frame_bounds = gtk_util::GetWidgetScreenBounds(GTK_WIDGET(parent));
+   gfx::Point origin = frame_bounds.origin();
+   gfx::Size size = gtk_util::GetWidgetSize(GTK_WIDGET(window));

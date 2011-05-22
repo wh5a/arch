@@ -1,13 +1,13 @@
-Index: src/chrome/browser/extensions/extension_dom_ui.cc
+Index: src/chrome/browser/extensions/extension_web_ui.cc
 ===================================================================
---- src/chrome/browser/extensions/extension_dom_ui.cc	(revision 61262)
-+++ src/chrome/browser/extensions/extension_dom_ui.cc	(working copy)
-@@ -131,7 +131,7 @@
+--- src/chrome/browser/extensions/extension_web_ui.cc	(revision 86235)
++++ src/chrome/browser/extensions/extension_web_ui.cc	(working copy)
+@@ -136,7 +136,7 @@
    DCHECK(extension);
    // Only hide the url for internal pages (e.g. chrome-extension or packaged
    // component apps like bookmark manager.
 -  should_hide_url_ = !extension->is_hosted_app();
 +  should_hide_url_ = false;
  
-   bindings_ = BindingsPolicy::EXTENSION;
-   // Bind externalHost to Extension DOMUI loaded in Chrome Frame.
+   // The base class defaults to enabling web ui bindings, but we don't need
+   // those.
