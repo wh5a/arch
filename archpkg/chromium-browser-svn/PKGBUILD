@@ -43,6 +43,8 @@ build() {
 #	sed -e 's/\.kde/.kde4/' -i net/proxy/proxy_config_service_linux.cc || return 1
 	# Write out corrrect revision number in 'About Chromium'
 	echo ${pkgver} > build/LASTCHANGE.in || return 1
+        # see http://code.google.com/p/chromium/issues/detail?id=41887
+        export CXXFLAGS="${CXXFLAGS} -fno-ipa-cp"
 	export GYP_GENERATORS='make'
 	# TODO: replace _localconf with GYP_DEFINES
 #	export _localconf="-Drelease_extra_cflags='-fPIC'"
