@@ -3,14 +3,11 @@ pkgname=chromium-browser-svn
 # than we think we have. If we get the PKGVER from svn, we need to run svn with
 # LC_ALL=en_US.utf8 so we don't have to try matching foreign words for
 # "Revision".
-pkgver=(`curl http://build.chromium.org/f/chromium/continuous/linux/LATEST/REVISION -o -`)
+pkgver=(`curl http://commondatastorage.googleapis.com/chromium-browser-continuous/Linux/LAST_CHANGE -o -`)
 pkgrel=1
 pkgdesc='An open-source browser project that aims to build a safer, faster, and more stable way for all users to experience the web'
 # doing a shared build currently(01/13/2010) fails...
 _shared_build=false
-# set to trunk or a specific revision
-_revision=trunk
-# pkgver=${_revision}
 arch=('i686' 'x86_64')
 url='http://www.chromium.org/'
 license=('BSD')
@@ -72,7 +69,7 @@ build() {
 	_localconf="${_localconf} -Duse_system_yasm=1"
 	_localconf="${_localconf} -Dremoting=0"
         # Borrow from Gentoo: http://gentoo-portage.com/www-client/chromium
-	_localconf="${_localconf} -Duse_gconf=0 -Duse_system_icu=1 -Duse_system_sqlite=0"
+	_localconf="${_localconf} -Duse_gconf=0 -Duse_system_icu=0 -Duse_system_sqlite=0"
 	if [ ${_shared_build} = "true" ]; then
 		msg "Preparing a shared Build..."
 		_localconf="${_localconf} -Dlibrary=shared_library"
@@ -123,9 +120,5 @@ _source() {
 	fi
 	cp -v ${srcdir}/gclient ${srcdir}/.gclient || return 1
 	msg "Running gclient sync for Chromium trunk, revision ${pkgver}..."
-	if [ ${_revision} = "trunk" ]; then
-		gclient.py sync --force --nohooks || return 1
-	else
-		gclient.py sync --force --nohooks --revision src@${_revision}|| return 1
-	fi
+        gclient.py sync --force --nohooks --revision src@${pkgver}|| return 1
 }
