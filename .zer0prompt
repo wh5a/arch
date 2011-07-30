@@ -56,7 +56,7 @@ function pre_prompt {
   ZPWD=${PWD/#$HOME/\~}  # sorten home dir to ~
 
   # set length of our important info
-  local infolength="$(whoami)@$(hostname):$(basename $(tty))$ZPWD"
+  local infolength="$(whoami)@$(hostname):$ZPWD"
   # set length of our graphics
   local gfxlength=23
 

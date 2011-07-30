@@ -113,7 +113,7 @@ alias cls="echo -ne '\033c'"
 export PATH=`cope_path`:$PATH
 
 # compleat, a bash completion util, http://github.com/mbrubeck/compleat
-. ~/.cabal/share/compleat-1.0/compleat_setup
+#. ~/.cabal/share/compleat-1.0/compleat_setup
 
 # http://stackoverflow.com/questions/994563/integrate-readlines-kill-ring-and-the-x11-clipboard
 # M-u, M-k, M-y are similar to C-u, C-k, C-y, but deal with X primary selection.
