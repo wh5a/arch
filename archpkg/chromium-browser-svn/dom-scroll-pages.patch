@@ -1,7 +1,7 @@
-Index: src/third_party/WebKit/WebCore/page/DOMWindow.cpp
+Index: src/third_party/WebKit/Source/WebCore/page/DOMWindow.cpp
 ===================================================================
---- src/third_party/WebKit/WebCore/page/DOMWindow.cpp	(revision 54493)
-+++ src/third_party/WebKit/WebCore/page/DOMWindow.cpp	(working copy)
+--- src/third_party/WebKit/Source/WebCore/page/DOMWindow.cpp	(revision 54493)
++++ src/third_party/WebKit/Source/WebCore/page/DOMWindow.cpp	(working copy)
 @@ -1156,6 +1156,25 @@
      view->scrollBy(IntSize(x, y));
  }
@@ -28,10 +28,10 @@ Index: src/third_party/WebKit/WebCore/page/DOMWindow.cpp
  void DOMWindow::scrollTo(int x, int y) const
  {
      if (!m_frame)
-Index: src/third_party/WebKit/WebCore/page/DOMWindow.h
+Index: src/third_party/WebKit/Source/WebCore/page/DOMWindow.h
 ===================================================================
---- src/third_party/WebKit/WebCore/page/DOMWindow.h	(revision 54493)
-+++ src/third_party/WebKit/WebCore/page/DOMWindow.h	(working copy)
+--- src/third_party/WebKit/Source/WebCore/page/DOMWindow.h	(revision 54493)
++++ src/third_party/WebKit/Source/WebCore/page/DOMWindow.h	(working copy)
 @@ -227,6 +227,7 @@
          void postMessageTimerFired(PostMessageTimer*);
  
@@ -40,10 +40,10 @@ Index: src/third_party/WebKit/WebCore/page/DOMWindow.h
          void scrollTo(int x, int y) const;
          void scroll(int x, int y) const { scrollTo(x, y); }
  
-Index: src/third_party/WebKit/WebCore/page/DOMWindow.idl
+Index: src/third_party/WebKit/Source/WebCore/page/DOMWindow.idl
 ===================================================================
---- src/third_party/WebKit/WebCore/page/DOMWindow.idl	(revision 54493)
-+++ src/third_party/WebKit/WebCore/page/DOMWindow.idl	(working copy)
+--- src/third_party/WebKit/Source/WebCore/page/DOMWindow.idl	(revision 54493)
++++ src/third_party/WebKit/Source/WebCore/page/DOMWindow.idl	(working copy)
 @@ -108,6 +108,7 @@
          readonly attribute long pageYOffset;
  

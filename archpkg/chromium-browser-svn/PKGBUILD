@@ -11,7 +11,7 @@ _shared_build=false
 arch=('i686' 'x86_64')
 url='http://www.chromium.org/'
 license=('BSD')
-depends=('gtk2' 'nss>=3.12' 'glib2' 'ttf-ms-fonts' 'freetype2' 'cairo' 'dbus' 'zlib' 'libjpeg' 'bzip2' 'libevent' 'libpng' 'ffmpeg' 'sqlite3' 'icu')
+depends=('gtk2' 'nss>=3.12' 'glib2' 'freetype2' 'cairo' 'dbus' 'zlib' 'libjpeg' 'bzip2' 'libevent' 'libpng' 'ffmpeg' 'sqlite3' 'icu' 'speex' 'flac' 'libxslt' 'xdg-utils' 'libwebp')
 makedepends=('subversion' 'python2' 'perl>=5' 'bison>=2.3' 'flex>=2.5.34' 'gperf>=3.0.3' 'pkg-config' 'alsa-lib' 'nspr>=4.7.1' 'rsync' 'libgnome-keyring' 'yasm')
 provides=('chromium-browser' 'chromium' 'chrome')
 conflicts=('chromium-browser' 'chromium' 'chrome')
@@ -61,14 +61,16 @@ build() {
 	_localconf="${_localconf} -Dlinux_strip_binary=1 -Dremove_webcore_debug_symbols=1"
 	_localconf="${_localconf} -Duse_system_zlib=1 -Duse_system_libjpeg=1"
 	_localconf="${_localconf} -Duse_system_bzip2=1 -Duse_system_libevent=1"
-	_localconf="${_localconf} -Duse_system_libpng=1"
-	_localconf="${_localconf} -Duse_system_ffmpeg=1 -Duse_system_vpx=1"
-#	 not used, if using system-ffmpeg...
-#	_localconf="${_localconf} -Dffmpeg_branding=Chrome"
+	_localconf="${_localconf} -Duse_system_libpng=1 -Duse_system_speex=1"
+	_localconf="${_localconf} -Duse_system_ffmpeg=0 -Duse_system_libwebp=1"
+	_localconf="${_localconf} -Duse_system_flac=1 -Duse_system_vpx=1"
+	_localconf="${_localconf} -Duse_system_libxml=1 -Duse_system_xdg_utils=1"
         _localconf="${_localconf} -Dproprietary_codecs=1"
 	_localconf="${_localconf} -Duse_system_yasm=1"
 	_localconf="${_localconf} -Dremoting=0"
-        # Borrow from Gentoo: http://gentoo-portage.com/www-client/chromium
+        # http://crbug.com/89857, either disable webrtc or add dependency on pulseaudio
+	_localconf="${_localconf} -Denable_webrtc=0"
+        # Borrow from Gentoo: http://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo-x86/www-client/chromium/
 	_localconf="${_localconf} -Duse_gconf=0 -Duse_system_icu=0 -Duse_system_sqlite=0"
 	if [ ${_shared_build} = "true" ]; then
 		msg "Preparing a shared Build..."
@@ -85,7 +87,8 @@ build() {
 	install -m 0755 -D ${_builddir}/out/Release/chrome				${pkgdir}/usr/lib/chromium/chromium
 	install -m 4555 -o root -g root -D ${_builddir}/out/Release/chrome_sandbox	${pkgdir}/usr/lib/chromium/chromium-sandbox
 	install -m 0644 -D ${_builddir}/out/Release/chrome.pak				${pkgdir}/usr/lib/chromium/chrome.pak
-#	install -m 0644 -D ${_builddir}/out/Release/libffmpegsumo.so			${pkgdir}/usr/lib/chromium/libffmpegsumo.so
+#	 not used, if using system-ffmpeg...
+	install -m 0644 -D ${_builddir}/out/Release/libffmpegsumo.so			${pkgdir}/usr/lib/chromium/libffmpegsumo.so
 	install -m 0644 -D "${_builddir}/out/Release/resources.pak"			"${pkgdir}/usr/lib/chromium/resources.pak"
 	ln -s /usr/lib/libavcodec.so.52 ${pkgdir}/usr/lib/chromium/libavcodec.so.52
 	ln -s /usr/lib/libavformat.so.52 ${pkgdir}/usr/lib/chromium/libavformat.so.52

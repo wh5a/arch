@@ -1,7 +1,7 @@
-Index: src/third_party/WebKit/WebCore/page/SecurityOrigin.cpp
+Index: src/third_party/WebKit/Source/WebCore/page/SecurityOrigin.cpp
 ===================================================================
---- src/third_party/WebKit/WebCore/page/SecurityOrigin.cpp	(revision 71311)
-+++ src/third_party/WebKit/WebCore/page/SecurityOrigin.cpp	(working copy)
+--- src/third_party/WebKit/Source/WebCore/page/SecurityOrigin.cpp	(revision 71311)
++++ src/third_party/WebKit/Source/WebCore/page/SecurityOrigin.cpp	(working copy)
 @@ -468,6 +468,23 @@
  
  bool SecurityOrigin::shouldHideReferrer(const KURL& url, const String& referrer)
