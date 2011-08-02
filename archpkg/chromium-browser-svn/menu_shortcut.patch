@@ -1,16 +1,7 @@
 Index: src/chrome/browser/ui/gtk/accelerators_gtk.cc
 ===================================================================
---- src/chrome/browser/ui/gtk/accelerators_gtk.cc	(revision 86235)
+--- src/chrome/browser/ui/gtk/accelerators_gtk.cc	(revision 94868)
 +++ src/chrome/browser/ui/gtk/accelerators_gtk.cc	(working copy)
-@@ -156,7 +156,7 @@
-   { GDK_o, IDC_OPEN_FILE, GDK_CONTROL_MASK },
-   { GDK_f, IDC_FIND, GDK_CONTROL_MASK },
-   { GDK_p, IDC_PRINT, GDK_CONTROL_MASK },
--  { GDK_b, IDC_SHOW_BOOKMARK_BAR,
-+  { GDK_b, IDC_SHOW_BOOKMARK_MANAGER,
-     GdkModifierType(GDK_CONTROL_MASK | GDK_SHIFT_MASK) },
-   { GDK_F11, IDC_FULLSCREEN, GdkModifierType(0) },
-   { GDK_Delete, IDC_CLEAR_BROWSING_DATA,
 @@ -171,6 +171,8 @@
    { GDK_s, IDC_SAVE_PAGE, GDK_CONTROL_MASK },
    { GDK_e, IDC_SHOW_APP_MENU, GDK_MOD1_MASK },
@@ -22,15 +13,13 @@ Index: src/chrome/browser/ui/gtk/accelerators_gtk.cc
  }  // namespace
 Index: src/chrome/browser/ui/views/accelerator_table_gtk.cc
 ===================================================================
---- src/chrome/browser/ui/views/accelerator_table_gtk.cc	(revision 86235)
+--- src/chrome/browser/ui/views/accelerator_table_gtk.cc	(revision 94868)
 +++ src/chrome/browser/ui/views/accelerator_table_gtk.cc	(working copy)
-@@ -136,7 +136,8 @@
-   { ui::VKEY_NUMPAD7,        false, true,  false, IDC_SELECT_TAB_6 },
-   { ui::VKEY_8,              false, true,  false, IDC_SELECT_TAB_7 },
-   { ui::VKEY_NUMPAD8,        false, true,  false, IDC_SELECT_TAB_7 },
--  { ui::VKEY_B,              true,  true,  false, IDC_SHOW_BOOKMARK_BAR },
-+  { ui::VKEY_B,              true,  true,  false, IDC_SHOW_BOOKMARK_MANAGERR },
-+  { ui::VKEY_E, true, true, false, IDC_MANAGE_EXTENSIONS},
-   { ui::VKEY_J,              false, true,  false, IDC_SHOW_DOWNLOADS },
+@@ -141,6 +141,7 @@
    { ui::VKEY_H,              false, true,  false, IDC_SHOW_HISTORY },
    { ui::VKEY_F,              false, false, true,  IDC_SHOW_APP_MENU},
+   { ui::VKEY_E,              false, false, true,  IDC_SHOW_APP_MENU},
++  { ui::VKEY_E, true, true, false, IDC_MANAGE_EXTENSIONS},
+   { ui::VKEY_ESCAPE,         false, false, false, IDC_STOP },
+   { ui::VKEY_ESCAPE,         true,  false, false, IDC_TASK_MANAGER },
+   { ui::VKEY_U,              false, true,  false, IDC_VIEW_SOURCE },

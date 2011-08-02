@@ -1,6 +1,6 @@
 Index: src/chrome/browser/sessions/tab_restore_service.cc
 ===================================================================
---- src/chrome/browser/sessions/tab_restore_service.cc	(revision 86235)
+--- src/chrome/browser/sessions/tab_restore_service.cc	(revision 94868)
 +++ src/chrome/browser/sessions/tab_restore_service.cc	(working copy)
 @@ -54,7 +54,7 @@
  // TabRestoreService ----------------------------------------------------------
@@ -13,9 +13,9 @@ Index: src/chrome/browser/sessions/tab_restore_service.cc
  // The ordering in the file is as follows:
 Index: src/chrome/browser/resources/new_tab.js
 ===================================================================
---- src/chrome/browser/resources/new_tab.js	(revision 86235)
+--- src/chrome/browser/resources/new_tab.js	(revision 94868)
 +++ src/chrome/browser/resources/new_tab.js	(working copy)
-@@ -770,8 +770,6 @@
+@@ -788,8 +788,6 @@
    var recentElement = $('recently-closed');
    var miniview = getSectionMiniview(recentElement);
  
@@ -26,7 +26,7 @@ Index: src/chrome/browser/resources/new_tab.js
      miniview.classList.add('opaque');
 Index: src/chrome/browser/resources/new_tab.css
 ===================================================================
---- src/chrome/browser/resources/new_tab.css	(revision 86235)
+--- src/chrome/browser/resources/new_tab.css	(revision 94868)
 +++ src/chrome/browser/resources/new_tab.css	(working copy)
 @@ -34,7 +34,7 @@
  #login-container,
@@ -37,7 +37,7 @@ Index: src/chrome/browser/resources/new_tab.css
  }
  
  html[dir=rtl] #main {
-@@ -529,7 +529,7 @@
+@@ -534,7 +534,7 @@
    display: none;
    margin: 10px 0 30px;
    white-space: nowrap;
@@ -48,9 +48,9 @@ Index: src/chrome/browser/resources/new_tab.css
  .section.collapsed > * {
 Index: src/chrome/browser/resources/downloads.html
 ===================================================================
---- src/chrome/browser/resources/downloads.html	(revision 86235)
+--- src/chrome/browser/resources/downloads.html	(revision 94868)
 +++ src/chrome/browser/resources/downloads.html	(working copy)
-@@ -150,7 +150,6 @@
+@@ -159,7 +159,6 @@
    color: #5566DD;
    max-width: 500px;
    white-space: nowrap;
@@ -60,9 +60,9 @@ Index: src/chrome/browser/resources/downloads.html
    padding-top: 4px;
 Index: src/chrome/browser/resources/new_tab.html
 ===================================================================
---- src/chrome/browser/resources/new_tab.html	(revision 86235)
+--- src/chrome/browser/resources/new_tab.html	(revision 94868)
 +++ src/chrome/browser/resources/new_tab.html	(working copy)
-@@ -184,7 +184,7 @@
+@@ -215,7 +215,7 @@
          section="RECENT" noexpand="true">
        <h2>
          <div class="back"></div>
@@ -73,9 +73,9 @@ Index: src/chrome/browser/resources/new_tab.html
        <div class="miniview"></div>
 Index: src/chrome/browser/resources/ntp/most_visited.js
 ===================================================================
---- src/chrome/browser/resources/ntp/most_visited.js	(revision 86235)
+--- src/chrome/browser/resources/ntp/most_visited.js	(revision 94868)
 +++ src/chrome/browser/resources/ntp/most_visited.js	(working copy)
-@@ -250,9 +250,9 @@
+@@ -252,9 +252,9 @@
                '<div></div>' +
              '</div>' +
            '</a>';
@@ -85,9 +85,9 @@ Index: src/chrome/browser/resources/ntp/most_visited.js
 -      for (var i = 0; i < 8; i++) {
 +      for (var i = 0; i < 15; i++) {
          children[i].id = 't' + i;
-       }
-     },
-@@ -260,8 +260,8 @@
+         children[i].onmouseover = this.handleMouseOver_.bind(this);
+         children[i].onmouseout = this.handleMouseOut_.bind(this);
+@@ -264,8 +264,8 @@
      getMostVisitedLayoutRects_: function() {
        var small = this.useSmallGrid;
  
@@ -98,7 +98,7 @@ Index: src/chrome/browser/resources/ntp/most_visited.js
        var marginWidth = 10;
        var marginHeight = 7;
        var borderWidth = 4;
-@@ -294,7 +294,7 @@
+@@ -298,7 +298,7 @@
        if (this.visible) {
          var rects = this.getMostVisitedLayoutRects_();
          var children = this.element.children;
@@ -107,7 +107,7 @@ Index: src/chrome/browser/resources/ntp/most_visited.js
            var t = children[i];
            t.style.left = rects[i].left + 'px';
            t.style.top = rects[i].top + 'px';
-@@ -525,7 +525,7 @@
+@@ -574,7 +574,7 @@
      set data(data) {
        // We append the class name with the "filler" so that we can style fillers
        // differently.
@@ -118,7 +118,7 @@ Index: src/chrome/browser/resources/ntp/most_visited.js
        for (var i = len; i < maxItems; i++) {
 Index: src/chrome/browser/resources/ntp/most_visited.css
 ===================================================================
---- src/chrome/browser/resources/ntp/most_visited.css	(revision 86235)
+--- src/chrome/browser/resources/ntp/most_visited.css	(revision 94868)
 +++ src/chrome/browser/resources/ntp/most_visited.css	(working copy)
 @@ -2,7 +2,7 @@
  
@@ -138,11 +138,27 @@ Index: src/chrome/browser/resources/ntp/most_visited.css
    }
  
    .thumbnail,
+Index: src/chrome/browser/history/top_sites.cc
+===================================================================
+--- src/chrome/browser/history/top_sites.cc	(revision 94868)
++++ src/chrome/browser/history/top_sites.cc	(working copy)
+@@ -44,9 +44,9 @@
+ 
+ // Max number of temporary images we'll cache. See comment above
+ // temp_images_ for details.
+-static const size_t kMaxTempTopImages = 8;
++static const size_t kMaxTempTopImages = 15;
+ 
+-static const size_t kTopSitesShown = 8;
++static const size_t kTopSitesShown = 15;
+ static const int kDaysOfHistory = 90;
+ // Time from startup to first HistoryService query.
+ static const int64 kUpdateIntervalSecs = 15;
 Index: src/chrome/browser/ui/webui/ntp/new_tab_ui.cc
 ===================================================================
---- src/chrome/browser/ui/webui/ntp/new_tab_ui.cc	(revision 86235)
+--- src/chrome/browser/ui/webui/ntp/new_tab_ui.cc	(revision 94868)
 +++ src/chrome/browser/ui/webui/ntp/new_tab_ui.cc	(working copy)
-@@ -52,12 +52,6 @@
+@@ -55,12 +55,6 @@
  
  namespace {
  
@@ -155,28 +171,16 @@ Index: src/chrome/browser/ui/webui/ntp/new_tab_ui.cc
  // The amount of time there must be no painting for us to consider painting
  // finished.  Observed times are in the ~1200ms range on Windows.
  const int kTimeoutMs = 2000;
-@@ -570,7 +564,7 @@
+Index: src/chrome/browser/ui/webui/ntp/recently_closed_tabs_handler.cc
+===================================================================
+--- src/chrome/browser/ui/webui/ntp/recently_closed_tabs_handler.cc	(revision 94868)
++++ src/chrome/browser/ui/webui/ntp/recently_closed_tabs_handler.cc	(working copy)
+@@ -145,7 +145,7 @@
  // static
- void NewTabUI::AddRecentlyClosedEntries(
+ void RecentlyClosedTabsHandler::AddRecentlyClosedEntries(
      const TabRestoreService::Entries& entries, ListValue* entry_list_value) {
 -  const int max_count = 10;
 +  const int max_count = 30;
    int added_count = 0;
    std::set<std::string> unique_items;
    // We filter the list of recently closed to only show 'interesting' entries,
-Index: src/chrome/browser/history/top_sites.cc
-===================================================================
---- src/chrome/browser/history/top_sites.cc	(revision 86235)
-+++ src/chrome/browser/history/top_sites.cc	(working copy)
-@@ -43,9 +43,9 @@
- 
- // Max number of temporary images we'll cache. See comment above
- // temp_images_ for details.
--static const size_t kMaxTempTopImages = 8;
-+static const size_t kMaxTempTopImages = 15;
- 
--static const size_t kTopSitesShown = 8;
-+static const size_t kTopSitesShown = 15;
- static const int kDaysOfHistory = 90;
- // Time from startup to first HistoryService query.
- static const int64 kUpdateIntervalSecs = 15;
