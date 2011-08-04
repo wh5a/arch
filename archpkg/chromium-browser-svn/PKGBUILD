@@ -64,7 +64,7 @@ build() {
 	_localconf="${_localconf} -Duse_system_libpng=1 -Duse_system_speex=1"
 	_localconf="${_localconf} -Duse_system_ffmpeg=0 -Duse_system_libwebp=1"
 	_localconf="${_localconf} -Duse_system_flac=1 -Duse_system_vpx=1"
-	_localconf="${_localconf} -Duse_system_libxml=1 -Duse_system_xdg_utils=1"
+	_localconf="${_localconf} -Duse_system_xdg_utils=1"
         _localconf="${_localconf} -Dproprietary_codecs=1"
 	_localconf="${_localconf} -Duse_system_yasm=1"
 	_localconf="${_localconf} -Dremoting=0"
