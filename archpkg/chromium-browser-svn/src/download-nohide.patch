@@ -1,0 +1,12 @@
+Index: src/chrome/browser/resources/downloads.html
+===================================================================
+--- src/chrome/browser/resources/downloads.html	(revision 96198)
++++ src/chrome/browser/resources/downloads.html	(working copy)
+@@ -159,7 +159,6 @@
+   color: #5566DD;
+   max-width: 500px;
+   white-space: nowrap;
+-  overflow: hidden;
+   text-overflow: ellipsis;
+   text-decoration: none;
+   padding-top: 4px;
