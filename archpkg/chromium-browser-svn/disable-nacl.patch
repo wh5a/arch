@@ -1,0 +1,12 @@
+Index: src/chrome/chrome.gyp
+===================================================================
+--- src/chrome/chrome.gyp	(revision 98589)
++++ src/chrome/chrome.gyp	(working copy)
+@@ -135,7 +135,6 @@
+     'chrome_renderer.gypi',
+     'chrome_tests.gypi',
+     'common_constants.gypi',
+-    'nacl.gypi',
+   ],
+   'targets': [
+     {
