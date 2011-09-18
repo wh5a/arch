@@ -7,14 +7,12 @@ $include /etc/inputrc
 
 # List the possible completions when Tab is pressed:
 set show-all-if-ambiguous on
-# Make Meta+S cycle through the list:
-"\M-s": menu-complete
+# Cycle through the list:
+Control-j: menu-complete
+#Control-p: menu-complete-backward
 
 set completion-ignore-case On
 
 # http://www.reddit.com/r/commandline/comments/kbeoe/you_can_make_readline_and_bash_much_more_user/
 # Omit long common prefixes
 set completion-prefix-display-length 1
-
-Control-n: menu-complete
-Control-p: menu-complete-backward
