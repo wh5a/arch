@@ -1,3 +1,6 @@
+# Read default
+$include /etc/inputrc
+
 # Change the behavior of Up and Dn:
 "\e[A": history-search-backward
 "\e[B": history-search-forward
@@ -8,3 +11,10 @@ set show-all-if-ambiguous on
 "\M-s": menu-complete
 
 set completion-ignore-case On
+
+# http://www.reddit.com/r/commandline/comments/kbeoe/you_can_make_readline_and_bash_much_more_user/
+# Omit long common prefixes
+set completion-prefix-display-length 1
+
+Control-n: menu-complete
+Control-p: menu-complete-backward

@@ -409,13 +409,13 @@
 ;; SLIME
 ;(add-to-list 'load-path "/usr/share/emacs/site-lisp/slime/")
 ;(add-to-list 'load-path "/usr/share/emacs/site-lisp/slime/contrib")
-(require 'slime)
-(slime-setup '(slime-fancy slime-asdf slime-autodoc))
-;(setq inferior-lisp-program "/path/to/lisp-executable")
-(setq slime-lisp-implementations
-      '((sbcl ("sbcl") :coding-system utf-8-unix)))
-(setf slime-default-lisp 'sbcl)
-(setq slime-startup-animation nil)
+;; (require 'slime)
+;; (slime-setup '(slime-fancy slime-asdf slime-autodoc))
+;; ;(setq inferior-lisp-program "/path/to/lisp-executable")
+;; (setq slime-lisp-implementations
+;;       '((sbcl ("sbcl") :coding-system utf-8-unix)))
+;; (setf slime-default-lisp 'sbcl)
+;; (setq slime-startup-animation nil)
 
 ;(load "/usr/share/emacs/site-lisp/nxhtml/autostart.el")
 

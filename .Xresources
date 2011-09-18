@@ -10,7 +10,7 @@ URxvt.scrollTtyOutput: False
 URxvt.scrollWithBuffer: True
 URxvt.scrollTtyKeypress: True
 URxvt.fading: 40
-URxvt.saveLines: 10000
+URxvt.saveLines: 1000000
 
 ! Colors taken from http://ezyang.scripts.mit.edu/blog/2010/01/rxvt-unicode-for-gnome-terminal-refugees/
 URxvt*background: black
