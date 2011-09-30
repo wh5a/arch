@@ -180,4 +180,6 @@ export SPEC_LOCALE_OK=THIS_CAN_BE_ANYTHING
 # llvm-gcc and klee
 export PATH=/opt/klee/Release/bin:/opt/llvm-gcc-4.2-2.7-i686-linux/bin:/opt/llvm-2.7/Release/bin:$PATH
 
-alias bs9='ssh -f gateway -L 2222:bs9:22 -N; ssh -o TCPKeepAlive=no -L:8079:bs9:8080 gateway -N -f'
+alias aup='arvpn2 up'
+#alias bs9='ssh -f gateway -L 2222:bs9:22 -N; ssh -o TCPKeepAlive=no -L:8079:bs9:8080 gateway -N -f'
+alias bs9='ssh bs9'
