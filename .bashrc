@@ -147,8 +147,8 @@ bind -m emacs -x '"\ey": _xyank'
 
 # Read by chromium-browser.sh, which is usually installed to /usr/bin/chromium
 # See chrome/common/chrome_switches.cc for all flags, see chrome/browser/about_flags.cc for about:flags
-export CHROMIUM_USER_FLAGS="--enable-experimental-extension-apis --purge-memory-button --allow-scripting-gallery --enable-preconnect --enable-click-to-play --enable-fastback --reload-killed-tabs --enable-in-browser-thumbnailing --proxy-pac-url=file:///home/wh5a/proxy --enable-tab-groups-context-menu --multi-profiles --ppapi-flash-in-process --enable-web-intents --enable-webui-taskmanager --prerender=auto"
-# --enable-vertical-tabs --user-data-dir=/foo/bar --register-pepper-plugins=libpdf.so;application/pdf --show-composited-layer-borders --enable-print-preview --enable-tcp-fastopen --new-tab-page
+export CHROMIUM_USER_FLAGS="--enable-experimental-extension-apis --purge-memory-button --allow-scripting-gallery --enable-preconnect --enable-click-to-play --enable-fastback --reload-killed-tabs --enable-in-browser-thumbnailing --enable-tab-groups-context-menu --multi-profiles --ppapi-flash-in-process --enable-web-intents --enable-webui-taskmanager --prerender=auto"
+# --enable-vertical-tabs --user-data-dir=/foo/bar --register-pepper-plugins=libpdf.so;application/pdf --show-composited-layer-borders --enable-print-preview --enable-tcp-fastopen --new-tab-page --proxy-pac-url=file:///home/wh5a/proxy
 
 # http://github.com/wh5a/git-achievements
 # http://wh5a.github.com/git-achievements/
