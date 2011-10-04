@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# A git porcelain for removing all local and remote tags
+
+for tag in $(git tag); do
+    git tag -d $tag
+    git push origin :${tag}
+done
