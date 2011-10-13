@@ -12,6 +12,12 @@
   inhibit-splash-screen t
   inhibit-startup-buffer-menu t)
 
+;; Improves interactivity
+(setq redisplay-dont-pause t)
+
+; Sadly matlab files conflict with objective-c files
+(setq auto-mode-alist (cons '("\\.m\\'" . octave-mode) auto-mode-alist))
+
 (push "~/Emacs" load-path)
 
 (transient-mark-mode t)
