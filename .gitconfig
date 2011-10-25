@@ -25,3 +25,5 @@ ui = auto
 	log = true
 [achievement]
 	upload = true
+[remote "upstream"]
+	tagopt = --no-tags
