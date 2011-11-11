@@ -184,4 +184,4 @@ alias aup='arvpn2 up'
 #alias bs9='ssh -f gateway -L 2222:bs9:22 -N; ssh -o TCPKeepAlive=no -L:8079:bs9:8080 gateway -N -f'
 alias bs9='ssh bs9'
 
-alias octave='octave -q --traditional'
+alias octave='octave -q'
