@@ -1,7 +1,7 @@
 # Contributed by Neil Santos <nsantos16+aur@gmail.com>
 
 pkgname=emacs-bzr
-pkgver=105641
+pkgver=106361
 pkgrel=1
 pkgdesc='GNU Emacs from official Bzr repository'
 arch=('i686' 'x86_64')
@@ -9,7 +9,7 @@ url='http://www.gnu.org/software/emacs/'
 license=('GPL3')
 depends=('dbus-core' 'libpng' 'libtiff' 'librsvg' 'giflib' 'gtk2' 'libxpm' 'libjpeg>=7' 'hicolor-icon-theme')
 makedepends=('bzr' 'pkg-config' 'texinfo')
-provides=('emacs=$pkgver')
+provides=("emacs=$pkgver")
 conflicts=('emacs' 'emacs-otf' 'emacs-cvs' 'emacs-git')
 replaces=('emacs' 'emacs-cvs' 'emacs-git')
 install=$pkgname.install
