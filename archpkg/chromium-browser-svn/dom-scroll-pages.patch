@@ -1,8 +1,8 @@
 Index: src/third_party/WebKit/Source/WebCore/page/DOMWindow.cpp
 ===================================================================
---- src/third_party/WebKit/Source/WebCore/page/DOMWindow.cpp	(revision 54493)
+--- src/third_party/WebKit/Source/WebCore/page/DOMWindow.cpp	(revision 102542)
 +++ src/third_party/WebKit/Source/WebCore/page/DOMWindow.cpp	(working copy)
-@@ -1156,6 +1156,25 @@
+@@ -1444,6 +1444,25 @@
      view->scrollBy(IntSize(x, y));
  }
  
@@ -27,13 +27,13 @@ Index: src/third_party/WebKit/Source/WebCore/page/DOMWindow.cpp
 +
  void DOMWindow::scrollTo(int x, int y) const
  {
-     if (!m_frame)
+     if (!isCurrentlyDisplayedInFrame())
 Index: src/third_party/WebKit/Source/WebCore/page/DOMWindow.h
 ===================================================================
---- src/third_party/WebKit/Source/WebCore/page/DOMWindow.h	(revision 54493)
+--- src/third_party/WebKit/Source/WebCore/page/DOMWindow.h	(revision 102542)
 +++ src/third_party/WebKit/Source/WebCore/page/DOMWindow.h	(working copy)
-@@ -227,6 +227,7 @@
-         void postMessageTimerFired(PostMessageTimer*);
+@@ -236,6 +236,7 @@
+         void postMessageTimerFired(PassOwnPtr<PostMessageTimer>);
  
          void scrollBy(int x, int y) const;
 +        void scrollByPages(int pages) const;
@@ -42,13 +42,13 @@ Index: src/third_party/WebKit/Source/WebCore/page/DOMWindow.h
  
 Index: src/third_party/WebKit/Source/WebCore/page/DOMWindow.idl
 ===================================================================
---- src/third_party/WebKit/Source/WebCore/page/DOMWindow.idl	(revision 54493)
+--- src/third_party/WebKit/Source/WebCore/page/DOMWindow.idl	(revision 102542)
 +++ src/third_party/WebKit/Source/WebCore/page/DOMWindow.idl	(working copy)
-@@ -108,6 +108,7 @@
+@@ -107,6 +107,7 @@
          readonly attribute long pageYOffset;
  
-         [RequiresAllArguments] void scrollBy(in long x, in long y);
-+        [RequiresAllArguments] void scrollByPages(in long pages);
-         [RequiresAllArguments] void scrollTo(in long x, in long y);
-         [RequiresAllArguments] void scroll(in long x, in long y);
-         [RequiresAllArguments] void moveBy(in float x, in float y); // FIXME: this should take longs not floats.
+         void scrollBy(in [Optional=CallWithDefaultValue] long x, in [Optional=CallWithDefaultValue] long y);
++        void scrollByPages(in [Optional=CallWithDefaultValue] long pages);
+         void scrollTo(in [Optional=CallWithDefaultValue] long x, in [Optional=CallWithDefaultValue] long y);
+         void scroll(in [Optional=CallWithDefaultValue] long x, in [Optional=CallWithDefaultValue] long y);
+         void moveBy(in [Optional=CallWithDefaultValue] float x, in [Optional=CallWithDefaultValue] float y); // FIXME: this should take longs not floats.
