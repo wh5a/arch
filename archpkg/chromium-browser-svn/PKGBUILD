@@ -21,7 +21,7 @@ source=('chromium.desktop'
 md5sums=('897de25e9c25a01f8b1b67abe554a6b7'
          'cea9624d65dfdcf8550cae34b91bfe13'
          '2178331349c6ee8f8300bf71d585dc6d')
-install=('chromium.install')
+install=chromium.install
 
 _builddir=${srcdir}/src
 
@@ -68,8 +68,6 @@ build() {
         _localconf="${_localconf} -Dproprietary_codecs=1 -Dffmpeg_branding=Chrome"
 	_localconf="${_localconf} -Duse_system_yasm=1"
 	_localconf="${_localconf} -Dremoting=0"
-        # http://crbug.com/89857, either disable webrtc or add dependency on pulseaudio
-	_localconf="${_localconf} -Denable_webrtc=0"
         # Borrow from Gentoo: http://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo-x86/www-client/chromium/
 	_localconf="${_localconf} -Duse_gconf=0 -Duse_system_icu=0 -Duse_system_sqlite=0"
 	if [ ${_shared_build} = "true" ]; then
