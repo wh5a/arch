@@ -3,7 +3,7 @@ set nocompatible
 syntax on
 set ignorecase hlsearch incsearch smartcase
 " Disable screen clearing
-set t_te=
+set t_te= t_ti=
 set autoindent expandtab tabstop=4 shiftwidth=4
 " set relativenumber
 filetype plugin indent on

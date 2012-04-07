@@ -1,5 +1,5 @@
 pkgname=xmobar-git
-pkgver=20111219
+pkgver=20120406
 pkgrel=1
 pkgdesc="A minimal status bar for the XMonad Window Manager"
 arch=('i686' 'x86_64')
@@ -28,9 +28,7 @@ build() {
   msg "GIT checkout done or server timeout"
   msg "Starting make..."
 
-  rm -rf "$srcdir/$_gitname-build"
-  git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
-  cd "$srcdir/$_gitname-build"
+  cd "$srcdir/$_gitname"
 
   runghc Setup configure --flags="with_xft" --prefix=/ --ghc-option=-threaded || return 1
   runghc Setup build || return 1
@@ -39,6 +37,6 @@ build() {
 }
 
 package() {
-  cd "$srcdir/$_gitname-build"
+  cd "$srcdir/$_gitname"
   runghc Setup copy --destdir=$startdir/pkg/usr
 } 
