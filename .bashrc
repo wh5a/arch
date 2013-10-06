@@ -110,7 +110,8 @@ stty -ixon
 alias cls="echo -ne '\033c'"
 
 # cope, a command line coloriser, kinda supersedes colorgcc
-export PATH=`cope_path`:$PATH
+# Problematic on perl 5.18. The other package, cw, seems equally problematic according to its AUR page.
+#export PATH=`cope_path`:$PATH
 
 # compleat, a bash completion util, http://github.com/mbrubeck/compleat
 if [ -d ~/.cabal/share/compleat-1.0 ]; then
