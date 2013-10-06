@@ -38,7 +38,7 @@ export HISTSIZE=1000000
 export HISTIGNORE=ls:'ls -l':fg:up
 
 # Syntax-highlighting pager
-alias cless='/usr/share/vim/vim73/macros/less.sh'
+alias cless='/usr/share/vim/vim74/macros/less.sh'
 
 # Bash 4 features
 shopt -s autocd globstar checkjobs
