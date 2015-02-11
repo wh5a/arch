@@ -7,7 +7,12 @@ alias ls='ls --color=auto -F'
 alias ll='ls -l'
 alias p='sudo pacman'
 alias y='yaourt' # --noconfirm'
-alias skype='LD_PRELOAD=/usr/lib/libv4l/v4l1compat.so /opt/skype/skype'
+alias octave='octave -q'
+alias grep='grep --color=auto --exclude-dir=_darcs --exclude-dir=\.svn --exclude-dir=\.git --exclude-dir=\.hg'
+# Syntax-highlighting pager
+alias cless='/usr/share/vim/vim74/macros/less.sh'
+# Completely wipe urxvt buffer
+alias cls="echo -ne '\033c'"
 
 # set PATH so it includes user's private bin if it exists
 if [ -d ~/bin ] ; then
@@ -36,9 +41,6 @@ export HISTCONTROL=ignoredups
 export HISTSIZE=1000000
 # Ignore a few specified commands
 export HISTIGNORE=ls:'ls -l':fg:up
-
-# Syntax-highlighting pager
-alias cless='/usr/share/vim/vim74/macros/less.sh'
 
 # Bash 4 features
 shopt -s autocd globstar checkjobs
@@ -86,32 +88,21 @@ export LM_LICENSE_FILE=~/codesurfer-2.1p1/csurf/bin/cs-license.dat
 # With alternate-editor being empty string, emacsclient knows to start a daemon automatically.
 export EDITOR="emacsclient -c -a ''"
 
-export GREP_OPTIONS='--color=auto --exclude-dir=_darcs --exclude-dir=\.svn --exclude-dir=\.git --exclude-dir=\.hg'
-
 export OOO_FORCE_DESKTOP=kde
 # Hack to make xdg-open call gnome-open
 export GNOME_DESKTOP_SESSION_ID=anything
 # Or kde-open:
 # export KDE_FULL_SESSION=true
 
-export PATH=~/cil/bin/:$PATH
-
 # ocaml-batteries
 alias bocaml='ocaml -init ~/.batteriesinit'
-
-export PATH=~/paktahn:$PATH
-
-alias ddc='~/ddc-head/bin/ddc -basedir ~/ddc-head'
 
 # http://blog.nelhage.com/archives/27
 stty -ixon
 
-# Completely wipe urxvt buffer
-alias cls="echo -ne '\033c'"
-
 # cope, a command line coloriser, kinda supersedes colorgcc
 # Problematic on perl 5.18. The other package, cw, seems equally problematic according to its AUR page.
-#export PATH=`cope_path`:$PATH
+export PATH=`cope_path`:$PATH
 
 # compleat, a bash completion util, http://github.com/mbrubeck/compleat
 if [ -d ~/.cabal/share/compleat-1.0 ]; then
@@ -176,15 +167,3 @@ function cd {
 
 # Don't let SPEC CPU 2006 set the locale
 export SPEC_LOCALE_OK=THIS_CAN_BE_ANYTHING
-
-# Replaces the stock qemu for the MIT jos OS: http://pdos.csail.mit.edu/6.828/2009/tools.html
-#export PATH=/opt/qemu-patched/bin:$PATH
-
-# llvm-gcc and klee
-export PATH=/opt/klee/Release/bin:/opt/llvm-gcc-4.2-2.7-i686-linux/bin:/opt/llvm-2.7/Release/bin:$PATH
-
-alias aup='arvpn2 up'
-#alias bs9='ssh -f gateway -L 2222:bs9:22 -N; ssh -o TCPKeepAlive=no -L:8079:bs9:8080 gateway -N -f'
-alias bs9='ssh bs9'
-
-alias octave='octave -q'
