@@ -10,7 +10,7 @@ alias y='yaourt' # --noconfirm'
 alias octave='octave -q'
 alias grep='grep --color=auto --exclude-dir=_darcs --exclude-dir=\.svn --exclude-dir=\.git --exclude-dir=\.hg'
 # Syntax-highlighting pager
-alias cless='/usr/share/vim/vim74/macros/less.sh'
+alias cless='/usr/share/vim/vim80/macros/less.sh'
 # Completely wipe urxvt buffer
 alias cls="echo -ne '\033c'"
 
@@ -100,8 +100,7 @@ alias bocaml='ocaml -init ~/.batteriesinit'
 # http://blog.nelhage.com/archives/27
 stty -ixon
 
-# cope, a command line coloriser, kinda supersedes colorgcc
-# Problematic on perl 5.18. The other package, cw, seems equally problematic according to its AUR page.
+# cope-git (AUR), a command line coloriser, kinda supersedes colorgcc
 export PATH=`cope_path`:$PATH
 
 # compleat, a bash completion util, http://github.com/mbrubeck/compleat
