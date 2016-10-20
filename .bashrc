@@ -166,3 +166,7 @@ function cd {
 
 # Don't let SPEC CPU 2006 set the locale
 export SPEC_LOCALE_OK=THIS_CAN_BE_ANYTHING
+
+if [ -f /srv/http/bin/activate ]; then
+    . /srv/http/bin/activate
+fi
