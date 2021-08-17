@@ -14,16 +14,16 @@ lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen
 [color]
 ui = auto
 [user]
-	name = Wei Hu
-	email = weihu@cs.virginia.edu
+    name = Wei Hu
+    email = weihu@cs.virginia.edu
 [push]
-	default = matching
+	default = current
 [branch "master"]
   remote = origin
   merge = refs/heads/master
 [merge]
-	log = true
+    log = true
 [achievement]
-	upload = true
+    upload = true
 [remote "upstream"]
-	tagopt = --no-tags
+    tagopt = --no-tags
